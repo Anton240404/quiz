@@ -1,30 +1,28 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './home.module.css';
+import styles from './css/home.module.css';
 import headerLogo from '../assets/header.svg';
 import headerLogo2 from '../assets/header2.svg';
 import shipImage from '../assets/shipImage.svg';
-import icon1 from '../assets/icon1.svg';
-import icon2 from '../assets/icon2.svg';
+import tours from '../assets/tours.svg';
+import info from '../assets/info.svg';
 
 export function Home() {
     const navigate = useNavigate();
 
-    const handleStart = () => {
-        navigate('/quiz');
-    };
-
     return (
         <div className={styles.wrapper}>
             <header className={styles.header}>
-                <h1 className={styles.museumTitle}>Дубенский районный краеведческий музей</h1>
-                <img src={headerLogo} alt="Логотип" className={styles.headerLogo} />
+                <div className={styles.headerLeft}>
+                    <img src={headerLogo} alt="Логотип" className={styles.headerLogo} />
+                    <h1 className={styles.museumTitle}>Дубенский районный <br/> краеведческий музей</h1>
+                </div>
                 <img src={headerLogo2} alt="Логотип" className={styles.headerLogo} />
             </header>
 
             <main className={styles.content}>
                 <div className={styles.leftColumn}>
-                    <h2 className={styles.quizTitle}>Квиз для старшеклассников «Умная морская душа»</h2>
-                    <button className={styles.button} onClick={handleStart}>
+                    <h2 className={styles.quizTitle}>Квиз для <br/> старшеклассников <br/> «Умная морская душа»</h2>
+                    <button className={styles.button} onClick={() => navigate('/quiz')}>
                         Начать
                     </button>
                 </div>
@@ -35,10 +33,12 @@ export function Home() {
                     </div>
                     <div className={styles.infoBlocks}>
                         <div className={styles.infoItem}>
-                            <img src={icon1} alt="Иконка 1" className={styles.infoIcon} />
+                            <img src={tours} alt="Иконка 1" className={styles.infoIcon} />
+                            <h4 className={styles.text}>7 захватывающих <br/> этапов</h4>
                         </div>
                         <div className={styles.infoItem}>
-                            <img src={icon2} alt="Иконка 2" className={styles.infoIcon} />
+                            <img src={info} alt="Иконка 2" className={styles.infoIcon} />
+                            <h4 className={styles.text}>Отправься в увлекательное <br/> путешествие по загадочным <br/> глубинам знаний</h4>
                         </div>
                     </div>
                 </div>
