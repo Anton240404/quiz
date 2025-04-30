@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Result } from './pages/Results.tsx';
 import { Quiz } from './pages/Quiz.tsx';
 import { Home } from './pages/Home.tsx';
 import styles from './reset.module.css';
@@ -14,7 +13,6 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/quiz" element={<QuizIntro />} />
                     <Route path="/quiz/:questionId" element={<Quiz />} />
-                    <Route path="/result" element={<Result />} />
                 </Routes>
             </BrowserRouter>
         </div>

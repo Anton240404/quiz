@@ -10,6 +10,7 @@
     margin: 14px;
 
 
+
 }
 
 .questionNumber {
@@ -58,18 +59,7 @@
     font-size: 20px;
     color: #1b1b1b;
 }
-
-.nextButton {
-    margin-top: 20px;
-    font-size: 18px;
-    background-color: #ff6b81;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.nextButton:hover {
-    background-color: #ff4757;
+.buttonConteiner{
+    display: flex;
+    gap:3px;
 }

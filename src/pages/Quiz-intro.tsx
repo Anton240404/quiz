@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './css/quiz-intro.module.css';
-import intro from '..//assets/intro.svg'
 
 export function QuizIntro() {
     const navigate = useNavigate();

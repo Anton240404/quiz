@@ -3,7 +3,7 @@ export type Tour = {
     pages: Page[]
 }
 
-export type Page = DescriptionInfoPage | ExamplesInfoPage | InputQuestionPage | MultiselectAnswerQuestionPage | SingleAnswerQuestionPage
+export type Page = DescriptionInfoPage | ExamplesInfoPage | InputQuestionPage | MultiselectAnswerQuestionPage | SingleAnswerQuestionPage | ResultPage
 
 export type DescriptionInfoPage = {
     type: 'DescriptionInfoPage'
@@ -26,8 +26,28 @@ export type SingleAnswerQuestionPage  = {
     correctAnswer: string
     selectedAnswer?: string
 }
+export type ResultPage = BadResultPage | GoodResultPage | ExcellentResultPage
 
-//
+export type BadResultPage = {
+    type: 'BadResultPage',
+    text: string,
+    image: string,
+}
+export type GoodResultPage = {
+    type: 'GoodResultPage',
+    text: string,
+    image: string,
+}
+export type ExcellentResultPage = {
+    type: 'ExcellentResultPage',
+    text: string,
+    image: string,
+}
+
+// Как сделать указать что BadResultPage - показывается только когда пользователь ответил меньше 6 вопросов.
+// (абсолютные единицы
+// и относительные единицы)
+// Также подумать как показывать в процентном соотношение
 // pages: [{
 //     type: 'SingleQuestionPage',
 //     question: 'Как называется трехмачтовый боевой корабль, у которого много пушек?',

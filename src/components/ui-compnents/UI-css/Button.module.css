@@ -1,0 +1,56 @@
+/* Общие стили */
+.button {
+    border-radius: 20px;
+    font-size: 20px;
+    display: inline-block;
+    height: 120px;
+    width: 453.5px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.incorrect {
+    background-color: #E3605F;
+    transition-duration: 0.2s;
+    color: white;
+}
+.incorrect:hover {
+    background-color: darkred;
+}
+
+.correct {
+    align-items: center;
+    background: #44BE72;
+    color: white;
+    transition-duration: 0.2s;
+}
+.default {
+    background-color: #FFFFFF;
+    transition-duration: 0.2s;
+}
+.default:hover {
+    background-color: #999;
+}
+.nextDefault{
+    align-items: center;
+    width: 909px;
+    background: #5C59FD;
+    color: white;
+    transition-duration: 0.2s;
+}
+.next{
+    align-items: center;
+    width: 909px;
+    background: #4845E9;
+    color: white;
+    transition-duration: 0.2s;
+}
+.nextDisabled{
+    align-items: center;
+    width: 909px;
+    background: #5C59FD;
+    color: white;
+    transition-duration: 0.2s;
+}
