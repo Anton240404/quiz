@@ -31,17 +31,17 @@ export type ResultPage = BadResultPage | GoodResultPage | ExcellentResultPage
 export type BadResultPage = {
     type: 'BadResultPage',
     text: string,
-    image: string,
+    image: 'iconBad.png',
 }
 export type GoodResultPage = {
     type: 'GoodResultPage',
     text: string,
-    image: string,
+    image: 'iconGood.png',
 }
 export type ExcellentResultPage = {
     type: 'ExcellentResultPage',
     text: string,
-    image: string,
+    image: 'iconExcelent.png',
 }
 
 // Как сделать указать что BadResultPage - показывается только когда пользователь ответил меньше 6 вопросов.
