@@ -6,19 +6,18 @@
     padding: 20px;
     text-align: center;
     font-family: 'Inter', sans-serif;
-    background: #0D003B;
-    max-height: 100vh;
+    background: #0d003b;
+    height: 100vh;
 }
-.intro{
+.intro {
     background-image: url('src/assets/map.svg');
     height: 1000px;
-   /* height: auto;
+    /* height: auto;
     display: block;
     width: 100%;
     border-radius: 20px;
     z-index: 0;
     object-fit: cover;*/
-
 }
 
 .buttons {
@@ -32,7 +31,7 @@
 }
 
 .button {
-    background: #5C59FD;
+    background: #5c59fd;
     color: white;
     border: none;
     width: 50%;
@@ -42,7 +41,6 @@
     transition: background 0.3s;
 }
 
-
 .button:hover {
-    background: #4285F4;
+    background: #4285f4;
 }

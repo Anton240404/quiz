@@ -3,7 +3,7 @@
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
-    background: #0D003B;
+    background: #0d003b;
     padding: 20px;
 }
 
@@ -14,7 +14,7 @@
     width: 100%;
     height: 134px;
     border-radius: 20px;
-    background: #5C59FD;
+    background: #5c59fd;
     padding: 0 40px;
     margin-bottom: 3px;
 }
@@ -26,7 +26,7 @@
 }
 
 .museumTitle {
-    background: #5C59FD;
+    background: #5c59fd;
     color: white;
     font-size: 24px;
     font-weight: 600;
@@ -34,12 +34,13 @@
 
 .headerLogo {
     height: 80px;
-    background: #5C59FD;
+    background: #5c59fd;
 }
 
 .content {
     display: flex;
     gap: 3px;
+    flex-grow: 1;
 }
 
 .leftColumn {
@@ -49,9 +50,8 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    background: #5C59FD;
-    height: 637px;
-    background: linear-gradient(180deg, #81C8F2 0%, #5C59FD 100%);
+    background: #5c59fd;
+    background: linear-gradient(180deg, #81c8f2 0%, #5c59fd 100%);
     gap: 40px;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .button:hover {
-    background: #357AE8;
+    background: #357ae8;
     color: #fff;
 }
 
@@ -87,15 +87,16 @@
 
 .shipContainer {
     border-radius: 20px;
-    background-color:#5C59FD;
+    background-color: #5c59fd;
     padding: 20px;
+    flex-grow: 1;
 }
 
 .shipImage {
     width: 100%;
     height: auto;
     border-radius: 12px;
-    background-color:#5C59FD;
+    background-color: #5c59fd;
 }
 
 .infoBlocks {
@@ -109,17 +110,16 @@
     justify-content: center;
     align-items: center;
     flex: 1;
-    background-color:#5C59FD;
+    background-color: #5c59fd;
     border-radius: 20px;
     height: 326px;
-
 }
 
 .infoIcon {
     width: 100px;
     height: 100px;
 }
-.text{
+.text {
     color: white;
     margin-top: 20px;
     text-align: center;

@@ -1,48 +1,62 @@
 export type Tour = {
-    title: string,
-    pages: Page[]
-}
+    title: string;
+    pages: Page[];
+};
 
-export type Page = DescriptionInfoPage | ExamplesInfoPage | InputQuestionPage | MultiselectAnswerQuestionPage | SingleAnswerQuestionPage | ResultPage
+export type Page =
+    | DescriptionInfoPage
+    | ExamplesInfoPage
+    | InputQuestionPage
+    | MultiselectAnswerQuestionPage
+    | SingleAnswerQuestionPage
+    | ResultPage;
 
 export type DescriptionInfoPage = {
-    type: 'DescriptionInfoPage'
-}
+    type: 'DescriptionInfoPage';
+};
 export type ExamplesInfoPage = {
-    type: 'ExamplesInfoPage'
-}
+    type: 'ExamplesInfoPage';
+};
 export type InputQuestionPage = {
-    type: 'InputQuestionPage'
-    correctAnswer: string
-}
+    type: 'InputQuestionPage';
+    correctAnswer: string;
+};
 export type MultiselectAnswerQuestionPage = {
-    type: 'MultiselectAnswerQuestionPage'
-    correctAnswers: string[]
-}
-export type SingleAnswerQuestionPage  = {
-    type: 'SingleAnswerQuestionPage'
-    question: string
-    options: string[]
-    correctAnswer: string
-    selectedAnswer?: string
-}
-export type ResultPage = BadResultPage | GoodResultPage | ExcellentResultPage
+    type: 'MultiselectAnswerQuestionPage';
+    correctAnswers: string[];
+};
+export type SingleAnswerQuestionPage = {
+    type: 'SingleAnswerQuestionPage';
+    question: string;
+    options: string[];
+    correctAnswer: string;
+    selectedAnswer?: string;
+};
+export type ResultPage = {
+    type: 'ResultPage';
+    pages: [BadResultPage, GoodResultPage, ExcellentResultPage];
+};
 
 export type BadResultPage = {
-    type: 'BadResultPage',
-    text: string,
-    image: 'iconBad.png',
-}
+    type: 'BadResultPage';
+    text: string;
+    image: 'iconBad.png';
+    range: [number, number] | [string, string];
+};
+
 export type GoodResultPage = {
-    type: 'GoodResultPage',
-    text: string,
-    image: 'iconGood.png',
-}
+    type: 'GoodResultPage';
+    text: string;
+    image: 'iconGood.png';
+    range: [number, number] | [string, string];
+};
+
 export type ExcellentResultPage = {
-    type: 'ExcellentResultPage',
-    text: string,
-    image: 'iconExcelent.png',
-}
+    type: 'ExcellentResultPage';
+    text: string;
+    image: 'iconExcellent.png';
+    range: [number, number] | [string, string];
+};
 
 // Как сделать указать что BadResultPage - показывается только когда пользователь ответил меньше 6 вопросов.
 // (абсолютные единицы

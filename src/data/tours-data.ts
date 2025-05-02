@@ -6,19 +6,22 @@ export const toursData: Tour[] = [
         pages: [
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Как называется трехмачтовый боевой корабль, у которого много пушек?',
+                question:
+                    'Как называется трехмачтовый боевой корабль, у которого много пушек?',
                 options: ['Фрегат', 'Линкор', 'Бот', 'Корвет'],
                 correctAnswer: 'Фрегат',
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Как называется парусное судно с двумя и более мачтами и косыми парусами?',
+                question:
+                    'Как называется парусное судно с двумя и более мачтами и косыми парусами?',
                 options: ['Бриг', 'Барк', 'Шхуна', 'Бригантина'],
                 correctAnswer: 'Шхуна',
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Как называется помещение для приготовления пищи на морском судне?',
+                question:
+                    'Как называется помещение для приготовления пищи на морском судне?',
                 options: ['Рубка', 'Камбуз', 'Гальюн', 'Каюта'],
                 correctAnswer: 'Камбуз',
             },
@@ -30,13 +33,15 @@ export const toursData: Tour[] = [
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Как называется жилое помещение на судне для команды и пассажиров?',
+                question:
+                    'Как называется жилое помещение на судне для команды и пассажиров?',
                 options: ['Крюйт-камера', 'Каюта', 'Тамбур', 'Столовая'],
                 correctAnswer: 'Каюта',
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Как называется надстройка на верхней палубе, не доходящая до бортов?',
+                question:
+                    'Как называется надстройка на верхней палубе, не доходящая до бортов?',
                 options: ['Рубка', 'Трюм', 'Пищеблок', 'Насосное отделение'],
                 correctAnswer: 'Рубка',
             },
@@ -66,7 +71,8 @@ export const toursData: Tour[] = [
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Как называется механическое приспособление для переправы с одного берега на другой?',
+                question:
+                    'Как называется механическое приспособление для переправы с одного берега на другой?',
                 options: ['Паром', 'Понтон', 'Трап', 'Трал'],
                 correctAnswer: 'Паром',
             },
@@ -77,20 +83,29 @@ export const toursData: Tour[] = [
                 correctAnswer: 'Кашалот',
             },
             {
-                type: 'ExcellentResultPage',
-                text: 'Вы справились отлично!',
-                image: 'iconExcelent.png'
+                type: 'ResultPage',
+                pages: [
+                    {
+                        type: 'BadResultPage',
+                        text: 'Не сдавайся!',
+                        image: 'iconBad.png',
+                        range: [0, 6],
+                    },
+                    {
+                        type: 'GoodResultPage',
+                        text: 'Хороший результат!',
+                        image: 'iconGood.png',
+                        range: [7, 9],
+                    },
+
+                    {
+                        type: 'ExcellentResultPage',
+                        text: 'Вы справились отлично!',
+                        image: 'iconExcellent.png',
+                        range: [10, 12],
+                    },
+                ],
             },
-            {
-                type: 'GoodResultPage',
-                text: 'Хороший результат!',
-                image: 'iconGood.png'
-            },
-            {
-                type: 'BadResultPage',
-                text: 'Не сдавайся!',
-                image: 'iconBad.png'
-            }
         ],
     },
     {
@@ -98,13 +113,15 @@ export const toursData: Tour[] = [
         pages: [
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Зачерпнуло ветра белое крыло Нас с тобой кататься в море унесло',
+                question:
+                    'Зачерпнуло ветра белое крыло Нас с тобой кататься в море унесло',
                 options: ['Облако', 'Парус', 'Дым Парохода', 'Льдина'],
                 correctAnswer: 'Парус',
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Кругом вода, а с питьем беда. Кто знает,где это бывает?',
+                question:
+                    'Кругом вода, а с питьем беда. Кто знает,где это бывает?',
                 options: ['Река', 'Ручей', 'Стакан', 'Море'],
                 correctAnswer: 'Море',
             },
@@ -116,25 +133,29 @@ export const toursData: Tour[] = [
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'По морю идет, идет, А до берега дойдет,Тут и пропадет.',
+                question:
+                    'По морю идет, идет, А до берега дойдет,Тут и пропадет.',
                 options: ['Корабль', 'Пловец', 'Волна', 'Лодка'],
                 correctAnswer: 'Волна',
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Великан стоит в порту,Освещая темноту И сигналит кораблям: Заходите в гости к нам.',
+                question:
+                    'Великан стоит в порту,Освещая темноту И сигналит кораблям: Заходите в гости к нам.',
                 options: ['Корабль', 'Док', 'Маяк', 'Подъемный Кран'],
                 correctAnswer: 'Маяк',
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Когда он нужен – Его выбрасывают. Когда не нужен – Его поднимают.',
+                question:
+                    'Когда он нужен – Его выбрасывают. Когда не нужен – Его поднимают.',
                 options: ['Шкаф', 'Якорь', 'Парус', 'Сейф'],
                 correctAnswer: 'Якорь',
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Если входят корабли В порта акваторию, ' +
+                question:
+                    'Если входят корабли В порта акваторию, ' +
                     'Нужно, чтоб их провели Водной территорией. Как к причалу подойти?' +
                     'Ведь фарватер под водой.Кто подскажет, как пройти? Отгадайте, кто такой?',
                 options: ['Юнга', 'Кок', 'Капитан', 'Лоцман'],
@@ -142,14 +163,16 @@ export const toursData: Tour[] = [
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Поднимает якоря, Возит грузы за моря, Только лишь сухие грузы: ' +
+                question:
+                    'Поднимает якоря, Возит грузы за моря, Только лишь сухие грузы: ' +
                     'Бочки ящики, арбузы… Не берет он жидкий груз,  Потому и…',
                 options: ['Сухогруз', 'Сам Арбуз', 'В нём конфуз', 'Профсоюз'],
                 correctAnswer: 'Сухогруз',
             },
             {
                 type: 'SingleAnswerQuestionPage',
-                question: 'Туч нагнал сердитый ветер. Небо в тучах, нет просвета, ' +
+                question:
+                    'Туч нагнал сердитый ветер. Небо в тучах, нет просвета, ' +
                     'И разбушевалось море Всем судам морским на горе. ' +
                     'Ночь настала прямо днем. Как мы это назовем?',
                 options: ['Ураган', 'Смерч', 'Шторм', 'Затмение'],
@@ -158,22 +181,21 @@ export const toursData: Tour[] = [
             {
                 type: 'ExcellentResultPage',
                 text: 'Вы справились отлично!',
-                image: 'iconExcelent.png'
+                image: 'iconExcelent.png',
             },
             {
                 type: 'GoodResultPage',
                 text: 'Хороший результат!',
-                image: 'iconGood.png'
+                image: 'iconGood.png',
             },
             {
                 type: 'BadResultPage',
                 text: 'Не сдавайся!',
-                image: 'iconBad.png'
-            }
+                image: 'iconBad.png',
+            },
         ],
     },
 ];
-
 
 /*{
     type: 'info-examples',
