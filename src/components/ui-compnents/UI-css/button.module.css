@@ -5,23 +5,23 @@
     font-size: 20px;
     display: inline-block;
     height: 120px;
-    width: 453.5px;
+    width: 25%;
     text-align: center;
     cursor: pointer;
     outline: none;
     border: none;
 }
 
-.incorrect {
+.danger {
     background-color: #E3605F;
     transition-duration: 0.2s;
     color: white;
 }
-.incorrect:hover {
+.danger:hover {
     background-color: darkred;
 }
 
-.correct {
+.success {
     align-items: center;
     background: #44BE72;
     color: white;
@@ -34,23 +34,14 @@
 .default:hover {
     background-color: #999;
 }
-.nextDefault{
+.primary{
     align-items: center;
     background: #4845E9;
     color: white;
     transition-duration: 0.2s;
     flex-grow: 1;
 }
-.next{
-    align-items: center;
-    background: #4845E9;
-    color: white;
-    transition-duration: 0.2s;
-}
-.nextDisabled{
-    align-items: center;
-    background: #4845E9;
-    opacity: 0.4;
-    color: white;
-    transition-duration: 0.2s;
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

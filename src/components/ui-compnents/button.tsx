@@ -13,16 +13,12 @@ export function Button(props: Props) {
 
     if (props.color === 'default') {
         classnames.push(styles.default)
-    } else if (props.color === 'correct') {
-        classnames.push(styles.correct)
-    } else if (props.color === 'incorrect') {
-        classnames.push(styles.incorrect)
-    } else if (props.color === 'next'){
-        classnames.push(styles.next)
-    } else if (props.color === 'nextDefault'){
-        classnames.push(styles.nextDefault)
-    }else if (props.color === 'nextDisabled'){
-        classnames.push(styles.nextDisabled)
+    } else if (props.color === 'success') {
+        classnames.push(styles.success)
+    } else if (props.color === 'danger') {
+        classnames.push(styles.danger)
+    } else if (props.color === 'primary'){
+        classnames.push(styles.primary)
     }
 
     if (props.disabled) {

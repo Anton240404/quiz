@@ -12,7 +12,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/quiz-intro/:tourIndex" element={<QuizIntro />} />
-                    <Route path="/quiz/:questionId" element={<Quiz />} />
+                    <Route path="/quiz/:tourIndex" element={<Quiz />} />
                 </Routes>
             </BrowserRouter>
         </div>

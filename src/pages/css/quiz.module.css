@@ -1,20 +1,29 @@
 
-.container{
+.container {
     width: 100%;
     min-height: 100vh;
     background: #0d003b;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 .wrapper {
     background-color: #eaf1f7;
     width: 100%;
-
+    flex: 1;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-
+    box-sizing: border-box;
+    margin-bottom: 3px;
+}
+.controlsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .questionNumber {
@@ -22,7 +31,8 @@
     font-weight: bold;
     color: #5C59FD;
     background-color: #eaf1f7;
-    margin-bottom: 20px;
+    align-self: center;
+    margin-bottom: 3px;
 }
 
 .questionText {
@@ -39,12 +49,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: #eaf1f7;
-    gap: 2px;
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 3px;
+    gap: 3px;
 }
 
 .buttonConteiner{
     display: flex;
     gap:3px;
     width: 100%;
+    margin-bottom: 20px;
 }
