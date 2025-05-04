@@ -1,60 +1,112 @@
 import { useState } from 'react';
 import { toursData } from '../data/tours-data.ts';
 import styles from './css/quiz.module.css';
-import { useNavigate } from 'react-router-dom';
 import { SingleAnswerQuestionPageView } from './single-answer-question-page-view.tsx';
-/*import { BadResultPageView } from './bad-result-page-view.tsx';*/
+import { useNavigate } from 'react-router-dom';
+import { BadResultPageView } from './bad-result-page-view.tsx';
+import { getQuestionsPages } from './lib.ts';
+import { Page } from '../types/Types.ts';
+
+function calculateResult(pages: Page[]) {
+    const correctAnswers = pages.filter((page) => {
+        if (page.type === 'SingleAnswerQuestionPage') {
+            return page.selectedAnswer === page.correctAnswer;
+        } else if (page.type === 'InputQuestionPage') {
+            return page.selectedAnswer === page.correctAnswer;
+        }
+    });
+    return {
+        correctQuestionsCount: correctAnswers.length,
+        questionsCount: getQuestionsPages(pages).length,
+    };
+}
 
 export function Quiz() {
     const navigate = useNavigate();
-    const [currentTourIndex, setCurrentTourIndex] = useState(0);
+    const [currentTourIndex] = useState(0);
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
-
     const [tours, setTours] = useState(toursData);
 
     const currentTour = tours[currentTourIndex];
     const currentPage = currentTour.pages[currentPageIndex];
 
-    let selectedAnswer: string | undefined = undefined;
-    let correctAnswer: string | undefined = undefined;
-
-    if (currentPage.type === 'SingleAnswerQuestionPage') {
-        selectedAnswer = currentPage.selectedAnswer;
-        correctAnswer = currentPage.correctAnswer;
-    }
-
-    const hasSelectedAnswer = Boolean(selectedAnswer);
-
     const handleNext = () => {
         if (currentPageIndex < currentTour.pages.length - 1) {
+            // Переход к следующему вопросу в текущем туре
             setCurrentPageIndex((prev) => prev + 1);
         } else if (currentTourIndex < tours.length - 1) {
-            setCurrentTourIndex((prev) => prev + 1);
-            setCurrentPageIndex(0);
+            // Если это последний вопрос в туре, но не последний тур
+            // Перенаправляем на страницу intro для следующего тура
+            navigate(`/quiz-intro/${currentTourIndex + 1}`);
+        } else {
+            // Если это последний вопрос последнего тура
+            // Можно перенаправить на страницу с итоговыми результатами
+            navigate('/');
         }
     };
 
+    function renderResultPage() {
+        if (currentPage.type !== 'ResultPage') return;
+
+        const { correctAnswers, allAnswers } = calculateResult(currentTour.pages);
+
+        const view = currentPage.pages.find(x => {
+            const [min, max] = x.range; // [0, 5]
+            // const min = x.range[0];
+            // const max = x.range[1];
+            return correctAnswers >= min && correctAnswers <= max;
+        });
+
+        if (!view) return;
+
+        return <>
+            <>
+                {view.type === 'BadResultPage' && (
+                    <BadResultPageView
+                        onNext={handleNext}
+                        correctAnswers={correctAnswers}
+                        allAnswers={allAnswers}
+                    />
+                )}
+                {view.type === 'GoodResultPage' && (
+                    <GoodResultPageView
+                        onNext={handleNext}
+                        correctAnswers={correctAnswers}
+                        allAnswers={allAnswers}
+                    />
+                )}
+                {view.type === 'ExcellentResultPage' && (
+                    <ExcellentResultPageView
+                        onNext={handleNext}
+                        correctAnswers={correctAnswers}
+                        allAnswers={allAnswers}
+                    />
+                )}
+            </>
+        </>;
+    }
+
     return (
-        <div className={styles.wrapper}>
-            {currentPage.type === 'SingleAnswerQuestionPage' && (
-                <SingleAnswerQuestionPageView
-                    page={currentPage}
-                    onNext={handleNext}
-                />
-            )}
-            {/* {currentPage.type === 'BadResultPage' && (
-                <BadResultPageView
-                    onNext={handleNext}
-                    correctAnswers={9}
-                    allAnswers={12}
-                />
-            )}
-            {currentPage.type === 'GoodResultPage' && (
+        <div className={styles.container}>
+            <div className={styles.wrapper}>
+                {currentPage.type === 'SingleAnswerQuestionPage' && (
+                    <SingleAnswerQuestionPageView
+                        page={currentPage}
+                        onNext={handleNext}
+                        currentPageIndex={currentPageIndex}
+                        currentTourIndex={currentTourIndex}
+                        tours={tours}
+                        setTours={setTours}
+                    />
+                )}
+                {renderResultPage()}
+                {/* {currentPage.type === 'GoodResultPage' && (
                 <BadResultPageView onNext={handleNext} />
             )}
             {currentPage.type === 'ExcellentResultPage' && (
                 <BadResultPageView />
             )} */}
+            </div>
         </div>
     );
 }

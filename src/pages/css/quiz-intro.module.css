@@ -10,14 +10,29 @@
     height: 100vh;
 }
 .intro {
-    background-image: url('src/assets/map.svg');
-    height: 1000px;
-    /* height: auto;
-    display: block;
+    background-size: cover;
+    background: #ECF7FF url('src/assets/map.svg') no-repeat center;
+    background-size: cover;
+    height: 100vh;
     width: 100%;
     border-radius: 20px;
-    z-index: 0;
-    object-fit: cover;*/
+}
+.tourInfo{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tourName{
+    color: #5C59FD;
+    font-size: 24px;
+    font-weight: bold;
+}
+.tourTitle{
+    color:#0D003B;
+    font-size: 100px;
+    font-weight: bold;
 }
 
 .buttons {

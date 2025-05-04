@@ -1,7 +1,7 @@
-import styles from './UI-css/Button.module.css'
+import styles from './UI-css/button.module.css'
 
 type Props = {
-    color: 'default' | 'correct' | 'incorrect' | 'next' | 'nextDefault' | 'nextDisabled',
+    color: 'default' | 'success' | 'danger' | 'primary',
     onClick?: () => void,
     text: string,
     disabled?: boolean;
@@ -24,7 +24,6 @@ export function Button(props: Props) {
     }else if (props.color === 'nextDisabled'){
         classnames.push(styles.nextDisabled)
     }
-
 
     if (props.disabled) {
         classnames.push(styles.disabled);

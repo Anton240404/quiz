@@ -8,3 +8,4 @@ export function getQuestionsPages(pages: Page[]) {
             page.type === 'MultiselectAnswerQuestionPage'
     );
 }
+

@@ -22,7 +22,7 @@ export function Home() {
             <main className={styles.content}>
                 <div className={styles.leftColumn}>
                     <h2 className={styles.quizTitle}>Квиз для <br/> старшеклассников <br/> «Умная морская душа»</h2>
-                    <button className={styles.button} onClick={() => navigate('/quiz')}>
+                    <button className={styles.button} onClick={() => navigate('/quiz-intro/0')}>
                         Начать
                     </button>
                 </div>

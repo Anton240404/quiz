@@ -97,7 +97,6 @@ export const toursData: Tour[] = [
                         image: 'iconGood.png',
                         range: [7, 9],
                     },
-
                     {
                         type: 'ExcellentResultPage',
                         text: 'Вы справились отлично!',
@@ -179,20 +178,27 @@ export const toursData: Tour[] = [
                 correctAnswer: 'Шторм',
             },
             {
-                type: 'ExcellentResultPage',
-                text: 'Вы справились отлично!',
-                image: 'iconExcelent.png',
-            },
-            {
-                type: 'GoodResultPage',
-                text: 'Хороший результат!',
-                image: 'iconGood.png',
-            },
-            {
-                type: 'BadResultPage',
-                text: 'Не сдавайся!',
-                image: 'iconBad.png',
-            },
+           type: 'ResultPage',
+           pages: [
+               {
+                   type: 'BadResultPage',
+                   text: 'Не сдавайся!',
+                   image: 'iconBad.png',
+                   range: [0, 5],
+               },
+               {
+                   type: 'GoodResultPage',
+                   text: 'Хороший результат!',
+                   image: 'iconGood.png',
+                   range: [6, 9],
+               },
+               {
+                   type: 'ExcellentResultPage',
+                   text: 'Вы справились отлично!',
+                   image: 'iconExcellent.png',
+                   range: [10, 12],
+               },
+           ]}
         ],
     },
 ];

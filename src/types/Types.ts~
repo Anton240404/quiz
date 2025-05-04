@@ -20,7 +20,6 @@ export type ExamplesInfoPage = {
 export type InputQuestionPage = {
     type: 'InputQuestionPage';
     correctAnswer: string;
-    selectedAnswer?: string;
 };
 export type MultiselectAnswerQuestionPage = {
     type: 'MultiselectAnswerQuestionPage';
