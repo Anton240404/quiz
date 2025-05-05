@@ -5,7 +5,7 @@ export type Tour = {
 
 export type Page =
     | DescriptionInfoPage
-    | ExamplesInfoPage
+    | SingleAnswerAndImageQuestionPage
     | InputQuestionPage
     | MultiselectAnswerQuestionPage
     | SingleAnswerQuestionPage
@@ -26,6 +26,15 @@ export type MultiselectAnswerQuestionPage = {
     type: 'MultiselectAnswerQuestionPage';
     correctAnswers: string[];
 };
+
+export type SingleAnswerAndImageQuestionPage = {
+    type: 'SingleAnswerAndImageQuestionPage';
+    question: string;
+    options: string[];
+    optionsImage?: {id: string, imagePath: string }[];
+    correctAnswer: string;
+    selectedAnswer?: string;
+}
 export type SingleAnswerQuestionPage = {
     type: 'SingleAnswerQuestionPage';
     question: string;

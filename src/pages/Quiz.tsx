@@ -3,13 +3,18 @@ import { toursData } from '../data/tours-data.ts';
 import styles from './css/quiz.module.css';
 import { SingleAnswerQuestionPageView } from './single-answer-question-page-view.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BadResultPageView } from './bad-result-page-view.tsx';
+import { BadResultPageView } from './pages-result/bad-result-page-view.tsx';
 import { getQuestionsPages } from './lib.ts';
 import { Page } from '../types/Types.ts';
+import { GoodResultPageView } from './pages-result/good-result-page-view.tsx';
+import { ExcellentResultPageView } from './pages-result/excellent-result-page-view.tsx';
+import { SingleAnswerAndImageQuestionPageView, } from './single-answer-and-image-question-page.tsx';
 
 function calculateResult(pages: Page[]) {
     const correctAnswers = pages.filter((page) => {
         if (page.type === 'SingleAnswerQuestionPage') {
+            return page.selectedAnswer === page.correctAnswer;
+        }else if (page.type === 'SingleAnswerAndImageQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
         } else if (page.type === 'InputQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
@@ -23,7 +28,7 @@ function calculateResult(pages: Page[]) {
 
 export function Quiz() {
     const navigate = useNavigate();
-    const {tourIndex} = useParams();
+    const { tourIndex } = useParams();
     const [currentTourIndex, setCurrentTourIndex] = useState(Number(tourIndex) || 0);
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     const [tours, setTours] = useState(toursData);
@@ -83,20 +88,36 @@ export function Quiz() {
                         allAnswers={questionsCount}
                     />
                 )}
-                {/*{view.type === 'GoodResultPage' && (
-                    <GoodResultPageView
-                        onNext={handleNext}
-                        correctAnswers={correctAnswers}
-                        allAnswers={allAnswers}
-                    />
-                )}
-                {view.type === 'ExcellentResultPage' && (
-                    <ExcellentResultPageView
-                        onNext={handleNext}
-                        correctAnswers={correctAnswers}
-                        allAnswers={allAnswers}
-                    />
-                )}*/}
+                    {view.type === 'GoodResultPage' && (
+                        <GoodResultPageView
+                            onNext={() => {
+                                if (currentTourIndex < tours.length - 1) {
+                                    setCurrentTourIndex(prev => prev + 1);
+                                    setCurrentPageIndex(0);
+                                    navigate(`/quiz-intro/${currentTourIndex + 1}`);
+                                } else {
+                                    navigate('/');
+                                }
+                            }}
+                            correctAnswers={correctQuestionsCount}
+                            allAnswers={questionsCount}
+                        />
+                    )}
+                    {view.type === 'ExcellentResultPage' && (
+                        <ExcellentResultPageView
+                            onNext={() => {
+                                if (currentTourIndex < tours.length - 1) {
+                                    setCurrentTourIndex(prev => prev + 1);
+                                    setCurrentPageIndex(0);
+                                    navigate(`/quiz-intro/${currentTourIndex + 1}`);
+                                } else {
+                                    navigate('/');
+                                }
+                            }}
+                            correctAnswers={correctQuestionsCount}
+                            allAnswers={questionsCount}
+                        />
+                    )}
             </>
         </>;
     }
@@ -115,12 +136,19 @@ export function Quiz() {
                     />
                 )}
                 {renderResultPage()}
-                {/* {currentPage.type === 'GoodResultPage' && (
-                <BadResultPageView onNext={handleNext} />
-            )}
-            {currentPage.type === 'ExcellentResultPage' && (
-                <BadResultPageView />
-            )} */}
+                )
+                {currentPage.type === 'SingleAnswerAndImageQuestionPage' && (
+                    <SingleAnswerAndImageQuestionPageView
+                        page={currentPage}
+                        onNext={handleNext}
+                        currentPageIndex={currentPageIndex}
+                        currentTourIndex={currentTourIndex}
+                        tours={tours}
+                        setTours={setTours}
+                    />
+                )}
+                {renderResultPage()}
+                )
             </div>
         </div>
     );

@@ -95,13 +95,13 @@ export const toursData: Tour[] = [
                         type: 'GoodResultPage',
                         text: 'Хороший результат!',
                         image: 'iconGood.png',
-                        range: [7, 9],
+                        range: [6, 10],
                     },
                     {
                         type: 'ExcellentResultPage',
                         text: 'Вы справились отлично!',
                         image: 'iconExcellent.png',
-                        range: [10, 12],
+                        range: [11, 12],
                     },
                 ],
             },
@@ -184,23 +184,45 @@ export const toursData: Tour[] = [
                    type: 'BadResultPage',
                    text: 'Не сдавайся!',
                    image: 'iconBad.png',
-                   range: [0, 5],
+                   range: [0, 3],
                },
                {
                    type: 'GoodResultPage',
                    text: 'Хороший результат!',
                    image: 'iconGood.png',
-                   range: [6, 9],
+                   range: [4, 7],
                },
                {
                    type: 'ExcellentResultPage',
                    text: 'Вы справились отлично!',
                    image: 'iconExcellent.png',
-                   range: [10, 12],
+                   range: [8, 9],
                },
            ]}
         ],
     },
+    {
+        title: 'Викторина + Загадки',
+        pages: [
+            {
+                type: 'SingleAnswerAndImageQuestionPage',
+                question:
+                    'Как называется флаг флота России?',
+                options: ['Гюйс', 'Андреевский флаг', 'Морской стяг', 'Военно-морское знамя'],
+                correctAnswer: 'Андреевский флаг',
+            },
+            {
+                type: 'SingleAnswerAndImageQuestionPage',
+                question:
+                    'Найдите Андреевский флаг и выделите его',
+                optionsImage: {
+                    id: 'option1',
+                    imagePath: './assets/flag1.png',
+                },
+                correctAnswer: 'flag1.png',
+            },
+        ],
+    }
 ];
 
 /*{
