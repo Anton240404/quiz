@@ -1,6 +1,6 @@
 // bad-result-page-view.tsx
 import styles from './pages-result-css/bad-result-page.module.css';
-import iconBad from '../../assets/iconBad.png';
+import iconBad from '../../../public/assets/iconBad.png';
 import { Button } from '../../components/ui-compnents/button.tsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,8 +23,7 @@ export function BadResultPageView(props: Props) {
                 />
                 <h3 className={styles.resultTitle}>Не сдавайся!</h3>
                 <p className={styles.resultText}>
-                    Вы ответили правильно на {props.correctAnswers} /{' '}
-                    {props.allAnswers} вопросов
+                    ВЫ ОТВЕТИЛИ ПРАВИЛЬНО НА {props.correctAnswers} / {props.allAnswers} ВОПРОСОВ
                 </p>
             </div>
 

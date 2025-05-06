@@ -1,4 +1,4 @@
-import { Page } from '../types/Types';
+import { Page } from '../types/types.ts';
 
 export function getQuestionsPages(pages: Page[]) {
     return pages.filter(

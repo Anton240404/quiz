@@ -1,8 +1,9 @@
-import { SingleAnswerAndImageQuestionPage, Tour } from '../types/Types.ts';
+import { SingleAnswerAndImageQuestionPage, Tour } from '../types/types.ts';
 import styles from './css/quiz.module.css';
 import { Button } from '../components/ui-compnents/button.tsx';
 import { useNavigate } from 'react-router-dom';
-import * as React from 'react';
+import { ImageButton } from '../components/ui-compnents/image-button.tsx';
+
 
 type Props = {
     page: SingleAnswerAndImageQuestionPage;
@@ -24,48 +25,40 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
 
     const handleAnswer = (answer: string) => {
         const copy = [...props.tours];
-        const currentPage =
-            copy[props.currentTourIndex].pages[props.currentPageIndex];
+        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
         if (currentPage.type === 'SingleAnswerAndImageQuestionPage') {
             currentPage.selectedAnswer = answer;
         }
         props.setTours(copy);
     };
 
-    const getButtonColor = (option: string) => {
+    const getButtonColor = (imgUrl: string) => {
         if (!hasSelectedAnswer) return 'default';
-        if (option === correctAnswer && option === selectedAnswer)
-            return 'success';
-        if (option !== correctAnswer && option === selectedAnswer)
-            return 'danger';
-        if (option === correctAnswer && selectedAnswer !== correctAnswer)
-            return 'success';
+        if (imgUrl === correctAnswer && imgUrl === selectedAnswer)
+            return 'correct';
+        if (imgUrl !== correctAnswer && imgUrl === selectedAnswer)
+            return 'incorrect';
+        if (imgUrl === correctAnswer && selectedAnswer !== correctAnswer)
+            return 'correct';
         return 'default';
     };
 
     return (
-        <div className={styles.container}>
-            <div className={styles.wrapper}>
+        <>
+            <div className={styles.questionContainer}>
                 <p className={styles.questionText}>{props.page.question}</p>
             </div>
-
             <div className={styles.controlsContainer}>
                 <div className={styles.options}>
                     {props.page.imageOptions.map((imgUrl, index) => (
-                        <Button
+                        <ImageButton
                             key={index}
                             onClick={() => handleAnswer(imgUrl)}
-                            disabled={hasSelectedAnswer}
-                            color={getButtonColor(imgUrl)}
-                            text={imgUrl}
+                            disabled={hasSelectedAnswer && imgUrl !== correctAnswer}
+                            variant={getButtonColor(imgUrl)}
+                            url={imgUrl}
                         />
-                        // variant = 'default' | 'dark' | 'incorrect' | 'correct'
-                        // <ImageButton
-                        //     key={imgUrl}
-                        //     url={imgUrl}
-                        //     variant={}
-                        //     number={index + 1}
-                        // />
+
                     ))}
                 </div>
 
@@ -83,11 +76,11 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
                                 : 'ПРОДОЛЖИТЬ КВИЗ'
                         }
                         onClick={props.onNext}
-                        color={'primary'}
+                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
                         disabled={!hasSelectedAnswer}
                     ></Button>
                 </div>
             </div>
-        </div>
+        </>
     );
 }

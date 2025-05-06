@@ -1,4 +1,4 @@
-import { SingleAnswerQuestionPage, Tour } from '../types/Types.ts';
+import { SingleAnswerQuestionPage, Tour } from '../types/types.ts';
 import styles from './css/quiz.module.css';
 import { Button } from '../components/ui-compnents/button.tsx';
 import { useNavigate } from 'react-router-dom';
@@ -48,18 +48,7 @@ export function SingleAnswerQuestionPageView(props: Props) {
 
     return (
         <>
-            <div
-                style={{
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    width: '100%',
-                    backgroundColor: '#eaf1f7',
-                    alignItems: 'center',
-                    borderRadius: 20,
-                }}
-            >
+            <div className={styles.questionContainer}>
                 <h2 className={styles.questionNumber}>
                     Вопрос {props.currentPageIndex + 1} / {questionPages.length}
                 </h2>
@@ -93,7 +82,7 @@ export function SingleAnswerQuestionPageView(props: Props) {
                                 : 'ПРОДОЛЖИТЬ КВИЗ'
                         }
                         onClick={props.onNext}
-                        color={'primary'}
+                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
                         disabled={!hasSelectedAnswer}
                     ></Button>
                 </div>

@@ -17,6 +17,16 @@
     box-sizing: border-box;
     margin-bottom: 3px;
 }
+.questionContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    background-color: #eaf1f7;
+    align-items: center;
+    border-radius: 20px;
+}
 .controlsContainer {
     width: 100%;
     display: flex;
@@ -34,8 +44,8 @@
 }
 
 .questionText {
-    font-size: 32px;
-    font-weight: bold;
+    font-size: 80px;
+    font-weight: 600;
     color: #0d003b;
     background-color: #eaf1f7;
     text-align: center;

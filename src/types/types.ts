@@ -9,14 +9,13 @@ export type Page =
     | InputQuestionPage
     | MultiselectAnswerQuestionPage
     | SingleAnswerQuestionPage
-    | ResultPage;
+    | ResultPage
+    | InfoPage
 
 export type DescriptionInfoPage = {
     type: 'DescriptionInfoPage';
 };
-export type ExamplesInfoPage = {
-    type: 'ExamplesInfoPage';
-};
+
 export type InputQuestionPage = {
     type: 'InputQuestionPage';
     correctAnswer: string;
@@ -25,6 +24,14 @@ export type InputQuestionPage = {
 export type MultiselectAnswerQuestionPage = {
     type: 'MultiselectAnswerQuestionPage';
     correctAnswers: string[];
+};
+
+export type InfoPage = {
+    type: 'InfoPage';
+    image: string;
+    title: string;
+    text: string;
+
 };
 
 export type SingleAnswerAndImageQuestionPage = {
@@ -43,7 +50,7 @@ export type SingleAnswerQuestionPage = {
 };
 export type ResultPage = {
     type: 'ResultPage';
-    pages: [BadResultPage, GoodResultPage, ExcellentResultPage];
+    pages: [BadResultPage, GoodResultPage, ExcellentResultPage ];
 };
 
 export type BadResultPage = {
@@ -67,20 +74,3 @@ export type ExcellentResultPage = {
     range: [number, number];
 };
 
-// Как сделать указать что BadResultPage - показывается только когда пользователь ответил меньше 6 вопросов.
-// (абсолютные единицы
-// и относительные единицы)
-// Также подумать как показывать в процентном соотношение
-// pages: [{
-//     type: 'SingleQuestionPage',
-//     question: 'Как называется трехмачтовый боевой корабль, у которого много пушек?',
-//     options: ['1', "2"],
-//     correctAnswer: 'фрегат'
-// }
-//     , {
-//         type: 'SingleQuestionPage',
-//         question: 'Как называется трехмачтовый боевой корабль, у которого много пушек?',
-//         options: ['1', "2"],
-//         correctAnswer: 'фрегат'
-//     }
-// ]

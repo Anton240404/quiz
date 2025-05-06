@@ -1,5 +1,5 @@
 import styles from './pages-result-css/excellent-reult-page.module.css';
-import iconExcellent from '../../assets/iconExcellent.png';
+import iconExcellent from '../../../public/assets/iconExcellent.png';
 import { Button } from '../../components/ui-compnents/button.tsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,8 +22,7 @@ export function ExcellentResultPageView(props: Props) {
                 />
                 <h3 className={styles.resultTitle}>Вы справились отлично!</h3>
                 <p className={styles.resultText}>
-                    Вы ответили правильно на {props.correctAnswers} /{' '}
-                    {props.allAnswers} вопросов
+                    ВЫ ОТВЕТИЛИ ПРАВИЛЬНО НА {props.correctAnswers} / {props.allAnswers} ВОПРОСОВ
                 </p>
             </div>
 

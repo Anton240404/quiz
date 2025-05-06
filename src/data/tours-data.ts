@@ -1,4 +1,4 @@
-import { Tour } from '../types/Types.ts';
+import { Tour } from '../types/types.ts';
 
 export const toursData: Tour[] = [
     {
@@ -220,38 +220,23 @@ export const toursData: Tour[] = [
                 type: 'SingleAnswerAndImageQuestionPage',
                 question: 'Найдите Андреевский флаг и выделите его',
                 imageOptions: [
-                    './assets/flag1.png',
-                    './assets/flag1.png',
-                    './assets/flag1.png',
-                    './assets/flag1.png',
+                    '/assets/flag1.png',
+                    '/assets/flag2.png',
+                    '/assets/flag3.png',
+                    '/assets/flag4.png',
                 ],
-                correctAnswer: './assets/flag1.png',
+                correctAnswer: '/assets/flag1.png',
+            },
+            {
+                type: 'InfoPage',
+                image: './assets/flag1.png',
+                title: 'Андреевский флаг',
+                text: 'Андреевский флаг является главным корабельным кормовым флагом Российского Флота. ' +
+                    'Он представляет собой белое полотнище, пересеченное по диагонали двумя синими полосами, ' +
+                    'которые образуют наклонный крест, который называется Андреевским. ' +
+                    'Этот крест и дал имя флагу.',
             },
         ],
     },
 ];
 
-/*{
-    type: 'info-examples',
-    examples: [
-        { image: '', title: '' },
-    ],
-},
-{
-    type: 'question',
-    subtitle: 'Собери Розу Ветров', // ?
-    question: 'Назовите самое крупное морское млекопитающее',
-    image: '', // ?
-    textOptions: ['нарвал', 'Акула', 'кашалот', 'Морж'],
-    imageOptions: ['https://image.com/forest', 'https://image.com/forest', 'https://image.com/forest', 'https://image.com/forest'],
-    correctAnswers: ['кашалот', 'https://image.com/forest'],
-},
-{
-    type: 'question-input',
-    subtitle: 'Собери Розу Ветров', // ?
-    question: 'Назовите самое крупное морское млекопитающее',
-    image: '', // ?
-    textOptions: ['нарвал', 'Акула', 'кашалот', 'Морж'],
-    imageOptions: ['https://image.com/forest', 'https://image.com/forest', 'https://image.com/forest', 'https://image.com/forest'],
-    correctAnswers: ['кашалот', 'https://image.com/forest'],
-},*/

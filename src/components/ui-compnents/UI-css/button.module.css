@@ -1,6 +1,5 @@
 /* Общие стили */
 .button {
-
     border-radius: 20px;
     font-size: 20px;
     display: inline-block;
@@ -17,9 +16,6 @@
     transition-duration: 0.2s;
     color: white;
 }
-.danger:hover {
-    background-color: darkred;
-}
 
 .success {
     align-items: center;
@@ -29,10 +25,6 @@
 }
 .default {
     background-color: #FFFFFF;
-    transition-duration: 0.2s;
-}
-.default:hover {
-    background-color: #999;
 }
 .primary{
     align-items: center;
@@ -42,6 +34,12 @@
     flex-grow: 1;
 }
 .disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+}
+.disabledButtons{
+    cursor: not-allowed;
+    color: #FFFF;
+    background-color: #5C59FD;
+    flex-grow: 1;
+    opacity: 0.5;
 }

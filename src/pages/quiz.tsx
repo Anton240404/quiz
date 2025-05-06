@@ -5,10 +5,11 @@ import { SingleAnswerQuestionPageView } from './single-answer-question-page-view
 import { useNavigate, useParams } from 'react-router-dom';
 import { BadResultPageView } from './pages-result/bad-result-page-view.tsx';
 import { getQuestionsPages } from './lib.ts';
-import { Page } from '../types/Types.ts';
+import { Page } from '../types/types.ts';
 import { GoodResultPageView } from './pages-result/good-result-page-view.tsx';
 import { ExcellentResultPageView } from './pages-result/excellent-result-page-view.tsx';
 import { SingleAnswerAndImageQuestionPageView } from './single-answer-and-image-question-page.tsx';
+import { InfoPageView } from './info/info-page-view.tsx';
 
 function calculateResult(pages: Page[]) {
     const correctAnswers = pages.filter((page) => {
@@ -61,6 +62,8 @@ export function Quiz() {
         }
     };
 
+    {/*Нужно изменить функцию*/}
+
     function renderResultPage() {
         if (currentPage.type !== 'ResultPage') return;
 
@@ -69,11 +72,12 @@ export function Quiz() {
         );
 
         const view = currentPage.pages.find((x) => {
-            const [min, max] = x.range; // [0, 5]
-            return correctQuestionsCount >= min && correctQuestionsCount <= max;
+                const [min, max] = x.range;
+                return correctQuestionsCount >= min && correctQuestionsCount <= max;
         });
 
         if (!view) return;
+
 
         return (
             <>
@@ -124,6 +128,20 @@ export function Quiz() {
                         allAnswers={questionsCount}
                     />
                 )}
+                {/*Нужно доработать отображение компонента*/}
+                {/*{view.type === 'InfoPage' && (
+                    <InfoPageView
+                        onNext={() => {
+                            if (currentTourIndex < tours.length - 1) {
+                                setCurrentTourIndex((prev) => prev + 1);
+                                setCurrentPageIndex(0);
+                                navigate(`/quiz-intro/${currentTourIndex + 1}`);
+                            } else {
+                                navigate('/');
+                            }
+                        }}
+                    />
+                )}*/}
             </>
         );
     }
