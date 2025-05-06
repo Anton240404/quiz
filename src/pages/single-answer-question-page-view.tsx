@@ -25,7 +25,8 @@ export function SingleAnswerQuestionPageView(props: Props) {
 
     const handleAnswer = (answer: string) => {
         const copy = [...props.tours];
-        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
+        const currentPage =
+            copy[props.currentTourIndex].pages[props.currentPageIndex];
         if (currentPage.type === 'SingleAnswerQuestionPage') {
             currentPage.selectedAnswer = answer;
         }
@@ -46,8 +47,19 @@ export function SingleAnswerQuestionPageView(props: Props) {
     const questionPages = getQuestionsPages(currentTour.pages);
 
     return (
-        <div className={styles.container}>
-            <div className={styles.wrapper}>
+        <>
+            <div
+                style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    width: '100%',
+                    backgroundColor: '#eaf1f7',
+                    alignItems: 'center',
+                    borderRadius: 20,
+                }}
+            >
                 <h2 className={styles.questionNumber}>
                     Вопрос {props.currentPageIndex + 1} / {questionPages.length}
                 </h2>
@@ -67,7 +79,7 @@ export function SingleAnswerQuestionPageView(props: Props) {
                     ))}
                 </div>
 
-                <div className={styles.buttonConteiner}>
+                <div className={styles.buttonContainer}>
                     <Button
                         text={'НА ГЛАВНУЮ'}
                         onClick={() => navigate('/')}
@@ -75,7 +87,8 @@ export function SingleAnswerQuestionPageView(props: Props) {
                     ></Button>
                     <Button
                         text={
-                            props.currentPageIndex < currentTour.pages.length - 1
+                            props.currentPageIndex <
+                            currentTour.pages.length - 1
                                 ? 'ДАЛЕЕ'
                                 : 'ПРОДОЛЖИТЬ КВИЗ'
                         }
@@ -85,6 +98,6 @@ export function SingleAnswerQuestionPageView(props: Props) {
                     ></Button>
                 </div>
             </div>
-        </div>
+        </>
     );
 }

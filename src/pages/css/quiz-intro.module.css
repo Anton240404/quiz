@@ -11,26 +11,26 @@
 }
 .intro {
     background-size: cover;
-    background: #ECF7FF url('src/assets/map.svg') no-repeat center;
+    background: #ecf7ff url('/src/assets/map.svg') no-repeat center;
     background-size: cover;
     height: 100vh;
     width: 100%;
     border-radius: 20px;
 }
-.tourInfo{
+.tourInfo {
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.tourName{
-    color: #5C59FD;
+.tourName {
+    color: #5c59fd;
     font-size: 24px;
     font-weight: bold;
 }
-.tourTitle{
-    color:#0D003B;
+.tourTitle {
+    color: #0d003b;
     font-size: 100px;
     font-weight: bold;
 }

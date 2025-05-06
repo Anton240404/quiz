@@ -1,13 +1,13 @@
-import styles from './pages-result-css/bad-result-page.module.css'
-import iconGood from '../../assets/iconGood.png'
+import styles from './pages-result-css/bad-result-page.module.css';
+import iconGood from '../../assets/iconGood.png';
 import { Button } from '../../components/ui-compnents/button.tsx';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
-    correctAnswers: number,
-    allAnswers: number,
-    onNext: () => void
-}
+    correctAnswers: number;
+    allAnswers: number;
+    onNext: () => void;
+};
 
 export function GoodResultPageView(props: Props) {
     const navigate = useNavigate();
@@ -15,15 +15,20 @@ export function GoodResultPageView(props: Props) {
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
-                <img src={iconGood} alt="Good Result" className={styles.iconBad} />
+                <img
+                    src={iconGood}
+                    alt="Good Result"
+                    className={styles.iconBad}
+                />
                 <h3 className={styles.resultTitle}>Хороший результат</h3>
                 <p className={styles.resultText}>
-                    Вы ответили правильно на {props.correctAnswers} / {props.allAnswers} вопросов
+                    Вы ответили правильно на {props.correctAnswers} /{' '}
+                    {props.allAnswers} вопросов
                 </p>
             </div>
 
             <div className={styles.controlsContainer}>
-                <div className={styles.buttonConteiner}>
+                <div className={styles.buttonContainer}>
                     <Button
                         text={'НА ГЛАВНУЮ'}
                         onClick={() => navigate('/')}

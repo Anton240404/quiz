@@ -1,24 +1,25 @@
-import styles from './UI-css/button.module.css'
+import styles from './UI-css/button.module.css';
 
 type Props = {
-    color: 'default' | 'success' | 'danger' | 'primary',
-    onClick?: () => void,
-    text: string,
+    color: 'default' | 'success' | 'danger' | 'primary';
+    onClick?: () => void;
+    text: string;
     disabled?: boolean;
-    type?: 'submit' | 'button' | "reset"
-}
+    readonly?: boolean;
+    type?: 'submit' | 'button' | 'reset';
+};
 
 export function Button(props: Props) {
-    const classnames = [styles.button]
+    const classnames = [styles.button];
 
     if (props.color === 'default') {
-        classnames.push(styles.default)
+        classnames.push(styles.default);
     } else if (props.color === 'success') {
-        classnames.push(styles.success)
+        classnames.push(styles.success);
     } else if (props.color === 'danger') {
-        classnames.push(styles.danger)
-    } else if (props.color === 'primary'){
-        classnames.push(styles.primary)
+        classnames.push(styles.danger);
+    } else if (props.color === 'primary') {
+        classnames.push(styles.primary);
     }
 
     if (props.disabled) {
@@ -27,8 +28,17 @@ export function Button(props: Props) {
 
     return (
         <>
-            <button type={props.type || 'button'} disabled={props.disabled} onClick={() => props.onClick?.()}
-                    className={classnames.join(' ')}>{props.text}</button>
+            <button
+                type={props.type || 'button'}
+                disabled={props.disabled}
+                onClick={() => {
+                    if (props.readonly) return;
+                    props.onClick?.();
+                }}
+                className={classnames.join(' ')}
+            >
+                {props.text}
+            </button>
         </>
-    )
+    );
 }

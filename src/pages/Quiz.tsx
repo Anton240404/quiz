@@ -8,13 +8,13 @@ import { getQuestionsPages } from './lib.ts';
 import { Page } from '../types/Types.ts';
 import { GoodResultPageView } from './pages-result/good-result-page-view.tsx';
 import { ExcellentResultPageView } from './pages-result/excellent-result-page-view.tsx';
-import { SingleAnswerAndImageQuestionPageView, } from './single-answer-and-image-question-page.tsx';
+import { SingleAnswerAndImageQuestionPageView } from './single-answer-and-image-question-page.tsx';
 
 function calculateResult(pages: Page[]) {
     const correctAnswers = pages.filter((page) => {
         if (page.type === 'SingleAnswerQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
-        }else if (page.type === 'SingleAnswerAndImageQuestionPage') {
+        } else if (page.type === 'SingleAnswerAndImageQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
         } else if (page.type === 'InputQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
@@ -29,7 +29,9 @@ function calculateResult(pages: Page[]) {
 export function Quiz() {
     const navigate = useNavigate();
     const { tourIndex } = useParams();
-    const [currentTourIndex, setCurrentTourIndex] = useState(Number(tourIndex) || 0);
+    const [currentTourIndex, setCurrentTourIndex] = useState(
+        Number(tourIndex) || 0
+    );
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     const [tours, setTours] = useState(toursData);
 
@@ -47,7 +49,9 @@ export function Quiz() {
         } else {
             // Если это последний вопрос последнего тура
             // Находим страницу результатов в туре и переключаемся на неё
-            const resultPageIndex = currentTour.pages.findIndex(page => page.type === 'ResultPage');
+            const resultPageIndex = currentTour.pages.findIndex(
+                (page) => page.type === 'ResultPage'
+            );
             if (resultPageIndex !== -1) {
                 setCurrentPageIndex(resultPageIndex);
             } else {
@@ -60,23 +64,25 @@ export function Quiz() {
     function renderResultPage() {
         if (currentPage.type !== 'ResultPage') return;
 
-        const { correctQuestionsCount, questionsCount } = calculateResult(currentTour.pages);
+        const { correctQuestionsCount, questionsCount } = calculateResult(
+            currentTour.pages
+        );
 
-        const view = currentPage.pages.find(x => {
+        const view = currentPage.pages.find((x) => {
             const [min, max] = x.range; // [0, 5]
             return correctQuestionsCount >= min && correctQuestionsCount <= max;
         });
 
         if (!view) return;
 
-        return <>
+        return (
             <>
                 {view.type === 'BadResultPage' && (
                     <BadResultPageView
                         onNext={() => {
                             if (currentTourIndex < tours.length - 1) {
                                 // Переход к следующему туру
-                                setCurrentTourIndex(prev => prev + 1);
+                                setCurrentTourIndex((prev) => prev + 1);
                                 setCurrentPageIndex(0); // Сброс индекса страницы
                                 navigate(`/quiz-intro/${currentTourIndex + 1}`);
                             } else {
@@ -88,38 +94,38 @@ export function Quiz() {
                         allAnswers={questionsCount}
                     />
                 )}
-                    {view.type === 'GoodResultPage' && (
-                        <GoodResultPageView
-                            onNext={() => {
-                                if (currentTourIndex < tours.length - 1) {
-                                    setCurrentTourIndex(prev => prev + 1);
-                                    setCurrentPageIndex(0);
-                                    navigate(`/quiz-intro/${currentTourIndex + 1}`);
-                                } else {
-                                    navigate('/');
-                                }
-                            }}
-                            correctAnswers={correctQuestionsCount}
-                            allAnswers={questionsCount}
-                        />
-                    )}
-                    {view.type === 'ExcellentResultPage' && (
-                        <ExcellentResultPageView
-                            onNext={() => {
-                                if (currentTourIndex < tours.length - 1) {
-                                    setCurrentTourIndex(prev => prev + 1);
-                                    setCurrentPageIndex(0);
-                                    navigate(`/quiz-intro/${currentTourIndex + 1}`);
-                                } else {
-                                    navigate('/');
-                                }
-                            }}
-                            correctAnswers={correctQuestionsCount}
-                            allAnswers={questionsCount}
-                        />
-                    )}
+                {view.type === 'GoodResultPage' && (
+                    <GoodResultPageView
+                        onNext={() => {
+                            if (currentTourIndex < tours.length - 1) {
+                                setCurrentTourIndex((prev) => prev + 1);
+                                setCurrentPageIndex(0);
+                                navigate(`/quiz-intro/${currentTourIndex + 1}`);
+                            } else {
+                                navigate('/');
+                            }
+                        }}
+                        correctAnswers={correctQuestionsCount}
+                        allAnswers={questionsCount}
+                    />
+                )}
+                {view.type === 'ExcellentResultPage' && (
+                    <ExcellentResultPageView
+                        onNext={() => {
+                            if (currentTourIndex < tours.length - 1) {
+                                setCurrentTourIndex((prev) => prev + 1);
+                                setCurrentPageIndex(0);
+                                navigate(`/quiz-intro/${currentTourIndex + 1}`);
+                            } else {
+                                navigate('/');
+                            }
+                        }}
+                        correctAnswers={correctQuestionsCount}
+                        allAnswers={questionsCount}
+                    />
+                )}
             </>
-        </>;
+        );
     }
 
     return (
@@ -136,7 +142,6 @@ export function Quiz() {
                     />
                 )}
                 {renderResultPage()}
-                )
                 {currentPage.type === 'SingleAnswerAndImageQuestionPage' && (
                     <SingleAnswerAndImageQuestionPageView
                         page={currentPage}
@@ -147,8 +152,6 @@ export function Quiz() {
                         setTours={setTours}
                     />
                 )}
-                {renderResultPage()}
-                )
             </div>
         </div>
     );

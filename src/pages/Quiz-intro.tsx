@@ -10,7 +10,8 @@ export function QuizIntro() {
     const currentTourIndex = tourIndex ? parseInt(tourIndex, 10) : 0;
 
     // Проверяем, что индекс в допустимом диапазоне
-    const isValidIndex = currentTourIndex >= 0 && currentTourIndex < toursData.length;
+    const isValidIndex =
+        currentTourIndex >= 0 && currentTourIndex < toursData.length;
 
     // Если индекс недопустимый, перенаправляем на главную
     if (!isValidIndex) {
@@ -33,13 +34,10 @@ export function QuizIntro() {
 
                     {/* Отображаем название тура из данных */}
                     <h2 className={styles.tourTitle}>{currentTour.title}</h2>
-            </div>
+                </div>
             </div>
             <div className={styles.buttons}>
-                <button
-                    className={styles.button}
-                    onClick={() => navigate('/')}
-                >
+                <button className={styles.button} onClick={() => navigate('/')}>
                     На главную
                 </button>
                 <button

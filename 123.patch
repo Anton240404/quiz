@@ -1,0 +1,925 @@
+From a9bb6049326372fd12edc81671e3e1759ee867db Mon Sep 17 00:00:00 2001
+From: artur <example@a.b>
+Date: Mon, 5 May 2025 22:44:46 +0500
+Subject: [PATCH] 1
+
+---
+ src/components/ui-compnents/button.tsx        | 42 +++++----
+ src/data/tours-data.ts                        | 72 ++++++++-------
+ src/pages/Quiz-intro.tsx                      | 12 ++-
+ src/pages/Quiz.tsx                            | 87 ++++++++++---------
+ src/pages/css/home.module.css                 |  4 +-
+ src/pages/css/quiz-intro.module.css           | 12 +--
+ src/pages/css/quiz.module.css                 | 17 ++--
+ .../pages-result/bad-result-page-view.tsx     | 23 +++--
+ .../excellent-result-page-view.tsx            | 23 +++--
+ .../pages-result/good-result-page-view.tsx    | 23 +++--
+ .../bad-result-page.module.css                | 10 +--
+ .../excellent-reult-page.module.css           | 10 +--
+ .../good-result-page.module.css               | 10 +--
+ .../single-answer-and-image-question-page.tsx | 28 +++---
+ .../single-answer-question-page-view.tsx      | 27 ++++--
+ src/types/Types.ts                            |  5 +-
+ 16 files changed, 227 insertions(+), 178 deletions(-)
+
+diff --git a/src/components/ui-compnents/button.tsx b/src/components/ui-compnents/button.tsx
+index f806344..277ced0 100644
+--- a/src/components/ui-compnents/button.tsx
++++ b/src/components/ui-compnents/button.tsx
+@@ -1,24 +1,25 @@
+-import styles from './UI-css/button.module.css'
++import styles from './UI-css/button.module.css';
+ 
+ type Props = {
+-    color: 'default' | 'success' | 'danger' | 'primary',
+-    onClick?: () => void,
+-    text: string,
++    color: 'default' | 'success' | 'danger' | 'primary';
++    onClick?: () => void;
++    text: string;
+     disabled?: boolean;
+-    type?: 'submit' | 'button' | "reset"
+-}
++    readonly?: boolean;
++    type?: 'submit' | 'button' | 'reset';
++};
+ 
+ export function Button(props: Props) {
+-    const classnames = [styles.button]
++    const classnames = [styles.button];
+ 
+     if (props.color === 'default') {
+-        classnames.push(styles.default)
++        classnames.push(styles.default);
+     } else if (props.color === 'success') {
+-        classnames.push(styles.success)
++        classnames.push(styles.success);
+     } else if (props.color === 'danger') {
+-        classnames.push(styles.danger)
+-    } else if (props.color === 'primary'){
+-        classnames.push(styles.primary)
++        classnames.push(styles.danger);
++    } else if (props.color === 'primary') {
++        classnames.push(styles.primary);
+     }
+ 
+     if (props.disabled) {
+@@ -27,8 +28,17 @@ export function Button(props: Props) {
+ 
+     return (
+         <>
+-            <button type={props.type || 'button'} disabled={props.disabled} onClick={() => props.onClick?.()}
+-                    className={classnames.join(' ')}>{props.text}</button>
++            <button
++                type={props.type || 'button'}
++                disabled={props.disabled}
++                onClick={() => {
++                    if (props.readonly) return;
++                    props.onClick?.();
++                }}
++                className={classnames.join(' ')}
++            >
++                {props.text}
++            </button>
+         </>
+-    )
+-}
+\ No newline at end of file
++    );
++}
+diff --git a/src/data/tours-data.ts b/src/data/tours-data.ts
+index 7ec793f..88c021a 100644
+--- a/src/data/tours-data.ts
++++ b/src/data/tours-data.ts
+@@ -178,51 +178,57 @@ export const toursData: Tour[] = [
+                 correctAnswer: 'Шторм',
+             },
+             {
+-           type: 'ResultPage',
+-           pages: [
+-               {
+-                   type: 'BadResultPage',
+-                   text: 'Не сдавайся!',
+-                   image: 'iconBad.png',
+-                   range: [0, 3],
+-               },
+-               {
+-                   type: 'GoodResultPage',
+-                   text: 'Хороший результат!',
+-                   image: 'iconGood.png',
+-                   range: [4, 7],
+-               },
+-               {
+-                   type: 'ExcellentResultPage',
+-                   text: 'Вы справились отлично!',
+-                   image: 'iconExcellent.png',
+-                   range: [8, 9],
+-               },
+-           ]}
++                type: 'ResultPage',
++                pages: [
++                    {
++                        type: 'BadResultPage',
++                        text: 'Не сдавайся!',
++                        image: 'iconBad.png',
++                        range: [0, 3],
++                    },
++                    {
++                        type: 'GoodResultPage',
++                        text: 'Хороший результат!',
++                        image: 'iconGood.png',
++                        range: [4, 7],
++                    },
++                    {
++                        type: 'ExcellentResultPage',
++                        text: 'Вы справились отлично!',
++                        image: 'iconExcellent.png',
++                        range: [8, 9],
++                    },
++                ],
++            },
+         ],
+     },
+     {
+         title: 'Викторина + Загадки',
+         pages: [
+             {
+-                type: 'SingleAnswerAndImageQuestionPage',
+-                question:
+-                    'Как называется флаг флота России?',
+-                options: ['Гюйс', 'Андреевский флаг', 'Морской стяг', 'Военно-морское знамя'],
++                type: 'SingleAnswerQuestionPage',
++                question: 'Как называется флаг флота России?',
++                options: [
++                    'Гюйс',
++                    'Андреевский флаг',
++                    'Морской стяг',
++                    'Военно-морское знамя',
++                ],
+                 correctAnswer: 'Андреевский флаг',
+             },
+             {
+                 type: 'SingleAnswerAndImageQuestionPage',
+-                question:
+-                    'Найдите Андреевский флаг и выделите его',
+-                optionsImage: {
+-                    id: 'option1',
+-                    imagePath: './assets/flag1.png',
+-                },
+-                correctAnswer: 'flag1.png',
++                question: 'Найдите Андреевский флаг и выделите его',
++                imageOptions: [
++                    './assets/flag1.png',
++                    './assets/flag1.png',
++                    './assets/flag1.png',
++                    './assets/flag1.png',
++                ],
++                correctAnswer: './assets/flag1.png',
+             },
+         ],
+-    }
++    },
+ ];
+ 
+ /*{
+diff --git a/src/pages/Quiz-intro.tsx b/src/pages/Quiz-intro.tsx
+index 9b8c8f9..32702d6 100644
+--- a/src/pages/Quiz-intro.tsx
++++ b/src/pages/Quiz-intro.tsx
+@@ -10,7 +10,8 @@ export function QuizIntro() {
+     const currentTourIndex = tourIndex ? parseInt(tourIndex, 10) : 0;
+ 
+     // Проверяем, что индекс в допустимом диапазоне
+-    const isValidIndex = currentTourIndex >= 0 && currentTourIndex < toursData.length;
++    const isValidIndex =
++        currentTourIndex >= 0 && currentTourIndex < toursData.length;
+ 
+     // Если индекс недопустимый, перенаправляем на главную
+     if (!isValidIndex) {
+@@ -33,13 +34,10 @@ export function QuizIntro() {
+ 
+                     {/* Отображаем название тура из данных */}
+                     <h2 className={styles.tourTitle}>{currentTour.title}</h2>
+-            </div>
++                </div>
+             </div>
+             <div className={styles.buttons}>
+-                <button
+-                    className={styles.button}
+-                    onClick={() => navigate('/')}
+-                >
++                <button className={styles.button} onClick={() => navigate('/')}>
+                     На главную
+                 </button>
+                 <button
+@@ -51,4 +49,4 @@ export function QuizIntro() {
+             </div>
+         </div>
+     );
+-}
+\ No newline at end of file
++}
+diff --git a/src/pages/Quiz.tsx b/src/pages/Quiz.tsx
+index 4b97457..e8f9714 100644
+--- a/src/pages/Quiz.tsx
++++ b/src/pages/Quiz.tsx
+@@ -8,13 +8,13 @@ import { getQuestionsPages } from './lib.ts';
+ import { Page } from '../types/Types.ts';
+ import { GoodResultPageView } from './pages-result/good-result-page-view.tsx';
+ import { ExcellentResultPageView } from './pages-result/excellent-result-page-view.tsx';
+-import { SingleAnswerAndImageQuestionPageView, } from './single-answer-and-image-question-page.tsx';
++import { SingleAnswerAndImageQuestionPageView } from './single-answer-and-image-question-page.tsx';
+ 
+ function calculateResult(pages: Page[]) {
+     const correctAnswers = pages.filter((page) => {
+         if (page.type === 'SingleAnswerQuestionPage') {
+             return page.selectedAnswer === page.correctAnswer;
+-        }else if (page.type === 'SingleAnswerAndImageQuestionPage') {
++        } else if (page.type === 'SingleAnswerAndImageQuestionPage') {
+             return page.selectedAnswer === page.correctAnswer;
+         } else if (page.type === 'InputQuestionPage') {
+             return page.selectedAnswer === page.correctAnswer;
+@@ -29,7 +29,9 @@ function calculateResult(pages: Page[]) {
+ export function Quiz() {
+     const navigate = useNavigate();
+     const { tourIndex } = useParams();
+-    const [currentTourIndex, setCurrentTourIndex] = useState(Number(tourIndex) || 0);
++    const [currentTourIndex, setCurrentTourIndex] = useState(
++        Number(tourIndex) || 0
++    );
+     const [currentPageIndex, setCurrentPageIndex] = useState(0);
+     const [tours, setTours] = useState(toursData);
+ 
+@@ -47,7 +49,9 @@ export function Quiz() {
+         } else {
+             // Если это последний вопрос последнего тура
+             // Находим страницу результатов в туре и переключаемся на неё
+-            const resultPageIndex = currentTour.pages.findIndex(page => page.type === 'ResultPage');
++            const resultPageIndex = currentTour.pages.findIndex(
++                (page) => page.type === 'ResultPage'
++            );
+             if (resultPageIndex !== -1) {
+                 setCurrentPageIndex(resultPageIndex);
+             } else {
+@@ -60,23 +64,25 @@ export function Quiz() {
+     function renderResultPage() {
+         if (currentPage.type !== 'ResultPage') return;
+ 
+-        const { correctQuestionsCount, questionsCount } = calculateResult(currentTour.pages);
++        const { correctQuestionsCount, questionsCount } = calculateResult(
++            currentTour.pages
++        );
+ 
+-        const view = currentPage.pages.find(x => {
++        const view = currentPage.pages.find((x) => {
+             const [min, max] = x.range; // [0, 5]
+             return correctQuestionsCount >= min && correctQuestionsCount <= max;
+         });
+ 
+         if (!view) return;
+ 
+-        return <>
++        return (
+             <>
+                 {view.type === 'BadResultPage' && (
+                     <BadResultPageView
+                         onNext={() => {
+                             if (currentTourIndex < tours.length - 1) {
+                                 // Переход к следующему туру
+-                                setCurrentTourIndex(prev => prev + 1);
++                                setCurrentTourIndex((prev) => prev + 1);
+                                 setCurrentPageIndex(0); // Сброс индекса страницы
+                                 navigate(`/quiz-intro/${currentTourIndex + 1}`);
+                             } else {
+@@ -88,38 +94,38 @@ export function Quiz() {
+                         allAnswers={questionsCount}
+                     />
+                 )}
+-                    {view.type === 'GoodResultPage' && (
+-                        <GoodResultPageView
+-                            onNext={() => {
+-                                if (currentTourIndex < tours.length - 1) {
+-                                    setCurrentTourIndex(prev => prev + 1);
+-                                    setCurrentPageIndex(0);
+-                                    navigate(`/quiz-intro/${currentTourIndex + 1}`);
+-                                } else {
+-                                    navigate('/');
+-                                }
+-                            }}
+-                            correctAnswers={correctQuestionsCount}
+-                            allAnswers={questionsCount}
+-                        />
+-                    )}
+-                    {view.type === 'ExcellentResultPage' && (
+-                        <ExcellentResultPageView
+-                            onNext={() => {
+-                                if (currentTourIndex < tours.length - 1) {
+-                                    setCurrentTourIndex(prev => prev + 1);
+-                                    setCurrentPageIndex(0);
+-                                    navigate(`/quiz-intro/${currentTourIndex + 1}`);
+-                                } else {
+-                                    navigate('/');
+-                                }
+-                            }}
+-                            correctAnswers={correctQuestionsCount}
+-                            allAnswers={questionsCount}
+-                        />
+-                    )}
++                {view.type === 'GoodResultPage' && (
++                    <GoodResultPageView
++                        onNext={() => {
++                            if (currentTourIndex < tours.length - 1) {
++                                setCurrentTourIndex((prev) => prev + 1);
++                                setCurrentPageIndex(0);
++                                navigate(`/quiz-intro/${currentTourIndex + 1}`);
++                            } else {
++                                navigate('/');
++                            }
++                        }}
++                        correctAnswers={correctQuestionsCount}
++                        allAnswers={questionsCount}
++                    />
++                )}
++                {view.type === 'ExcellentResultPage' && (
++                    <ExcellentResultPageView
++                        onNext={() => {
++                            if (currentTourIndex < tours.length - 1) {
++                                setCurrentTourIndex((prev) => prev + 1);
++                                setCurrentPageIndex(0);
++                                navigate(`/quiz-intro/${currentTourIndex + 1}`);
++                            } else {
++                                navigate('/');
++                            }
++                        }}
++                        correctAnswers={correctQuestionsCount}
++                        allAnswers={questionsCount}
++                    />
++                )}
+             </>
+-        </>;
++        );
+     }
+ 
+     return (
+@@ -136,7 +142,6 @@ export function Quiz() {
+                     />
+                 )}
+                 {renderResultPage()}
+-                )
+                 {currentPage.type === 'SingleAnswerAndImageQuestionPage' && (
+                     <SingleAnswerAndImageQuestionPageView
+                         page={currentPage}
+@@ -147,8 +152,6 @@ export function Quiz() {
+                         setTours={setTours}
+                     />
+                 )}
+-                {renderResultPage()}
+-                )
+             </div>
+         </div>
+     );
+diff --git a/src/pages/css/home.module.css b/src/pages/css/home.module.css
+index d6431d9..3d7d914 100644
+--- a/src/pages/css/home.module.css
++++ b/src/pages/css/home.module.css
+@@ -1,7 +1,7 @@
+ .wrapper {
+     display: flex;
+     flex-direction: column;
+-    min-height: 100vh;
++    height: 100vh;
+     font-family: 'Inter', sans-serif;
+     background: #0d003b;
+     padding: 20px;
+@@ -74,7 +74,7 @@
+ }
+ 
+ .button:hover {
+-    background: #F0F2F5;
++    background: #f0f2f5;
+ }
+ 
+ .rightColumn {
+diff --git a/src/pages/css/quiz-intro.module.css b/src/pages/css/quiz-intro.module.css
+index 8ce23f0..c414ea4 100644
+--- a/src/pages/css/quiz-intro.module.css
++++ b/src/pages/css/quiz-intro.module.css
+@@ -11,26 +11,26 @@
+ }
+ .intro {
+     background-size: cover;
+-    background: #ECF7FF url('src/assets/map.svg') no-repeat center;
++    background: #ecf7ff url('/src/assets/map.svg') no-repeat center;
+     background-size: cover;
+     height: 100vh;
+     width: 100%;
+     border-radius: 20px;
+ }
+-.tourInfo{
++.tourInfo {
+     height: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+ }
+-.tourName{
+-    color: #5C59FD;
++.tourName {
++    color: #5c59fd;
+     font-size: 24px;
+     font-weight: bold;
+ }
+-.tourTitle{
+-    color:#0D003B;
++.tourTitle {
++    color: #0d003b;
+     font-size: 100px;
+     font-weight: bold;
+ }
+diff --git a/src/pages/css/quiz.module.css b/src/pages/css/quiz.module.css
+index 8df0bff..4ebcb5f 100644
+--- a/src/pages/css/quiz.module.css
++++ b/src/pages/css/quiz.module.css
+@@ -1,17 +1,15 @@
+-
+ .container {
+     width: 100%;
+-    min-height: 100vh;
++    height: 100vh;
+     background: #0d003b;
+     display: flex;
+     flex-direction: column;
+     padding: 20px;
+ }
+ .wrapper {
+-    background-color: #eaf1f7;
+     width: 100%;
+     flex: 1;
+-    border-radius: 20px;
++    gap: 3px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+@@ -29,7 +27,7 @@
+ .questionNumber {
+     font-size: 24px;
+     font-weight: bold;
+-    color: #5C59FD;
++    color: #5c59fd;
+     background-color: #eaf1f7;
+     align-self: center;
+     margin-bottom: 3px;
+@@ -38,7 +36,7 @@
+ .questionText {
+     font-size: 32px;
+     font-weight: bold;
+-    color: #0D003B;
++    color: #0d003b;
+     background-color: #eaf1f7;
+     text-align: center;
+     max-width: 800px;
+@@ -55,9 +53,8 @@
+     gap: 3px;
+ }
+ 
+-.buttonConteiner{
++.buttonContainer {
+     display: flex;
+-    gap:3px;
++    gap: 3px;
+     width: 100%;
+-    margin-bottom: 20px;
+-}
+\ No newline at end of file
++}
+diff --git a/src/pages/pages-result/bad-result-page-view.tsx b/src/pages/pages-result/bad-result-page-view.tsx
+index 57e26d5..5ce518a 100644
+--- a/src/pages/pages-result/bad-result-page-view.tsx
++++ b/src/pages/pages-result/bad-result-page-view.tsx
+@@ -1,14 +1,14 @@
+ // bad-result-page-view.tsx
+-import styles from './pages-result-css/bad-result-page.module.css'
+-import iconBad from '../../assets/iconBad.png'
++import styles from './pages-result-css/bad-result-page.module.css';
++import iconBad from '../../assets/iconBad.png';
+ import { Button } from '../../components/ui-compnents/button.tsx';
+ import { useNavigate } from 'react-router-dom';
+ 
+ type Props = {
+-    correctAnswers: number,
+-    allAnswers: number,
+-    onNext: () => void
+-}
++    correctAnswers: number;
++    allAnswers: number;
++    onNext: () => void;
++};
+ 
+ export function BadResultPageView(props: Props) {
+     const navigate = useNavigate();
+@@ -16,15 +16,20 @@ export function BadResultPageView(props: Props) {
+     return (
+         <div className={styles.container}>
+             <div className={styles.wrapper}>
+-                <img src={iconBad} alt="Bad Result" className={styles.iconBad} />
++                <img
++                    src={iconBad}
++                    alt="Bad Result"
++                    className={styles.iconBad}
++                />
+                 <h3 className={styles.resultTitle}>Не сдавайся!</h3>
+                 <p className={styles.resultText}>
+-                    Вы ответили правильно на {props.correctAnswers} / {props.allAnswers} вопросов
++                    Вы ответили правильно на {props.correctAnswers} /{' '}
++                    {props.allAnswers} вопросов
+                 </p>
+             </div>
+ 
+             <div className={styles.controlsContainer}>
+-                <div className={styles.buttonConteiner}>
++                <div className={styles.buttonContainer}>
+                     <Button
+                         text={'НА ГЛАВНУЮ'}
+                         onClick={() => navigate('/')}
+diff --git a/src/pages/pages-result/excellent-result-page-view.tsx b/src/pages/pages-result/excellent-result-page-view.tsx
+index 7d25ff7..9d7a15b 100644
+--- a/src/pages/pages-result/excellent-result-page-view.tsx
++++ b/src/pages/pages-result/excellent-result-page-view.tsx
+@@ -1,13 +1,13 @@
+-import styles from './pages-result-css/excellent-reult-page.module.css'
+-import iconExcellent from '../../assets/iconExcellent.png'
++import styles from './pages-result-css/excellent-reult-page.module.css';
++import iconExcellent from '../../assets/iconExcellent.png';
+ import { Button } from '../../components/ui-compnents/button.tsx';
+ import { useNavigate } from 'react-router-dom';
+ 
+ type Props = {
+-    correctAnswers: number,
+-    allAnswers: number,
+-    onNext: () => void
+-}
++    correctAnswers: number;
++    allAnswers: number;
++    onNext: () => void;
++};
+ 
+ export function ExcellentResultPageView(props: Props) {
+     const navigate = useNavigate();
+@@ -15,15 +15,20 @@ export function ExcellentResultPageView(props: Props) {
+     return (
+         <div className={styles.container}>
+             <div className={styles.wrapper}>
+-                <img src={iconExcellent} alt="Good Result" className={styles.iconBad} />
++                <img
++                    src={iconExcellent}
++                    alt="Good Result"
++                    className={styles.iconBad}
++                />
+                 <h3 className={styles.resultTitle}>Вы справились отлично!</h3>
+                 <p className={styles.resultText}>
+-                    Вы ответили правильно на {props.correctAnswers} / {props.allAnswers} вопросов
++                    Вы ответили правильно на {props.correctAnswers} /{' '}
++                    {props.allAnswers} вопросов
+                 </p>
+             </div>
+ 
+             <div className={styles.controlsContainer}>
+-                <div className={styles.buttonConteiner}>
++                <div className={styles.buttonContainer}>
+                     <Button
+                         text={'НА ГЛАВНУЮ'}
+                         onClick={() => navigate('/')}
+diff --git a/src/pages/pages-result/good-result-page-view.tsx b/src/pages/pages-result/good-result-page-view.tsx
+index ac28c58..1904310 100644
+--- a/src/pages/pages-result/good-result-page-view.tsx
++++ b/src/pages/pages-result/good-result-page-view.tsx
+@@ -1,13 +1,13 @@
+-import styles from './pages-result-css/bad-result-page.module.css'
+-import iconGood from '../../assets/iconGood.png'
++import styles from './pages-result-css/bad-result-page.module.css';
++import iconGood from '../../assets/iconGood.png';
+ import { Button } from '../../components/ui-compnents/button.tsx';
+ import { useNavigate } from 'react-router-dom';
+ 
+ type Props = {
+-    correctAnswers: number,
+-    allAnswers: number,
+-    onNext: () => void
+-}
++    correctAnswers: number;
++    allAnswers: number;
++    onNext: () => void;
++};
+ 
+ export function GoodResultPageView(props: Props) {
+     const navigate = useNavigate();
+@@ -15,15 +15,20 @@ export function GoodResultPageView(props: Props) {
+     return (
+         <div className={styles.container}>
+             <div className={styles.wrapper}>
+-                <img src={iconGood} alt="Good Result" className={styles.iconBad} />
++                <img
++                    src={iconGood}
++                    alt="Good Result"
++                    className={styles.iconBad}
++                />
+                 <h3 className={styles.resultTitle}>Хороший результат</h3>
+                 <p className={styles.resultText}>
+-                    Вы ответили правильно на {props.correctAnswers} / {props.allAnswers} вопросов
++                    Вы ответили правильно на {props.correctAnswers} /{' '}
++                    {props.allAnswers} вопросов
+                 </p>
+             </div>
+ 
+             <div className={styles.controlsContainer}>
+-                <div className={styles.buttonConteiner}>
++                <div className={styles.buttonContainer}>
+                     <Button
+                         text={'НА ГЛАВНУЮ'}
+                         onClick={() => navigate('/')}
+diff --git a/src/pages/pages-result/pages-result-css/bad-result-page.module.css b/src/pages/pages-result/pages-result-css/bad-result-page.module.css
+index 5683b3b..98de77c 100644
+--- a/src/pages/pages-result/pages-result-css/bad-result-page.module.css
++++ b/src/pages/pages-result/pages-result-css/bad-result-page.module.css
+@@ -1,6 +1,6 @@
+ .container {
+     width: 100%;
+-    min-height: 100vh;
++    height: 100vh;
+     background: #0d003b;
+     display: flex;
+     flex-direction: column;
+@@ -34,7 +34,7 @@
+     margin-bottom: 20px;
+ }
+ 
+-.resultTitle{
++.resultTitle {
+     font-weight: 600;
+     font-size: 80px;
+     line-height: 100%;
+@@ -45,14 +45,14 @@
+ .resultText {
+     font-size: 20px;
+     font-weight: 600;
+-    color: #5C59FD;
++    color: #5c59fd;
+     text-align: center;
+     max-width: 800px;
+ }
+ 
+-.buttonConteiner {
++.buttonContainer {
+     display: flex;
+     gap: 3px;
+     width: 100%;
+     margin-bottom: 20px;
+-}
+\ No newline at end of file
++}
+diff --git a/src/pages/pages-result/pages-result-css/excellent-reult-page.module.css b/src/pages/pages-result/pages-result-css/excellent-reult-page.module.css
+index b990feb..5e9b52e 100644
+--- a/src/pages/pages-result/pages-result-css/excellent-reult-page.module.css
++++ b/src/pages/pages-result/pages-result-css/excellent-reult-page.module.css
+@@ -1,6 +1,6 @@
+ .container {
+     width: 100%;
+-    min-height: 100vh;
++    height: 100vh;
+     background: #0d003b;
+     display: flex;
+     flex-direction: column;
+@@ -33,7 +33,7 @@
+     height: 329px;
+     margin-bottom: 20px;
+ }
+-.resultTitle{
++.resultTitle {
+     font-weight: 600;
+     font-size: 80px;
+     line-height: 100%;
+@@ -44,14 +44,14 @@
+ .resultText {
+     font-size: 20px;
+     font-weight: 600;
+-    color: #5C59FD;
++    color: #5c59fd;
+     text-align: center;
+     max-width: 800px;
+ }
+ 
+-.buttonConteiner {
++.buttonContainer {
+     display: flex;
+     gap: 3px;
+     width: 100%;
+     margin-bottom: 20px;
+-}
+\ No newline at end of file
++}
+diff --git a/src/pages/pages-result/pages-result-css/good-result-page.module.css b/src/pages/pages-result/pages-result-css/good-result-page.module.css
+index e93b0d2..1367c3d 100644
+--- a/src/pages/pages-result/pages-result-css/good-result-page.module.css
++++ b/src/pages/pages-result/pages-result-css/good-result-page.module.css
+@@ -1,6 +1,6 @@
+ .container {
+     width: 100%;
+-    min-height: 100vh;
++    height: 100vh;
+     background: #0d003b;
+     display: flex;
+     flex-direction: column;
+@@ -34,7 +34,7 @@
+     margin-bottom: 20px;
+ }
+ 
+-.resultTitle{
++.resultTitle {
+     font-weight: 600;
+     font-size: 80px;
+     line-height: 100%;
+@@ -45,14 +45,14 @@
+ .resultText {
+     font-size: 20px;
+     font-weight: 600;
+-    color: #5C59FD;
++    color: #5c59fd;
+     text-align: center;
+     max-width: 800px;
+ }
+ 
+-.buttonConteiner {
++.buttonContainer {
+     display: flex;
+     gap: 3px;
+     width: 100%;
+     margin-bottom: 20px;
+-}
+\ No newline at end of file
++}
+diff --git a/src/pages/single-answer-and-image-question-page.tsx b/src/pages/single-answer-and-image-question-page.tsx
+index 202068e..52e81c6 100644
+--- a/src/pages/single-answer-and-image-question-page.tsx
++++ b/src/pages/single-answer-and-image-question-page.tsx
+@@ -1,7 +1,7 @@
+ import { SingleAnswerAndImageQuestionPage, Tour } from '../types/Types.ts';
+ import styles from './css/quiz.module.css';
+ import { Button } from '../components/ui-compnents/button.tsx';
+-import { useNavigate } from 'react-router-dom'
++import { useNavigate } from 'react-router-dom';
+ import * as React from 'react';
+ 
+ type Props = {
+@@ -24,7 +24,8 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
+ 
+     const handleAnswer = (answer: string) => {
+         const copy = [...props.tours];
+-        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
++        const currentPage =
++            copy[props.currentTourIndex].pages[props.currentPageIndex];
+         if (currentPage.type === 'SingleAnswerAndImageQuestionPage') {
+             currentPage.selectedAnswer = answer;
+         }
+@@ -42,7 +43,6 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
+         return 'default';
+     };
+ 
+-
+     return (
+         <div className={styles.container}>
+             <div className={styles.wrapper}>
+@@ -51,18 +51,25 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
+ 
+             <div className={styles.controlsContainer}>
+                 <div className={styles.options}>
+-                    {props.page.options.map((option, index) => (
++                    {props.page.imageOptions.map((imgUrl, index) => (
+                         <Button
+                             key={index}
+-                            onClick={() => handleAnswer(option)}
++                            onClick={() => handleAnswer(imgUrl)}
+                             disabled={hasSelectedAnswer}
+-                            color={getButtonColor(option)}
+-                            text={option}
++                            color={getButtonColor(imgUrl)}
++                            text={imgUrl}
+                         />
++                        // variant = 'default' | 'dark' | 'incorrect' | 'correct'
++                        // <ImageButton
++                        //     key={imgUrl}
++                        //     url={imgUrl}
++                        //     variant={}
++                        //     number={index + 1}
++                        // />
+                     ))}
+                 </div>
+ 
+-                <div className={styles.buttonConteiner}>
++                <div className={styles.buttonContainer}>
+                     <Button
+                         text={'НА ГЛАВНУЮ'}
+                         onClick={() => navigate('/')}
+@@ -70,7 +77,8 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
+                     ></Button>
+                     <Button
+                         text={
+-                            props.currentPageIndex < currentTour.pages.length - 1
++                            props.currentPageIndex <
++                            currentTour.pages.length - 1
+                                 ? 'ДАЛЕЕ'
+                                 : 'ПРОДОЛЖИТЬ КВИЗ'
+                         }
+@@ -82,4 +90,4 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
+             </div>
+         </div>
+     );
+-}
+\ No newline at end of file
++}
+diff --git a/src/pages/single-answer-question-page-view.tsx b/src/pages/single-answer-question-page-view.tsx
+index e7c6c5d..abbf2cf 100644
+--- a/src/pages/single-answer-question-page-view.tsx
++++ b/src/pages/single-answer-question-page-view.tsx
+@@ -25,7 +25,8 @@ export function SingleAnswerQuestionPageView(props: Props) {
+ 
+     const handleAnswer = (answer: string) => {
+         const copy = [...props.tours];
+-        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
++        const currentPage =
++            copy[props.currentTourIndex].pages[props.currentPageIndex];
+         if (currentPage.type === 'SingleAnswerQuestionPage') {
+             currentPage.selectedAnswer = answer;
+         }
+@@ -46,8 +47,19 @@ export function SingleAnswerQuestionPageView(props: Props) {
+     const questionPages = getQuestionsPages(currentTour.pages);
+ 
+     return (
+-        <div className={styles.container}>
+-            <div className={styles.wrapper}>
++        <>
++            <div
++                style={{
++                    flex: 1,
++                    display: 'flex',
++                    flexDirection: 'column',
++                    justifyContent: 'center',
++                    width: '100%',
++                    backgroundColor: '#eaf1f7',
++                    alignItems: 'center',
++                    borderRadius: 20,
++                }}
++            >
+                 <h2 className={styles.questionNumber}>
+                     Вопрос {props.currentPageIndex + 1} / {questionPages.length}
+                 </h2>
+@@ -67,7 +79,7 @@ export function SingleAnswerQuestionPageView(props: Props) {
+                     ))}
+                 </div>
+ 
+-                <div className={styles.buttonConteiner}>
++                <div className={styles.buttonContainer}>
+                     <Button
+                         text={'НА ГЛАВНУЮ'}
+                         onClick={() => navigate('/')}
+@@ -75,7 +87,8 @@ export function SingleAnswerQuestionPageView(props: Props) {
+                     ></Button>
+                     <Button
+                         text={
+-                            props.currentPageIndex < currentTour.pages.length - 1
++                            props.currentPageIndex <
++                            currentTour.pages.length - 1
+                                 ? 'ДАЛЕЕ'
+                                 : 'ПРОДОЛЖИТЬ КВИЗ'
+                         }
+@@ -85,6 +98,6 @@ export function SingleAnswerQuestionPageView(props: Props) {
+                     ></Button>
+                 </div>
+             </div>
+-        </div>
++        </>
+     );
+-}
+\ No newline at end of file
++}
+diff --git a/src/types/Types.ts b/src/types/Types.ts
+index cbb2dff..a9a8cf6 100644
+--- a/src/types/Types.ts
++++ b/src/types/Types.ts
+@@ -30,11 +30,10 @@ export type MultiselectAnswerQuestionPage = {
+ export type SingleAnswerAndImageQuestionPage = {
+     type: 'SingleAnswerAndImageQuestionPage';
+     question: string;
+-    options: string[];
+-    optionsImage?: {id: string, imagePath: string }[];
++    imageOptions: string[];
+     correctAnswer: string;
+     selectedAnswer?: string;
+-}
++};
+ export type SingleAnswerQuestionPage = {
+     type: 'SingleAnswerQuestionPage';
+     question: string;
+-- 
+2.47.1.windows.2
+

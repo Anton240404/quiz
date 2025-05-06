@@ -1,6 +1,6 @@
 .container {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     background: #0d003b;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
     margin-bottom: 20px;
 }
 
-.resultTitle{
+.resultTitle {
     font-weight: 600;
     font-size: 80px;
     line-height: 100%;
@@ -45,12 +45,12 @@
 .resultText {
     font-size: 20px;
     font-weight: 600;
-    color: #5C59FD;
+    color: #5c59fd;
     text-align: center;
     max-width: 800px;
 }
 
-.buttonConteiner {
+.buttonContainer {
     display: flex;
     gap: 3px;
     width: 100%;

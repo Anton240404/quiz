@@ -30,11 +30,10 @@ export type MultiselectAnswerQuestionPage = {
 export type SingleAnswerAndImageQuestionPage = {
     type: 'SingleAnswerAndImageQuestionPage';
     question: string;
-    options: string[];
-    optionsImage?: {id: string, imagePath: string }[];
+    imageOptions: string[];
     correctAnswer: string;
     selectedAnswer?: string;
-}
+};
 export type SingleAnswerQuestionPage = {
     type: 'SingleAnswerQuestionPage';
     question: string;
