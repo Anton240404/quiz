@@ -85,22 +85,21 @@
 }
 
 .shipContainer {
+    display: flex;
+    align-items: center;
     border-radius: 20px;
     background-color: #5c59fd;
-    padding: 20px;
-    flex-grow: 1;
+    height: 50%;
 }
 
 .shipImage {
     width: 100%;
-    height: auto;
-    border-radius: 12px;
-    background-color: #5c59fd;
 }
 
 .infoBlocks {
     display: flex;
     gap: 3px;
+    height: 50%;
 }
 
 .infoItem {
@@ -111,7 +110,7 @@
     flex: 1;
     background-color: #5c59fd;
     border-radius: 20px;
-    height: 326px;
+    height: 100%;
 }
 
 .infoIcon {
