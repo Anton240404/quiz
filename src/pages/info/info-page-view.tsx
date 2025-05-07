@@ -2,6 +2,8 @@ import style from './info.module.css'
 import styles from '../css/quiz.module.css';
 import { Button } from '../../components/ui-compnents/button.tsx';
 import { useNavigate } from 'react-router-dom';
+import flagInfo from '../../.././public/assets/flagInfo.png';
+
 
 type Props = {
     onNext: () => void;
@@ -10,14 +12,18 @@ type Props = {
 export function InfoPageView(props:Props) {
     const navigate = useNavigate();
     return (
-        <div>
-            <div className={style.container}>
+        <>
                 <div className={style.info}>
-                    <div className={style.flag}></div>
+                    <div className={style.flag}>
+                        <img src={flagInfo} alt="Андреевский флаг" className={style.flagImage}/>
+                    </div>
                     <div className={style.infoRight}>
                         <h1 className={style.title}>АНДРЕЕЙВСКИЙ ФЛАГ</h1>
-                        <h2 className={style.textInfo}>АНДРЕЕЙВСКИЙ ФЛАГ</h2>
+                        <h2 className={style.textInfo}>Андреевский флаг является главным корабельным кормовым флагом Российского Флота.
+                            Он представляет собой белое полотнище, пересеченное по диагонали двумя синими полосами, которые образуют наклонный крест,
+                            который называется Андреевским. Этот крест и дал имя флагу.</h2>
                     </div>
+                </div>
                     <div className={styles.buttonContainer}>
                         <Button
                             text={'НА ГЛАВНУЮ'}
@@ -30,8 +36,6 @@ export function InfoPageView(props:Props) {
                             color={'primary'}
                         ></Button>
                     </div>
-                </div>
-            </div>
-        </div>
+        </>
     )
 }

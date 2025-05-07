@@ -50,7 +50,7 @@ export type SingleAnswerQuestionPage = {
 };
 export type ResultPage = {
     type: 'ResultPage';
-    pages: [BadResultPage, GoodResultPage, ExcellentResultPage ];
+    pages: [BadResultPage, GoodResultPage, ExcellentResultPage];
 };
 
 export type BadResultPage = {

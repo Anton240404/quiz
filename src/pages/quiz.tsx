@@ -129,19 +129,6 @@ export function Quiz() {
                     />
                 )}
                 {/*Нужно доработать отображение компонента*/}
-                {/*{view.type === 'InfoPage' && (
-                    <InfoPageView
-                        onNext={() => {
-                            if (currentTourIndex < tours.length - 1) {
-                                setCurrentTourIndex((prev) => prev + 1);
-                                setCurrentPageIndex(0);
-                                navigate(`/quiz-intro/${currentTourIndex + 1}`);
-                            } else {
-                                navigate('/');
-                            }
-                        }}
-                    />
-                )}*/}
             </>
         );
     }
@@ -168,6 +155,19 @@ export function Quiz() {
                         currentTourIndex={currentTourIndex}
                         tours={tours}
                         setTours={setTours}
+                    />
+                )}
+                {currentPage.type === 'InfoPage' && (
+                    <InfoPageView
+                        onNext={() => {
+                            if (currentTourIndex < tours.length - 1) {
+                                setCurrentTourIndex((prev) => prev + 1);
+                                setCurrentPageIndex(0);
+                                navigate(`/quiz-intro/${currentTourIndex + 1}`);
+                            } else {
+                                navigate('/');
+                            }
+                        }}
                     />
                 )}
             </div>
