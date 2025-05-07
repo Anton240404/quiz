@@ -9,6 +9,7 @@ export type Page =
     | InputQuestionPage
     | MultiselectAnswerQuestionPage
     | SingleAnswerQuestionPage
+    | SingleAnswerQuestionAndImageQuestionPage
     | ResultPage
     | InfoPage
 
@@ -25,6 +26,16 @@ export type MultiselectAnswerQuestionPage = {
     type: 'MultiselectAnswerQuestionPage';
     correctAnswers: string[];
 };
+
+export type SingleAnswerQuestionAndImageQuestionPage = {
+    type: 'SingleAnswerQuestionAndImageQuestionPage';
+    subTitle: string;
+    question: string;
+    questionImage: string;
+    options: string[];
+    correctAnswer: string;
+    selectedAnswer?: string;
+}
 
 export type InfoPage = {
     type: 'InfoPage';

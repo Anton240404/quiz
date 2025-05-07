@@ -5,7 +5,8 @@ export function getQuestionsPages(pages: Page[]) {
         (page) =>
             page.type === 'SingleAnswerQuestionPage' ||
             page.type === 'InputQuestionPage' ||
-            page.type === 'MultiselectAnswerQuestionPage'
+            page.type === 'MultiselectAnswerQuestionPage' ||
+            page.type === 'SingleAnswerQuestionAndImageQuestionPage'
+
     );
 }
-

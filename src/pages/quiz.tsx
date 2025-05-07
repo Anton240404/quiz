@@ -10,6 +10,7 @@ import { GoodResultPageView } from './pages-result/good-result-page-view.tsx';
 import { ExcellentResultPageView } from './pages-result/excellent-result-page-view.tsx';
 import { SingleAnswerAndImageQuestionPageView } from './single-answer-and-image-question-page.tsx';
 import { InfoPageView } from './info/info-page-view.tsx';
+import { SingleAnswerQuestionAndImageQuestionPageView } from './single-answer-question-and-image-question-page.tsx';
 
 function calculateResult(pages: Page[]) {
     const correctAnswers = pages.filter((page) => {
@@ -168,6 +169,16 @@ export function Quiz() {
                                 navigate('/');
                             }
                         }}
+                    />
+                )}
+                {currentPage.type === 'SingleAnswerQuestionAndImageQuestionPage' && (
+                    <SingleAnswerQuestionAndImageQuestionPageView
+                        page={currentPage}
+                        onNext={handleNext}
+                        currentPageIndex={currentPageIndex}
+                        currentTourIndex={currentTourIndex}
+                        tours={tours}
+                        setTours={setTours}
                     />
                 )}
             </div>
