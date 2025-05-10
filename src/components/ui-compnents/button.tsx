@@ -1,7 +1,7 @@
 import styles from './UI-css/button.module.css';
 
 type Props = {
-    color: 'default' | 'success' | 'danger' | 'primary' | 'disabledButtons';
+    color: 'default' | 'success' | 'danger' | 'primary' | 'disabledButtons' | 'disabledButton';
     onClick?: () => void;
     text: string;
     disabled?: boolean;
@@ -22,6 +22,8 @@ export function Button(props: Props) {
         classnames.push(styles.primary);
     }else if (props.color === 'disabledButtons') {
         classnames.push(styles.disabledButtons);
+    }else if (props.color === 'disabledButton') {
+        classnames.push(styles.disabledButton);
     }
 
     if (props.disabled) {

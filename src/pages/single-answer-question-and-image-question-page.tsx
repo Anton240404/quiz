@@ -25,8 +25,7 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
 
     const handleAnswer = (answer: string) => {
         const copy = [...props.tours];
-        const currentPage =
-            copy[props.currentTourIndex].pages[props.currentPageIndex];
+        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
         if (currentPage.type === 'SingleAnswerQuestionAndImageQuestionPage') {
             currentPage.selectedAnswer = answer;
         }
@@ -42,7 +41,7 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
         if (option === correctAnswer && selectedAnswer !== correctAnswer)
             return 'success';
         return 'default';
-    };console.log(props.page.questionImage);
+    };
 
     return (
         <>
@@ -58,7 +57,7 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
 
 
             <div className={styles.controlsContainer}>
-                <div className={styles.options}>
+                <div className={style.options}>
                     {props.page.options.map((option, index) => (
                         <Button
                             key={index}

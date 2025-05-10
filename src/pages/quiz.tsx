@@ -11,6 +11,8 @@ import { ExcellentResultPageView } from './pages-result/excellent-result-page-vi
 import { SingleAnswerAndImageQuestionPageView } from './single-answer-and-image-question-page.tsx';
 import { InfoPageView } from './info/info-page-view.tsx';
 import { SingleAnswerQuestionAndImageQuestionPageView } from './single-answer-question-and-image-question-page.tsx';
+import { MultiSelectAnswerQuestionPageView } from './multi-select-answer-question-page-view.tsx';
+import { InfoPageTourFiveView } from './info/info-page-tour-five-view.tsx';
 
 function calculateResult(pages: Page[]) {
     const correctAnswers = pages.filter((page) => {
@@ -18,8 +20,8 @@ function calculateResult(pages: Page[]) {
             return page.selectedAnswer === page.correctAnswer;
         } else if (page.type === 'SingleAnswerAndImageQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
-        } else if (page.type === 'InputQuestionPage') {
-            return page.selectedAnswer === page.correctAnswer;
+        } else if (page.type === 'MultiSelectAnswerQuestionPage') {
+            return page.selectedAnswers === page.correctAnswers;
         }
     });
     return {
@@ -129,7 +131,6 @@ export function Quiz() {
                         allAnswers={questionsCount}
                     />
                 )}
-                {/*Нужно доработать отображение компонента*/}
             </>
         );
     }
@@ -179,6 +180,29 @@ export function Quiz() {
                         currentTourIndex={currentTourIndex}
                         tours={tours}
                         setTours={setTours}
+                    />
+                )}
+                {currentPage.type === 'MultiSelectAnswerQuestionPage' && (
+                    <MultiSelectAnswerQuestionPageView
+                        page={currentPage}
+                        onNext={handleNext}
+                        currentPageIndex={currentPageIndex}
+                        currentTourIndex={currentTourIndex}
+                        tours={tours}
+                        setTours={setTours}
+                    />
+                )}
+                {currentPage.type === 'InfoPageShip' && (
+                    <InfoPageTourFiveView
+                        onNext={() => {
+                            if (currentTourIndex < tours.length - 1) {
+                                setCurrentTourIndex((prev) => prev + 1);
+                                setCurrentPageIndex(0);
+                                navigate(`/quiz-intro/${currentTourIndex + 1}`);
+                            } else {
+                                navigate('/');
+                            }
+                        }}
                     />
                 )}
             </div>

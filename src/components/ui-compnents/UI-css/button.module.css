@@ -4,7 +4,7 @@
     font-size: 20px;
     display: inline-block;
     height: 120px;
-    width: 25%;
+    width: 100%;
     text-align: center;
     cursor: pointer;
     outline: none;
@@ -35,6 +35,11 @@
 }
 .disabled {
     cursor: not-allowed;
+
+}
+.disabledButton {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 .disabledButtons{
     cursor: not-allowed;

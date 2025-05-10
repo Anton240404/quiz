@@ -7,11 +7,12 @@ export type Page =
     | DescriptionInfoPage
     | SingleAnswerAndImageQuestionPage
     | InputQuestionPage
-    | MultiselectAnswerQuestionPage
+    | MultiSelectAnswerQuestionPage
     | SingleAnswerQuestionPage
     | SingleAnswerQuestionAndImageQuestionPage
     | ResultPage
     | InfoPage
+    | InfoPageShip
 
 export type DescriptionInfoPage = {
     type: 'DescriptionInfoPage';
@@ -19,13 +20,23 @@ export type DescriptionInfoPage = {
 
 export type InputQuestionPage = {
     type: 'InputQuestionPage';
-    correctAnswer: string;
-    selectedAnswer?: string;
-};
-export type MultiselectAnswerQuestionPage = {
-    type: 'MultiselectAnswerQuestionPage';
+    subTitle: string;
+    question: string;
+    options: string[];
     correctAnswers: string[];
+    selectedAnswers?: string[];
+}
+
+
+export type MultiSelectAnswerQuestionPage = {
+    type: 'MultiSelectAnswerQuestionPage';
+    subTitle: string;
+    question: string;
+    options: string[];
+    correctAnswers: string[];
+    selectedAnswers?: string[];
 };
+
 
 export type SingleAnswerQuestionAndImageQuestionPage = {
     type: 'SingleAnswerQuestionAndImageQuestionPage';
@@ -42,6 +53,13 @@ export type InfoPage = {
     image: string;
     title: string;
     text: string;
+
+};
+export type InfoPageShip = {
+    type: 'InfoPageShip';
+    image: string;
+    title: string;
+
 
 };
 
