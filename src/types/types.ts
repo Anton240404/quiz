@@ -12,22 +12,20 @@ export type Page =
     | SingleAnswerQuestionAndImageQuestionPage
     | ResultPage
     | InfoPage
-    | InfoPageShip
+    | TwoColumnsWithTitlePage
+
+
+
+export type InputQuestionPage = {
+    type: 'InputQuestionPage';
+    question: string;
+    correctAnswer: string;
+    selectedAnswer?: string;
+}
 
 export type DescriptionInfoPage = {
     type: 'DescriptionInfoPage';
 };
-
-export type InputQuestionPage = {
-    type: 'InputQuestionPage';
-    subTitle: string;
-    question: string;
-    options: string[];
-    correctAnswers: string[];
-    selectedAnswers?: string[];
-}
-
-
 export type MultiSelectAnswerQuestionPage = {
     type: 'MultiSelectAnswerQuestionPage';
     subTitle: string;
@@ -55,13 +53,16 @@ export type InfoPage = {
     text: string;
 
 };
-export type InfoPageShip = {
-    type: 'InfoPageShip';
-    image: string;
+export type TwoColumnsWithTitlePage = {
+    type: 'TwoColumnsWithTitlePage';
     title: string;
-
-
+    items: TwoColumnsWithTitlePageItem[]
 };
+
+export type TwoColumnsWithTitlePageItem = {
+    image: string,
+    text: string
+}
 
 export type SingleAnswerAndImageQuestionPage = {
     type: 'SingleAnswerAndImageQuestionPage';

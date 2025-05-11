@@ -242,7 +242,7 @@ export const toursData: Tour[] = [
         title: 'Викторина',
         pages: [
             {
-                type: 'SingleAnswerQuestionAndImageQuestionPage' ,
+                type: 'SingleAnswerQuestionAndImageQuestionPage',
                 subTitle: 'Собери Розу Ветров',
                 question: 'Какая сторона света находится здесь?',
                 questionImage: '/assets/compassNorth.png',
@@ -252,7 +252,7 @@ export const toursData: Tour[] = [
                 correctAnswer: 'NORTH (север)',
             },
             {
-                type: 'SingleAnswerQuestionAndImageQuestionPage' ,
+                type: 'SingleAnswerQuestionAndImageQuestionPage',
                 subTitle: 'Собери Розу Ветров',
                 question: 'Какая сторона света находится здесь?',
                 questionImage: '/assets/WEST.png',
@@ -262,7 +262,7 @@ export const toursData: Tour[] = [
                 correctAnswer: 'WEST (запад)',
             },
             {
-                type: 'SingleAnswerQuestionAndImageQuestionPage' ,
+                type: 'SingleAnswerQuestionAndImageQuestionPage',
                 subTitle: 'Собери Розу Ветров',
                 question: 'Какая сторона света находится здесь?',
                 questionImage: '/assets/SOUTH-EAST.png',
@@ -272,7 +272,7 @@ export const toursData: Tour[] = [
                 correctAnswer: 'SOUTH-EAST (юго-восток)',
             },
             {
-                type: 'SingleAnswerQuestionAndImageQuestionPage' ,
+                type: 'SingleAnswerQuestionAndImageQuestionPage',
                 subTitle: 'Собери Розу Ветров',
                 question: 'Какая сторона света находится здесь?',
                 questionImage: '/assets/NORTH-EAST.png',
@@ -282,7 +282,7 @@ export const toursData: Tour[] = [
                 correctAnswer: 'NORTH-EAST (северо-восток)',
             },
             {
-                type: 'SingleAnswerQuestionAndImageQuestionPage' ,
+                type: 'SingleAnswerQuestionAndImageQuestionPage',
                 subTitle: 'Собери Розу Ветров',
                 question: 'Какая сторона света находится здесь?',
                 questionImage: '/assets/EAST.png',
@@ -292,7 +292,7 @@ export const toursData: Tour[] = [
                 correctAnswer: 'EAST (восток)',
             },
             {
-                type: 'SingleAnswerQuestionAndImageQuestionPage' ,
+                type: 'SingleAnswerQuestionAndImageQuestionPage',
                 subTitle: 'Собери Розу Ветров',
                 question: 'Какая сторона света находится здесь?',
                 questionImage: '/assets/NORTH-WEST.png',
@@ -302,7 +302,7 @@ export const toursData: Tour[] = [
                 correctAnswer: 'NORTH-WEST (северо-запад)',
             },
             {
-                type: 'SingleAnswerQuestionAndImageQuestionPage' ,
+                type: 'SingleAnswerQuestionAndImageQuestionPage',
                 subTitle: 'Собери Розу Ветров',
                 question: 'Какая сторона света находится здесь?',
                 questionImage: '/assets/SOUTH.png',
@@ -312,7 +312,7 @@ export const toursData: Tour[] = [
                 correctAnswer: 'SOUTH (юг)',
             },
             {
-                type: 'SingleAnswerQuestionAndImageQuestionPage' ,
+                type: 'SingleAnswerQuestionAndImageQuestionPage',
                 subTitle: 'Собери Розу Ветров',
                 question: 'Какая сторона света находится здесь?',
                 questionImage: '/assets/SOUTH-WEST.png',
@@ -325,33 +325,70 @@ export const toursData: Tour[] = [
     },
     {
         title: 'Выборка',
-        pages:[
+        pages: [
             {
                 type: 'MultiSelectAnswerQuestionPage',
                 subTitle: 'Оснасти корабля капитана Чирикова',
                 question: 'Необходимо из списка предметов выбрать те, которые могли быть взяты для оснастки и укомплектования корабля во время Великой Северной экспедиции в 1741 году.?',
-                options: ['Магнитный компас', 'Проволочный трос', 'Песочные часы','Бумажные салфетки','Штурманский циркуль', 'Штурманская линейка','Большая гребная шлюпка', 'Малая гребная шлюпка','Шерстяной ковер','Кабестан', 'Лаг', 'Секстан','Солнечные часы','Бинокль', 'Глобус', 'Подзорная труба','Карандаш', 'Бортжурнал'],
+                options: ['Магнитный компас', 'Проволочный трос', 'Песочные часы', 'Бумажные салфетки', 'Штурманский циркуль', 'Штурманская линейка', 'Большая гребная шлюпка', 'Малая гребная шлюпка', 'Шерстяной ковер', 'Кабестан', 'Лаг', 'Секстан', 'Солнечные часы', 'Бинокль', 'Глобус', 'Подзорная труба', 'Карандаш', 'Бортжурнал'],
                 correctAnswers: ['Магнитный компас', 'Песочные часы', 'Штурманский циркуль', 'Штурманская линейка', 'Большая гребная шлюпка', 'Малая гребная шлюпка', 'Кабестан', 'Лаг', 'Секстан', 'Солнечные часы', 'Подзорная труба', 'Бортжурнал'],
             },
             {
                 type: 'MultiSelectAnswerQuestionPage',
                 subTitle: 'Оснасти корабля капитана Чирикова',
                 question: 'Необходимо из списка предметов выбрать те, которые могли быть взяты для оснастки и укомплектования корабля во время Великой Северной экспедиции в 1741 году.?',
-                options: ['Телефон', 'Секстан', 'Кипятильник','Морская карта','Телескоп', 'Пулемет', 'Микроскоп', 'Канистра', 'Лупа', 'Котел', 'Холодильник', 'Якорь', 'Люстра', 'Парус', 'Керосин', 'Бочки с водой', 'Лед', 'Раскладушка'],
+                options: ['Телефон', 'Секстан', 'Кипятильник', 'Морская карта', 'Телескоп', 'Пулемет', 'Микроскоп', 'Канистра', 'Лупа', 'Котел', 'Холодильник', 'Якорь', 'Люстра', 'Парус', 'Керосин', 'Бочки с водой', 'Лед', 'Раскладушка'],
                 correctAnswers: ['Морская картa', 'Лупа', 'Котел', 'Якорь', 'Парус', 'Бочки с водой'],
             },
             {
                 type: 'MultiSelectAnswerQuestionPage',
                 subTitle: 'Оснасти корабля капитана Чирикова',
                 question: 'Необходимо из списка предметов выбрать те, которые могли быть взяты для оснастки и укомплектования корабля во время Великой Северной экспедиции в 1741 году.?',
-                options: ['Гамак-сеть', 'Лаг', 'Консервы','Градшток', 'Газеты', 'Квадрант', 'Рогожа', 'Таранка','Пушки','Вино','Мука', 'Зерно','Сухари'],
-                correctAnswers: ['Гамак-сеть', 'Лаг','Градшток', 'Рогожа', 'Таранка','Пушки','Вино','Мука', 'Зерно','Сухари'],
+                options: ['Гамак-сеть', 'Лаг', 'Консервы', 'Градшток', 'Газеты', 'Квадрант', 'Рогожа', 'Таранка', 'Пушки', 'Вино', 'Мука', 'Зерно', 'Сухари'],
+                correctAnswers: ['Гамак-сеть', 'Лаг', 'Градшток', 'Рогожа', 'Таранка', 'Пушки', 'Вино', 'Мука', 'Зерно', 'Сухари'],
             },
-            /*{
-                type: 'InfoPageShip',
+            {
+                type: 'TwoColumnsWithTitlePage',
+                title: 'Примеры оснастки и снаряжения',
+                items: [
+                    {
+                        image: '/assets/gradshtok.png',
+                        text: 'Градшток',
+                    },
+                    {
+                        image: '/assets/kvadrat.png',
+                        text: 'Квадрат',
+                    },
+                    {
+                        image: '/assets/secstan.png',
+                        text: 'Секстан',
+                    },
+                    {
+                        image: '/assets/timeSun.png',
+                        text: 'Солнечные часы',
+                    },
+                    {
+                        image: '/assets/lag.png',
+                        text: 'Лаг',
+                    },
+                    {
+                        image: '/assets/kabestan.png',
+                        text: 'Кабестан',
+                    },
+                ],
 
-            }*/
-        ]
-    }
+            },
+        ],
+    },
+    {
+        title: 'Викторина',
+        pages: [
+            {
+                type: 'InputQuestionPage',
+                question: 'Какое слово относится к морскому языку?',
+                correctAnswer: 'Подзорная труба',
+            },
+        ],
+    },
 ];
 

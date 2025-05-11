@@ -12,7 +12,8 @@ import { SingleAnswerAndImageQuestionPageView } from './single-answer-and-image-
 import { InfoPageView } from './info/info-page-view.tsx';
 import { SingleAnswerQuestionAndImageQuestionPageView } from './single-answer-question-and-image-question-page.tsx';
 import { MultiSelectAnswerQuestionPageView } from './multi-select-answer-question-page-view.tsx';
-import { InfoPageTourFiveView } from './info/info-page-tour-five-view.tsx';
+import { TwoColumnsWithTitlePageView } from './info/two-columns-with-title-page-view.tsx';
+import { InputQuestionPageView } from './input-question-page.tsx';
 
 function calculateResult(pages: Page[]) {
     const correctAnswers = pages.filter((page) => {
@@ -22,6 +23,8 @@ function calculateResult(pages: Page[]) {
             return page.selectedAnswer === page.correctAnswer;
         } else if (page.type === 'MultiSelectAnswerQuestionPage') {
             return page.selectedAnswers === page.correctAnswers;
+        }else if (page.type === 'InputQuestionPage') {
+            return page.selectedAnswer === page.correctAnswer;
         }
     });
     return {
@@ -192,8 +195,9 @@ export function Quiz() {
                         setTours={setTours}
                     />
                 )}
-                {currentPage.type === 'InfoPageShip' && (
-                    <InfoPageTourFiveView
+                {currentPage.type === 'TwoColumnsWithTitlePage' && (
+                    <TwoColumnsWithTitlePageView
+                        page={currentPage}
                         onNext={() => {
                             if (currentTourIndex < tours.length - 1) {
                                 setCurrentTourIndex((prev) => prev + 1);
@@ -203,6 +207,16 @@ export function Quiz() {
                                 navigate('/');
                             }
                         }}
+                    />
+                )}
+                {currentPage.type === 'InputQuestionPage' && (
+                    <InputQuestionPageView
+                        page={currentPage}
+                        onNext={handleNext}
+                        currentPageIndex={currentPageIndex}
+                        currentTourIndex={currentTourIndex}
+                        tours={tours}
+                        setTours={setTours}
                     />
                 )}
             </div>

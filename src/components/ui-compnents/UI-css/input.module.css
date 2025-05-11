@@ -1,0 +1,24 @@
+.input {
+    border: 2px solid gray;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.default {
+    border-color: gray;
+}
+
+.success {
+    border-color: green;
+}
+
+.error {
+    border-color: red;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
