@@ -3,7 +3,6 @@ import styles from './css/quiz.module.css';
 import style from './css/multi-select-answer-question-page-view.module.css';
 import { Button } from '../components/ui-compnents/button.tsx';
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
     page: MultiSelectAnswerQuestionPage;
@@ -12,10 +11,10 @@ type Props = {
     currentTourIndex: number;
     tours: Tour[];
     setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
+    onExitAttempt: () => void;
 };
 
 export function MultiSelectAnswerQuestionPageView(props: Props) {
-    const navigate = useNavigate();
     const [finished, setFinished] = React.useState(false);
     // Используем локальное состояние для выбранных ответов
     const [localSelectedAnswers, setLocalSelectedAnswers] = React.useState<string[]>([]);
@@ -108,7 +107,7 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
                 <div className={styles.buttonContainer}>
                     <Button
                         text={'НА ГЛАВНУЮ'}
-                        onClick={() => navigate('/')}
+                        onClick={props.onExitAttempt}
                         color={'primary'}
                     />
                     <Button

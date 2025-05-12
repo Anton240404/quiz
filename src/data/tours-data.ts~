@@ -421,7 +421,7 @@ export const toursData: Tour[] = [
             {
                 type: 'InputQuestionPage',
                 question: 'Для чего нужны механики на корабле?',
-                correctAnswer: 'Чтобы устранять неисправности',
+                correctAnswer: 'Оказывает помощь',
             },
         ],
     },

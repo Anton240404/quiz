@@ -14,6 +14,7 @@ import { SingleAnswerQuestionAndImageQuestionPageView } from './single-answer-qu
 import { MultiSelectAnswerQuestionPageView } from './multi-select-answer-question-page-view.tsx';
 import { TwoColumnsWithTitlePageView } from './info/two-columns-with-title-page-view.tsx';
 import { InputQuestionPageView } from './input-question-page.tsx';
+import { Progress } from '../components/ui-compnents/progress.tsx';
 
 function calculateResult(pages: Page[]) {
     const correctAnswers = pages.filter((page) => {
@@ -41,6 +42,7 @@ export function Quiz() {
     );
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     const [tours, setTours] = useState(toursData);
+    const [showExitPopup, setShowExitPopup] = useState(false);
 
     const currentTour = tours[currentTourIndex];
     const currentPage = currentTour.pages[currentPageIndex];
@@ -67,8 +69,35 @@ export function Quiz() {
             }
         }
     };
+    const handleExitAttempt = () => {
+        setShowExitPopup(true);
+    };
 
-    {/*Нужно изменить функцию*/}
+    const handleConfirmExit = () => {
+        // Сбрасываем прогресс (опционально)
+        const resetTours = toursData.map(tour => ({
+            ...tour,
+            pages: tour.pages.map(page => {
+                if (page.type === 'SingleAnswerQuestionPage' ||
+                    page.type === 'SingleAnswerAndImageQuestionPage' ||
+                    page.type === 'InputQuestionPage') {
+                    return { ...page, selectedAnswer: undefined };
+                } else if (page.type === 'MultiSelectAnswerQuestionPage') {
+                    return { ...page, selectedAnswers: undefined };
+                }
+                return page;
+            })
+        }));
+
+        setTours(resetTours);
+        setShowExitPopup(false);
+        navigate('/');
+    };
+
+    const handleCancelExit = () => {
+        setShowExitPopup(false);
+    };
+
 
     function renderResultPage() {
         if (currentPage.type !== 'ResultPage') return;
@@ -149,6 +178,7 @@ export function Quiz() {
                         currentTourIndex={currentTourIndex}
                         tours={tours}
                         setTours={setTours}
+                        onExitAttempt={handleExitAttempt}
                     />
                 )}
                 {renderResultPage()}
@@ -160,6 +190,7 @@ export function Quiz() {
                         currentTourIndex={currentTourIndex}
                         tours={tours}
                         setTours={setTours}
+                        onExitAttempt={handleExitAttempt}
                     />
                 )}
                 {currentPage.type === 'InfoPage' && (
@@ -183,6 +214,7 @@ export function Quiz() {
                         currentTourIndex={currentTourIndex}
                         tours={tours}
                         setTours={setTours}
+                        onExitAttempt={handleExitAttempt}
                     />
                 )}
                 {currentPage.type === 'MultiSelectAnswerQuestionPage' && (
@@ -193,6 +225,7 @@ export function Quiz() {
                         currentTourIndex={currentTourIndex}
                         tours={tours}
                         setTours={setTours}
+                        onExitAttempt={handleExitAttempt}
                     />
                 )}
                 {currentPage.type === 'TwoColumnsWithTitlePage' && (
@@ -217,8 +250,16 @@ export function Quiz() {
                         currentTourIndex={currentTourIndex}
                         tours={tours}
                         setTours={setTours}
+                        onExitAttempt={handleExitAttempt}
                     />
                 )}
+                <Progress
+                    isOpen={showExitPopup}
+                    title="Весь прогресс будет утерян"
+                    subTitle="Вы уверены что хотите выйти?"
+                    onConfirm={handleConfirmExit}
+                    onCancel={handleCancelExit}
+                />
             </div>
         </div>
     );

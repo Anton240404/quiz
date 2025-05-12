@@ -2,7 +2,6 @@ import { SingleAnswerQuestionAndImageQuestionPage, Tour } from '../types/types.t
 import styles from './css/quiz.module.css';
 import style from './css/single-answer-question-and-image-question-page.module.css'
 import { Button } from '../components/ui-compnents/button.tsx';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
     page: SingleAnswerQuestionAndImageQuestionPage;
@@ -11,11 +10,11 @@ type Props = {
     currentTourIndex: number;
     tours: Tour[];
     setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
+    onExitAttempt: () => void;
 };
 
 export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
 
-    const navigate = useNavigate();
 
     const currentTour = props.tours[props.currentTourIndex];
     const selectedAnswer = props.page.selectedAnswer;
@@ -72,7 +71,7 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
                 <div className={styles.buttonContainer}>
                     <Button
                         text={'НА ГЛАВНУЮ'}
-                        onClick={() => navigate('/')}
+                        onClick={props.onExitAttempt}
                         color={'primary'}
                     ></Button>
                     <Button
