@@ -54,7 +54,7 @@ export function InputQuestionPageView(props: Props) {
             handleAnswer(userInput);
         }
     };
-    const getInputColor = () => {
+    const getInputColor = (): 'default' | 'success' | 'error' => {
         if (!isAnswered) {
             return 'default';
         }

@@ -82,8 +82,8 @@ export type SingleAnswerQuestionPage = {
 
 export type PopupInfoPage ={
     type: 'PopupInfoPage';
-    title: string;
-    text: string;
+    title: string[];
+    text: string[];
 }
 export type ResultPage = {
     type: 'ResultPage';
