@@ -43,11 +43,46 @@ export function Quiz() {
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     const [tours, setTours] = useState(toursData);
     const [showExitPopup, setShowExitPopup] = useState(false);
+    /*const [infoPopupIndex, setInfoPopupIndex] = useState(0); // Индекс текущего элемента в массиве text
+    const [infoPopupData, setInfoPopupData] = useState<{title: string; text: string; }>({ title: '', text: '' });*/
 
     const currentTour = tours[currentTourIndex];
     const currentPage = currentTour.pages[currentPageIndex];
 
+   /* const handleInfoPopupAction = () => {
+        // Если это последний элемент в массиве, закрываем попап
+        if (infoPopupIndex >= infoPopupData.text.length - 1) {
+            setShowInfoPopup(false);
+        } else {
+            // Иначе переходим к следующему элементу
+            setInfoPopupIndex(prev => prev + 1);
+        }
+    };*/
+
+
+
     const handleNext = () => {
+        /*if (currentTourIndex < currentTour.pages.length ) {
+            const nextPage = currentTour.pages[currentTourIndex];
+
+            // Если следующая страница - информационный попап
+            if (nextPage.type === 'PopupInfoPage') {
+                // Устанавливаем данные для попапа
+                setInfoPopupData({
+                    title: nextPage.title,
+                    text: nextPage.text
+                });
+                setInfoPopupIndex(0); // Начинаем с первого элемента массива text
+
+                // Показываем попап через 3 секунды
+                setTimeout(() => {
+                    setShowInfoPopup(true);
+                }, 3000);
+            }
+        }*/
+
+
+
         if (currentPageIndex < currentTour.pages.length - 1) {
             // Переход к следующему вопросу в текущем туре
             setCurrentPageIndex((prev) => prev + 1);
@@ -251,7 +286,9 @@ export function Quiz() {
                         tours={tours}
                         setTours={setTours}
                         onExitAttempt={handleExitAttempt}
+
                     />
+
                 )}
                 <Progress
                     isOpen={showExitPopup}

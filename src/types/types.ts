@@ -13,7 +13,6 @@ export type Page =
     | ResultPage
     | InfoPage
     | TwoColumnsWithTitlePage
-    | PopupInfoPage
 
 
 
@@ -22,6 +21,11 @@ export type InputQuestionPage = {
     question: string;
     correctAnswer: string;
     selectedAnswer?: string;
+    popupInfo: PopupInfo
+}
+export type PopupInfo ={
+    title: string;
+    text: string;
 }
 
 export type DescriptionInfoPage = {
@@ -80,11 +84,7 @@ export type SingleAnswerQuestionPage = {
     selectedAnswer?: string;
 };
 
-export type PopupInfoPage ={
-    type: 'PopupInfoPage';
-    title: string;
-    text: string;
-}
+
 export type ResultPage = {
     type: 'ResultPage';
     pages: [BadResultPage, GoodResultPage, ExcellentResultPage];

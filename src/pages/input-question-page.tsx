@@ -5,6 +5,7 @@ import { getQuestionsPages } from './lib.ts';
 import { Input } from '../components/ui-compnents/input.tsx';
 import * as React from 'react';
 import { useState } from 'react';
+import { PopupInfo } from '../components/ui-compnents/popup-info.tsx';
 
 type Props = {
     page: InputQuestionPage;
@@ -25,6 +26,7 @@ export function InputQuestionPageView(props: Props) {
 
     const [userInput, setUserInput] = useState(selectedAnswer);
     const [isAnswered, setIsAnswered] = useState(false);
+    const [showInfoPopup, setShowInfoPopup] = useState(false);
 
     const isCorrect = isAnswered &&
         userInput.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
@@ -77,13 +79,19 @@ export function InputQuestionPageView(props: Props) {
                             setUserInput(e.target.value);
                             setIsAnswered(false);
                         }}
-                        onClick={() => {
-                        }}
                         onKeyDown={handleKeyDown}
                         placeholder="Введите ответ"
                         color={getInputColor()}
                     />
+                    <PopupInfo
+                        isOpen={showInfoPopup}
+                        title={'asdasdasda'}
+                        text={'asdasdasdasdasdasd'}
+                        onCancel={() => {}}
+                    />
+                    <button onClick={() => setShowInfoPopup(true)}>?</button>
                 </div>
+
             </div>
 
 
