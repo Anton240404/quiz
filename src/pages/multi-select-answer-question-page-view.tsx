@@ -100,6 +100,7 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
                             disabled={finished && !localSelectedAnswers.includes(option)}
                             color={getButtonColor(option)}
                             text={option}
+                            index={index}
                         />
                     ))}
                 </div>

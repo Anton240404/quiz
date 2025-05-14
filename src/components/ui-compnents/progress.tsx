@@ -1,5 +1,5 @@
 import styles from './UI-css/progress.module.css';
-import arrow from '../../../public/assets/growth-arrow.svg';
+import arrow from '../../../public/assets/growth-arrow.png';
 
 type Props = {
     title: string;

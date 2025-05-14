@@ -64,6 +64,7 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
                             disabled={hasSelectedAnswer}
                             color={getButtonColor(option)}
                             text={option}
+                            index={index}
                         />
                     ))}
                 </div>

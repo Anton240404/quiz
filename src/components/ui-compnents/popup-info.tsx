@@ -11,9 +11,11 @@ export function PopupInfo(props: Props) {
     return (
         <div className={styles.container}>
             <div className={styles.popup}>
-                <h2 className={styles.title}>{props.title}</h2>
-                <p className={styles.subTitle}>{props.text}</p>
-                <button className={styles.buttonNo} onClick={props.onCancel}>Закрыть</button>
+                <div className={styles.content}>
+                    <h2 className={styles.title}>{props.title}</h2>
+                    <p className={styles.subTitle}>{props.text}</p>
+                </div>
+                <button className={styles.buttonNo} onClick={props.onCancel}>ЗАКРЫТЬ</button>
             </div>
         </div>
     );

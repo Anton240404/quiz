@@ -1,5 +1,6 @@
 import { InputQuestionPage, Tour } from '../types/types.ts';
 import styles from './css/quiz.module.css';
+import style from './css/input-question-page.module.css';
 import { Button } from '../components/ui-compnents/button.tsx';
 import { getQuestionsPages } from './lib.ts';
 import { Input } from '../components/ui-compnents/input.tsx';
@@ -34,34 +35,35 @@ export function InputQuestionPageView(props: Props) {
 
     const handleAnswer = (answer: string) => {
         const copy = [...props.tours];
-        const currentPage =
-            copy[props.currentTourIndex].pages[props.currentPageIndex];
+        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
         if (currentPage.type === 'InputQuestionPage') {
             currentPage.selectedAnswer = answer;
         }
         props.setTours(copy);
         setIsAnswered(true);
     };
+    const resetInputState = () => {
+        setUserInput('');
+        setIsAnswered(false);
+    };
 
     const handleNext = () => {
         if (!isAnswered) {
             handleAnswer(userInput);
         }else{
+            resetInputState();
             props.onNext();
         }
     };
 
-    const handleKeyDown = () => {
-        if (userInput.trim() !== '') {
-            handleAnswer(userInput);
-        }
-    };
     const getInputColor = (): 'default' | 'success' | 'error' => {
         if (!isAnswered) {
             return 'default';
         }
         return isCorrect ? 'success' : 'error';
     };
+
+
 
     const questionPages = getQuestionsPages(currentTour.pages);
 
@@ -72,24 +74,25 @@ export function InputQuestionPageView(props: Props) {
                     Вопрос {props.currentPageIndex + 1} / {questionPages.length}
                 </h2>
                 <p className={styles.questionText}>{props.page.question}</p>
-                <div className={styles.controlsContainer}>
+                <div className={style.controlsContainer}>
                     <Input
                         value={userInput}
                         onChange={(e) => {
                             setUserInput(e.target.value);
                             setIsAnswered(false);
                         }}
-                        onKeyDown={handleKeyDown}
                         placeholder="Введите ответ"
                         color={getInputColor()}
                     />
-                    <PopupInfo
-                        isOpen={showInfoPopup}
-                        title={'asdasdasda'}
-                        text={'asdasdasdasdasdasd'}
-                        onCancel={() => {}}
-                    />
-                    <button onClick={() => setShowInfoPopup(true)}>?</button>
+                    {showInfoPopup && (
+                        <PopupInfo
+                            isOpen={showInfoPopup}
+                            title={props.page.popupInfo.title}
+                            text={props.page.popupInfo.text}
+                            onCancel={() => setShowInfoPopup(false)}
+                        />
+                    )}
+                    <button className={style.button} onClick={() => setShowInfoPopup(true)}>?</button>
                 </div>
 
             </div>

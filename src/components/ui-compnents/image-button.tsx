@@ -5,7 +5,6 @@ type Props = {
     onClick?: () => void;
     url: string;
     disabled?: boolean;
-    readonly?: boolean;
 };
 
 export function ImageButton(props: Props) {
@@ -27,10 +26,14 @@ export function ImageButton(props: Props) {
         <>
             <button disabled={props.disabled}
                     onClick={() => {
-                        if (props.readonly) return;
                         props.onClick?.();
                     }}
-                    style={{ backgroundImage: `url(${props.url})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '200px'}}
+                    style={{
+                        backgroundImage: `url(${props.url})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        height: '300px',
+                    }}
                     className={classnames.join(' ')}
             >
             </button>

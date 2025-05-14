@@ -1,5 +1,6 @@
 /* Общие стили */
 .button {
+    position: relative;
     border-radius: 20px;
     font-size: 20px;
     display: inline-block;
@@ -47,4 +48,13 @@
     background-color: #5C59FD;
     flex-grow: 1;
     opacity: 0.5;
+}
+.optionNumber{
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 14px;
+    color: #b1acc4;
+    font-weight: 600;
+    pointer-events: none;
 }

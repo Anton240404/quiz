@@ -31,13 +31,13 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
         props.setTours(copy);
     };
 
-    const getButtonColor = (imgUrl: string) => {
+    const getButtonColor = (img: string) => {
         if (!hasSelectedAnswer) return 'default';
-        if (imgUrl === correctAnswer && imgUrl === selectedAnswer)
+        if (img === correctAnswer && img === selectedAnswer)
             return 'correct';
-        if (imgUrl !== correctAnswer && imgUrl === selectedAnswer)
+        if (img !== correctAnswer && img === selectedAnswer)
             return 'incorrect';
-        if (imgUrl === correctAnswer && selectedAnswer !== correctAnswer)
+        if (img === correctAnswer && selectedAnswer !== correctAnswer)
             return 'correct';
         return 'default';
     };
@@ -49,13 +49,13 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
             </div>
             <div className={styles.controlsContainer}>
                 <div className={styles.options}>
-                    {props.page.imageOptions.map((imgUrl, index) => (
+                    {props.page.imageOptions.map((img, index) => (
                         <ImageButton
                             key={index}
-                            onClick={() => handleAnswer(imgUrl)}
-                            disabled={hasSelectedAnswer && imgUrl !== correctAnswer}
-                            variant={getButtonColor(imgUrl)}
-                            url={imgUrl}
+                            onClick={() => handleAnswer(img)}
+                            disabled={hasSelectedAnswer && img !== selectedAnswer}
+                            variant={getButtonColor(img)}
+                            url={img}
                         />
 
                     ))}

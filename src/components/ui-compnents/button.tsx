@@ -5,8 +5,8 @@ type Props = {
     onClick?: () => void;
     text: string;
     disabled?: boolean;
-    readonly?: boolean;
     type?: 'submit' | 'button' | 'reset';
+    index?: number;
 };
 
 export function Button(props: Props) {
@@ -31,12 +31,12 @@ export function Button(props: Props) {
     }
     return (
         <>
-            <button type={props.type || 'button'} disabled={props.disabled} onClick={() => {
-                    if (props.readonly) return;
-                    props.onClick?.();
-                }}
+            <button type={props.type || 'button'} disabled={props.disabled} onClick={() => {props.onClick?.()}}
                 className={classnames.join(' ')}
             >
+                {props.index !== undefined && (
+                    <span className={styles.optionNumber}>{props.index + 1}</span>
+                )}
                 {props.text}
             </button>
         </>

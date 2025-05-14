@@ -23,6 +23,8 @@
     gap: 3px;
 }
 .container{
+    display: flex;
+    align-items: center;
     border-radius: 20px;
     width: 100%;
     gap: 33px;
@@ -34,6 +36,8 @@
     display: flex;
     align-items: flex-end;
     width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     padding-left: 20px;
     gap: 20px;
 }
@@ -46,6 +50,8 @@
 }
 .text{
     color: rgba(255, 255, 255, 1);
+    font-weight: 600;
+    font-size: 40px;
 }
 
 .buttonContainer{
