@@ -1,34 +1,28 @@
-import { SingleAnswerQuestionPage, Tour } from '../types/types.ts';
-import styles from './css/quiz.module.css';
-import { Button } from '../components/ui/button/button.tsx';
-import { getQuestionsPages } from './lib.ts';
-import * as React from 'react';
+import {  Tour } from '../../types/types.ts';
+import styles from '../quiz/base-page.module.css';
+import { Button } from '../../components/ui/button/button.tsx';
+import { getQuestionsPages } from '../lib.ts';
+import { SingleAnswerQuestionPage } from '../../types/single-answer-question-page/single-answer-question-page.ts';
 
 type Props = {
     page: SingleAnswerQuestionPage;
+    pageNumber: number;
+    tour: Tour;
+    onFinishAnswer: (page: SingleAnswerQuestionPage) => void;
     onNext: () => void;
-    currentPageIndex: number;
-    currentTourIndex: number;
-    tours: Tour[];
-    setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
     onExitAttempt: () => void;
 };
 
 export function SingleAnswerQuestionPageView(props: Props) {
-    const currentTour = props.tours[props.currentTourIndex];
     const selectedAnswer = props.page.selectedAnswer;
     const correctAnswer = props.page.correctAnswer;
 
     const hasSelectedAnswer = Boolean(selectedAnswer);
 
     const handleAnswer = (answer: string) => {
-        const copy = [...props.tours];
-        const currentPage =
-            copy[props.currentTourIndex].pages[props.currentPageIndex];
-        if (currentPage.type === 'SingleAnswerQuestionPage') {
-            currentPage.selectedAnswer = answer;
-        }
-        props.setTours(copy);
+        const copy = { ...props.page };
+        copy.selectedAnswer = answer;
+        props.onFinishAnswer(copy);
     };
 
     const getButtonColor = (option: string) => {
@@ -42,13 +36,13 @@ export function SingleAnswerQuestionPageView(props: Props) {
         return 'default';
     };
 
-    const questionPages = getQuestionsPages(currentTour.pages);
+    const questionPages = getQuestionsPages(props.tour.pages);
 
     return (
         <>
             <div className={styles.questionContainer}>
                 <h2 className={styles.questionNumber}>
-                    Вопрос {props.currentPageIndex + 1} / {questionPages.length}
+                    Вопрос {props.pageNumber} / {questionPages.length}
                 </h2>
                 <p className={styles.questionText}>{props.page.question}</p>
             </div>
@@ -72,20 +66,13 @@ export function SingleAnswerQuestionPageView(props: Props) {
                         text={'НА ГЛАВНУЮ'}
                         onClick={props.onExitAttempt}
                         color={'primary'}
-                    ></Button>
+                    />
                     <Button
-                        text={
-                            props.currentPageIndex <
-                            currentTour.pages.length - 1
-                                ? 'ДАЛЕЕ'
-                                : 'ПРОДОЛЖИТЬ КВИЗ'
-                        }
+                        text={'ДАЛЕЕ'}
                         onClick={props.onNext}
-                        color={
-                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
-                        }
+                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
                         disabled={!hasSelectedAnswer}
-                    ></Button>
+                    />
                 </div>
             </div>
         </>

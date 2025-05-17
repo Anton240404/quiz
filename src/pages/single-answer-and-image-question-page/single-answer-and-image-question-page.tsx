@@ -1,33 +1,25 @@
-import { SingleAnswerAndImageQuestionPage, Tour } from '../types/types.ts';
-import styles from './css/quiz.module.css';
-import { Button } from '../components/ui/button/button.tsx';
-import { ImageButton } from '../components/ui/image-button/image-button.tsx';
+import styles from '../quiz/base-page.module.css';
+import { Button } from '../../components/ui/button/button.tsx';
+import { ImageButton } from '../../components/ui/image-button/image-button.tsx';
+import { SingleAnswerAndImageQuestionPage } from '../../types/single-answer-and-image-question-page/single-answer-and-image-question-page.ts';
 
 type Props = {
     page: SingleAnswerAndImageQuestionPage;
+    onFinishAnswer: (page: SingleAnswerAndImageQuestionPage) => void;
     onNext: () => void;
-    currentPageIndex: number;
-    currentTourIndex: number;
-    tours: Tour[];
-    setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
     onExitAttempt: () => void;
 };
 
 export function SingleAnswerAndImageQuestionPageView(props: Props) {
-    const currentTour = props.tours[props.currentTourIndex];
     const selectedAnswer = props.page.selectedAnswer;
     const correctAnswer = props.page.correctAnswer;
 
     const hasSelectedAnswer = Boolean(selectedAnswer);
 
     const handleAnswer = (answer: string) => {
-        const copy = [...props.tours];
-        const currentPage =
-            copy[props.currentTourIndex].pages[props.currentPageIndex];
-        if (currentPage.type === 'SingleAnswerAndImageQuestionPage') {
-            currentPage.selectedAnswer = answer;
-        }
-        props.setTours(copy);
+        const copy = { ...props.page };
+        copy.selectedAnswer = answer;
+        props.onFinishAnswer(copy);
     };
 
     const getButtonColor = (img: string) => {
@@ -64,20 +56,13 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
                         text={'НА ГЛАВНУЮ'}
                         onClick={props.onExitAttempt}
                         color={'primary'}
-                    ></Button>
+                    />
                     <Button
-                        text={
-                            props.currentPageIndex <
-                            currentTour.pages.length - 1
-                                ? 'ДАЛЕЕ'
-                                : 'ПРОДОЛЖИТЬ КВИЗ'
-                        }
+                        text={'ДАЛЕЕ'}
                         onClick={props.onNext}
-                        color={
-                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
-                        }
+                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
                         disabled={!hasSelectedAnswer}
-                    ></Button>
+                    />
                 </div>
             </div>
         </>

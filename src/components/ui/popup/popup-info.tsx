@@ -1,4 +1,4 @@
-import styles from './UI-css/popup.module.css';
+import styles from './popup.module.css';
 
 type Props = {
     title: string;

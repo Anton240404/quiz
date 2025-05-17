@@ -1,4 +1,4 @@
-import styles from './UI-css/button.module.css';
+import styles from './button.module.css';
 
 type Props = {
     color: 'default' | 'success' | 'danger' | 'primary' | 'disabledButtons' | 'disabledButton';

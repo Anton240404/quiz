@@ -1,25 +1,25 @@
 import { useState } from 'react';
-import { toursData } from '../data/tours-data.ts';
-import styles from './css/quiz.module.css';
-import { SingleAnswerQuestionPageView } from './single-answer-question-page-view.tsx';
+import { toursData } from '../../data/tours-data.ts';
+import styles from './base-page.module.css';
+import { SingleAnswerQuestionPageView } from '../single-answer-question-page/single-answer-question-page-view.tsx';
 import { useNavigate, useParams } from 'react-router-dom';
-import { BadResultPageView } from './pages-result/bad-result-page-view.tsx';
-import { GoodResultPageView } from './pages-result/good-result-page-view.tsx';
-import { ExcellentResultPageView } from './pages-result/excellent-result-page-view.tsx';
-import { SingleAnswerAndImageQuestionPageView } from './single-answer-and-image-question-page.tsx';
-import { InfoPageView } from './info/info-page-view.tsx';
-import { SingleAnswerQuestionAndImageQuestionPageView } from './single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.tsx';
-import { MultiSelectAnswerQuestionPageView } from './multi-select-answer-question-page-view.tsx';
-import { TwoColumnsWithTitlePageView } from './info/two-columns-with-title-page-view.tsx';
-import { InputQuestionPageView } from './input-question-page.tsx';
-import { Progress } from '../components/progress/progress.tsx';
-import { calculateResult } from './lib.ts';
+import { BadResultPageView } from '../pages-result/bad-result-page/bad-result-page-view.tsx';
+import { GoodResultPageView } from '../pages-result/good-result-page/good-result-page-view.tsx';
+import { ExcellentResultPageView } from '../pages-result/excellent-result-page/excellent-result-page-view.tsx';
+import { SingleAnswerAndImageQuestionPageView } from '../single-answer-and-image-question-page/single-answer-and-image-question-page.tsx';
+import { InfoPageView } from '../info/info-page-view.tsx';
+import { SingleAnswerQuestionAndImageQuestionPageView } from '../single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.tsx';
+import { TwoColumnsWithTitlePageView } from '../two-columns-with-title-page/two-columns-with-title-page-view.tsx';
+import { InputQuestionPageView } from '../input-question-page/input-question-page.tsx';
+import { Progress } from '../../components/progress/progress.tsx';
+import { calculateResult } from '../lib.ts';
+import { MultiSelectAnswerQuestionPageView } from '../multi-select-answer-question-page/multi-select-answer-question-page-view.tsx';
+import { MultiSelectAnswerAndQuestionImagePageView } from '../multi-select-answer-and-question-image-page/multi-select-answer-and-question-image-page-view.tsx';
 
 export function Quiz() {
     const navigate = useNavigate();
     const { tourIndex } = useParams();
-    const [currentTourIndex, setCurrentTourIndex] = useState(
-        Number(tourIndex) || 0
+    const [currentTourIndex, setCurrentTourIndex] = useState(Number(tourIndex) || 0
     );
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     const [tours, setTours] = useState(toursData);
@@ -30,22 +30,19 @@ export function Quiz() {
 
     const handleNext = () => {
         if (currentPageIndex < currentTour.pages.length - 1) {
-            // Переход к следующему вопросу в текущем туре
+
             setCurrentPageIndex((prev) => prev + 1);
         } else if (currentTourIndex < tours.length - 1) {
-            // Если это последний вопрос в туре, но не последний тур
-            const nextTourIndex = currentTourIndex + 1; // Определяем nextTourIndex
+
+            const nextTourIndex = currentTourIndex + 1;
             navigate(`/quiz-intro/${nextTourIndex}`);
         } else {
-            // Если это последний вопрос последнего тура
-            // Находим страницу результатов в туре и переключаемся на неё
             const resultPageIndex = currentTour.pages.findIndex(
                 (page) => page.type === 'ResultPage'
             );
             if (resultPageIndex !== -1) {
                 setCurrentPageIndex(resultPageIndex);
             } else {
-                // Если страница результатов не найдена, перенаправляем на главную
                 navigate('/');
             }
         }
@@ -149,11 +146,15 @@ export function Quiz() {
                 {currentPage.type === 'SingleAnswerQuestionPage' && (
                     <SingleAnswerQuestionPageView
                         page={currentPage}
+                        onFinishAnswer={(newPage) => {
+                            const copy = [...tours];
+                            const currentTour = copy[currentTourIndex];
+                            currentTour.pages[currentPageIndex] = newPage;
+                            setTours(copy);
+                        }}
+                        pageNumber={currentPageIndex + 1}
+                        tour={currentTour}
                         onNext={handleNext}
-                        currentPageIndex={currentPageIndex}
-                        currentTourIndex={currentTourIndex}
-                        tours={tours}
-                        setTours={setTours}
                         onExitAttempt={handleExitAttempt}
                     />
                 )}
@@ -161,11 +162,13 @@ export function Quiz() {
                 {currentPage.type === 'SingleAnswerAndImageQuestionPage' && (
                     <SingleAnswerAndImageQuestionPageView
                         page={currentPage}
+                        onFinishAnswer={(newPage) => {
+                            const copy = [...tours];
+                            const currentTour = copy[currentTourIndex];
+                            currentTour.pages[currentPageIndex] = newPage;
+                            setTours(copy);
+                        }}
                         onNext={handleNext}
-                        currentPageIndex={currentPageIndex}
-                        currentTourIndex={currentTourIndex}
-                        tours={tours}
-                        setTours={setTours}
                         onExitAttempt={handleExitAttempt}
                     />
                 )}
@@ -183,8 +186,7 @@ export function Quiz() {
                         }}
                     />
                 )}
-                {currentPage.type ===
-                    'SingleAnswerQuestionAndImageQuestionPage' && (
+                {currentPage.type === 'SingleAnswerQuestionAndImageQuestionPage' && (
                     <SingleAnswerQuestionAndImageQuestionPageView
                         page={currentPage}
                         onFinishAnswer={(newPage) => {
@@ -200,11 +202,17 @@ export function Quiz() {
                 {currentPage.type === 'MultiSelectAnswerQuestionPage' && (
                     <MultiSelectAnswerQuestionPageView
                         page={currentPage}
-                        onNext={handleNext}
+                        onNext={(newPage, goToNextQuestion) => {
+                            const copy = [...tours];
+                            const currentTour = copy[currentTourIndex];
+                            currentTour.pages[currentPageIndex] = newPage;
+                            setTours(copy);
+                            if (goToNextQuestion) {
+                                handleNext();
+                            }
+                        }}
                         pageNumber={currentPageIndex + 1}
-                        tourNumber={currentTourIndex + 1}
-                        tours={tours}
-                        setTours={setTours}
+                        tourNumber={currentTourIndex}
                         onExitAttempt={handleExitAttempt}
                     />
                 )}
@@ -232,6 +240,23 @@ export function Quiz() {
                         setTours={setTours}
                         onExitAttempt={handleExitAttempt}
                     />
+                )}
+                {currentPage.type === 'MultiSelectAnswerAndQuestionImagePage' && (
+                    <MultiSelectAnswerAndQuestionImagePageView
+                        page={currentPage}
+                        onNext={(newPage, goToNextQuestion) => {
+                            const copy = [...tours];
+                            const currentTour = copy[currentTourIndex];
+                            currentTour.pages[currentPageIndex] = newPage;
+                            setTours(copy);
+                            if (goToNextQuestion) {
+                                handleNext();
+                            }
+                        }}
+                        pageNumber={currentPageIndex + 1}
+                        tourNumber={currentTourIndex}
+                        onExitAttempt={handleExitAttempt}
+                        />
                 )}
                 <Progress
                     isOpen={showExitPopup}

@@ -1,7 +1,7 @@
-import { SingleAnswerQuestionAndImageQuestionPage } from '../../types/types.ts';
-import styles from './css/quiz.module.css';
+import styles from '../quiz/base-page.module.css';
 import style from './single-answer-question-and-image-question-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
+import { SingleAnswerQuestionAndImageQuestionPage } from '../../types/single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.ts';
 
 type Props = {
     page: SingleAnswerQuestionAndImageQuestionPage;
@@ -70,15 +70,13 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
                         text={'НА ГЛАВНУЮ'}
                         onClick={props.onExitAttempt}
                         color={'primary'}
-                    ></Button>
+                    />
                     <Button
                         text={'ДАЛЕЕ'}
                         onClick={props.onNext}
-                        color={
-                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
-                        }
+                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
                         disabled={!hasSelectedAnswer}
-                    ></Button>
+                    />
                 </div>
             </div>
         </>

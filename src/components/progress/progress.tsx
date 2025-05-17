@@ -1,4 +1,4 @@
-import styles from './UI-css/progress.module.css';
+import styles from './progress.module.css';
 import arrow from '../../../public/assets/growth-arrow.png';
 
 type Props = {

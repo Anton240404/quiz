@@ -1,6 +1,6 @@
-import styles from './pages-result-css/excellent-reult-page.module.css';
-import iconExcellent from '../../../public/assets/iconExcellent.png';
-import { Button } from '../../components/ui/button/button.tsx';
+import styles from '../bad-result-page/bad-result-page.module.css';
+import iconGood from '../../../../public/assets/iconGood.png';
+import { Button } from '../../../components/ui/button/button.tsx';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
@@ -9,18 +9,18 @@ type Props = {
     onNext: () => void;
 };
 
-export function ExcellentResultPageView(props: Props) {
+export function GoodResultPageView(props: Props) {
     const navigate = useNavigate();
 
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
                 <img
-                    src={iconExcellent}
+                    src={iconGood}
                     alt="Good Result"
                     className={styles.iconBad}
                 />
-                <h3 className={styles.resultTitle}>Вы справились отлично!</h3>
+                <h3 className={styles.resultTitle}>Хороший результат</h3>
                 <p className={styles.resultText}>
                     ВЫ ОТВЕТИЛИ ПРАВИЛЬНО НА {props.correctAnswers} /{' '}
                     {props.allAnswers} ВОПРОСОВ

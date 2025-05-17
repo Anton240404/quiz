@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Quiz } from './pages/quiz.tsx';
-import { Home } from './pages/start-page.tsx';
+import { Quiz } from './pages/quiz/quiz.tsx';
+import { Home } from './pages/start-page/start-page.tsx';
 import styles from './reset.module.css';
-import { QuizIntro } from './pages/quiz-intro.tsx';
+import { QuizIntro } from './pages/quiz-intro/quiz-intro.tsx';
 
 function App() {
     return (

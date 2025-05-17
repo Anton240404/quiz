@@ -1,0 +1,24 @@
+.questionText {
+    font-size: 60px;
+    font-weight: 600;
+    color: #0d003b;
+    background-color: #eaf1f7;
+    text-align: center;
+    max-width: 1500px;
+    margin-bottom: 40px;
+}
+.subTitle{
+    color: rgba(92, 89, 253, 1);
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.options {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 3px;
+    gap: 3px;
+}

@@ -1,7 +1,6 @@
-// bad-result-page-view.tsx
-import styles from './pages-result-css/bad-result-page.module.css';
-import iconBad from '../../../public/assets/iconBad.png';
-import { Button } from '../../components/ui/button/button.tsx';
+import styles from './bad-result-page.module.css';
+import iconBad from '../../../../public/assets/iconBad.png';
+import { Button } from '../../../components/ui/button/button.tsx';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {

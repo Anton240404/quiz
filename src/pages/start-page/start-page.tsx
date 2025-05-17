@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './css/home.module.css';
-import headerLogo from '../../public/assets/header.svg';
-import headerLogo2 from '../../public/assets/header2.svg';
-import shipImage from '../../public/assets/shipImage.svg';
-import tours from '../../public/assets/tours.svg';
-import info from '../../public/assets/info.svg';
+import styles from '../home.module.css';
+import headerLogo from '../../../public/assets/header.svg';
+import headerLogo2 from '../../../public/assets/header2.svg';
+import shipImage from '../../../public/assets/shipImage.svg';
+import tours from '../../../public/assets/tours.svg';
+import info from '../../../public/assets/info.svg';
 
 export function Home() {
     const navigate = useNavigate();

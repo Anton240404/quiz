@@ -20,6 +20,8 @@ export function calculateResult(pages: Page[]) {
             return page.selectedAnswers === page.correctAnswers;
         } else if (page.type === 'InputQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
+        }else if (page.type === 'MultiSelectAnswerAndQuestionImagePage') {
+            return page.selectedAnswers === page.correctAnswers;
         }
     });
     return {
@@ -27,4 +29,3 @@ export function calculateResult(pages: Page[]) {
         questionsCount: getQuestionsPages(pages).length,
     };
 }
-//                             variant={getButtonColor(option)}

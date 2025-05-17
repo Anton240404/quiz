@@ -1,4 +1,4 @@
-import styles from './UI-css/image-button.module.css';
+import styles from './image-button.module.css';
 
 type Props = {
     variant: 'default' | 'incorrect' | 'correct';

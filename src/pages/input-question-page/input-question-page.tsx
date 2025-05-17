@@ -1,12 +1,13 @@
-import { InputQuestionPage, Tour } from '../types/types.ts';
-import styles from './css/quiz.module.css';
-import style from './css/input-question-page.module.css';
-import { Button } from '../components/ui/button/button.tsx';
-import { getQuestionsPages } from './lib.ts';
-import { Input } from '../components/ui/input/input.tsx';
+import styles from '../quiz/base-page.module.css';
+import style from './input-question-page.module.css';
+import { Button } from '../../components/ui/button/button.tsx';
+import { getQuestionsPages } from '../lib.ts';
+import { Input } from '../../components/ui/input/input.tsx';
 import * as React from 'react';
 import { useState } from 'react';
-import { PopupInfo } from '../components/ui/popup/popup-info.tsx';
+import { PopupInfo } from '../../components/ui/popup/popup-info.tsx';
+import { InputQuestionPage } from '../../types/input-question-page/input-question-page.ts';
+import { Tour } from '../../types/types.ts';
 
 type Props = {
     page: InputQuestionPage;

@@ -1,8 +1,8 @@
 import style from './two-columns-with-title-page-view.module.css';
-import styles from '../css/quiz.module.css';
+import styles from '../quiz/base-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { useNavigate } from 'react-router-dom';
-import { TwoColumnsWithTitlePage } from '../../types/types.ts';
+import { TwoColumnsWithTitlePage } from '../../types/two-columns-with-title-page/two-columns-with-title-page.ts';
 
 type Props = {
     page: TwoColumnsWithTitlePage;

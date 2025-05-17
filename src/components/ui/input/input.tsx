@@ -1,4 +1,4 @@
-import styles from './UI-css/input.module.css';
+import styles from './input.module.css';
 import * as React from 'react';
 
 type Props = {

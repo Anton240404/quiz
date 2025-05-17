@@ -1,9 +1,9 @@
 import style from './info.module.css';
-import styles from '../css/quiz.module.css';
+import styles from '../quiz/base-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { useNavigate } from 'react-router-dom';
 import flagInfo from '../../.././public/assets/flagInfo.png';
-import { InfoPage } from '../../types/types.ts';
+import { InfoPage } from '../../types/info-page/info-page.ts';
 
 type Props = {
     page: InfoPage;
