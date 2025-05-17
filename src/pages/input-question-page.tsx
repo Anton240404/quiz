@@ -1,12 +1,12 @@
 import { InputQuestionPage, Tour } from '../types/types.ts';
 import styles from './css/quiz.module.css';
 import style from './css/input-question-page.module.css';
-import { Button } from '../components/ui-compnents/button.tsx';
+import { Button } from '../components/ui/button/button.tsx';
 import { getQuestionsPages } from './lib.ts';
-import { Input } from '../components/ui-compnents/input.tsx';
+import { Input } from '../components/ui/input/input.tsx';
 import * as React from 'react';
 import { useState } from 'react';
-import { PopupInfo } from '../components/ui-compnents/popup-info.tsx';
+import { PopupInfo } from '../components/ui/popup/popup-info.tsx';
 
 type Props = {
     page: InputQuestionPage;
@@ -19,8 +19,6 @@ type Props = {
 };
 
 export function InputQuestionPageView(props: Props) {
-
-
     const currentTour = props.tours[props.currentTourIndex];
     const selectedAnswer = props.page.selectedAnswer || '';
     const correctAnswer = props.page.correctAnswer;
@@ -29,13 +27,14 @@ export function InputQuestionPageView(props: Props) {
     const [isAnswered, setIsAnswered] = useState(false);
     const [showInfoPopup, setShowInfoPopup] = useState(false);
 
-    const isCorrect = isAnswered &&
+    const isCorrect =
+        isAnswered &&
         userInput.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
-
 
     const handleAnswer = (answer: string) => {
         const copy = [...props.tours];
-        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
+        const currentPage =
+            copy[props.currentTourIndex].pages[props.currentPageIndex];
         if (currentPage.type === 'InputQuestionPage') {
             currentPage.selectedAnswer = answer;
         }
@@ -50,7 +49,7 @@ export function InputQuestionPageView(props: Props) {
     const handleNext = () => {
         if (!isAnswered) {
             handleAnswer(userInput);
-        }else{
+        } else {
             resetInputState();
             props.onNext();
         }
@@ -62,8 +61,6 @@ export function InputQuestionPageView(props: Props) {
         }
         return isCorrect ? 'success' : 'error';
     };
-
-
 
     const questionPages = getQuestionsPages(currentTour.pages);
 
@@ -92,30 +89,34 @@ export function InputQuestionPageView(props: Props) {
                             onCancel={() => setShowInfoPopup(false)}
                         />
                     )}
-                    <button className={style.button} onClick={() => setShowInfoPopup(true)}>?</button>
+                    <button
+                        className={style.button}
+                        onClick={() => setShowInfoPopup(true)}
+                    >
+                        ?
+                    </button>
                 </div>
-
             </div>
 
-
-                <div className={styles.buttonContainer}>
-                    <Button
-                        text={'НА ГЛАВНУЮ'}
-                        onClick={props.onExitAttempt}
-                        color={'primary'}
-                    />
-                    <Button
-                        text={
-                            props.currentPageIndex < currentTour.pages.length - 1
-                                ? 'ДАЛЕЕ'
-                                : 'ПРОДОЛЖИТЬ КВИЗ'
-                        }
-                        onClick={handleNext}
-                        color={userInput.trim() === '' ? 'disabledButtons' : 'primary'}
-                        disabled={userInput.trim() === ''}
-                    />
-                </div>
-
+            <div className={styles.buttonContainer}>
+                <Button
+                    text={'НА ГЛАВНУЮ'}
+                    onClick={props.onExitAttempt}
+                    color={'primary'}
+                />
+                <Button
+                    text={
+                        props.currentPageIndex < currentTour.pages.length - 1
+                            ? 'ДАЛЕЕ'
+                            : 'ПРОДОЛЖИТЬ КВИЗ'
+                    }
+                    onClick={handleNext}
+                    color={
+                        userInput.trim() === '' ? 'disabledButtons' : 'primary'
+                    }
+                    disabled={userInput.trim() === ''}
+                />
+            </div>
         </>
     );
 }

@@ -1,6 +1,6 @@
 import { SingleAnswerQuestionPage, Tour } from '../types/types.ts';
 import styles from './css/quiz.module.css';
-import { Button } from '../components/ui-compnents/button.tsx';
+import { Button } from '../components/ui/button/button.tsx';
 import { getQuestionsPages } from './lib.ts';
 import * as React from 'react';
 
@@ -15,7 +15,6 @@ type Props = {
 };
 
 export function SingleAnswerQuestionPageView(props: Props) {
-
     const currentTour = props.tours[props.currentTourIndex];
     const selectedAnswer = props.page.selectedAnswer;
     const correctAnswer = props.page.correctAnswer;
@@ -82,7 +81,9 @@ export function SingleAnswerQuestionPageView(props: Props) {
                                 : 'ПРОДОЛЖИТЬ КВИЗ'
                         }
                         onClick={props.onNext}
-                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswer}
                     ></Button>
                 </div>

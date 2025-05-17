@@ -1,44 +1,41 @@
 import { MultiSelectAnswerQuestionPage, Tour } from '../types/types.ts';
 import styles from './css/quiz.module.css';
 import style from './css/multi-select-answer-question-page-view.module.css';
-import { Button } from '../components/ui-compnents/button.tsx';
-import * as React from 'react';
+import { Button } from '../components/ui/button/button.tsx';
+import { useEffect, useState } from 'react';
 
 type Props = {
     page: MultiSelectAnswerQuestionPage;
-    onNext: () => void;
-    currentPageIndex: number;
-    currentTourIndex: number;
-    tours: Tour[];
-    setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
+    onNext: (newPage: MultiSelectAnswerQuestionPage) => void;
+    pageNumber: number;
+    tourNumber: number;
     onExitAttempt: () => void;
 };
 
 export function MultiSelectAnswerQuestionPageView(props: Props) {
-    const [finished, setFinished] = React.useState(false);
+    const [finished, setFinished] = useState(false);
     // Используем локальное состояние для выбранных ответов
-    const [localSelectedAnswers, setLocalSelectedAnswers] = React.useState<string[]>([]);
+    const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
 
-    const currentTour = props.tours[props.currentTourIndex];
     // Очищаем локальное состояние при изменении вопроса
-    React.useEffect(() => {
-        setLocalSelectedAnswers([]);
+    useEffect(() => {
+        setSelectedAnswers([]);
         setFinished(false);
-    }, [props.currentPageIndex, props.currentTourIndex]);
+    }, [props.pageNumber, props.tourNumber]);
 
     const correctAnswers = props.page.correctAnswers;
 
     // Проверяем, выбран ли хотя бы один вариант ответа
-    const hasSelectedAnswers = localSelectedAnswers.length > 0;
+    const hasSelectedAnswers = selectedAnswers.length > 0;
 
     const handleAnswer = (answer: string) => {
         if (finished) return; // Не позволяем менять ответы после проверки
 
         // Обновляем локальное состояние
-        setLocalSelectedAnswers(prev => {
+        setSelectedAnswers((prev) => {
             // Если ответ уже выбран, удаляем его, иначе добавляем
             if (prev.includes(answer)) {
-                return prev.filter(item => item !== answer);
+                return prev.filter((item) => item !== answer);
             } else {
                 return [...prev, answer];
             }
@@ -51,10 +48,10 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
             setFinished(true);
 
             const copy = [...props.tours];
-            const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
+            const currentPage = copy[props.tourNumber].pages[props.pageNumber];
 
             if (currentPage.type === 'MultiSelectAnswerQuestionPage') {
-                currentPage.selectedAnswers = [...localSelectedAnswers];
+                currentPage.selectedAnswers = [...selectedAnswers];
             }
 
             props.setTours(copy);
@@ -67,13 +64,15 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
     const getButtonColor = (option: string) => {
         if (!finished) {
             // До проверки: выбранные варианты подсвечиваются цветом primary
-            return localSelectedAnswers.includes(option) ? 'disabledButton' : 'default';
+            return selectedAnswers.includes(option)
+                ? 'disabledButton'
+                : 'default';
         } else {
             // После проверки показываем правильность ответов
             if (correctAnswers.includes(option)) {
                 // Правильный ответ - зеленый
                 return 'success';
-            } else if (localSelectedAnswers.includes(option)) {
+            } else if (selectedAnswers.includes(option)) {
                 // Выбранный неправильный ответ - красный
                 return 'danger';
             }
@@ -97,7 +96,9 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
                         <Button
                             key={index}
                             onClick={() => handleAnswer(option)}
-                            disabled={finished && !localSelectedAnswers.includes(option)}
+                            disabled={
+                                finished && !selectedAnswers.includes(option)
+                            }
                             color={getButtonColor(option)}
                             text={option}
                             index={index}
@@ -112,11 +113,18 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
                         color={'primary'}
                     />
                     <Button
-                        text={finished ?
-                            (props.currentPageIndex < currentTour.pages.length - 1 ? 'ДАЛЕЕ' : 'ПРОДОЛЖИТЬ КВИЗ') :
-                            'ДАЛЕЕ'}
+                        text={
+                            finished
+                                ? props.pageNumber <
+                                  currentTour.pages.length - 1
+                                    ? 'ДАЛЕЕ'
+                                    : 'ПРОДОЛЖИТЬ КВИЗ'
+                                : 'ДАЛЕЕ'
+                        }
                         onClick={handleNext}
-                        color={!hasSelectedAnswers ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswers ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswers}
                     />
                 </div>

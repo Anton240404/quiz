@@ -1,34 +1,25 @@
-import { SingleAnswerQuestionAndImageQuestionPage, Tour } from '../types/types.ts';
+import { SingleAnswerQuestionAndImageQuestionPage } from '../../types/types.ts';
 import styles from './css/quiz.module.css';
-import style from './css/single-answer-question-and-image-question-page.module.css'
-import { Button } from '../components/ui-compnents/button.tsx';
+import style from './single-answer-question-and-image-question-page.module.css';
+import { Button } from '../../components/ui/button/button.tsx';
 
 type Props = {
     page: SingleAnswerQuestionAndImageQuestionPage;
+    onFinishAnswer: (page: SingleAnswerQuestionAndImageQuestionPage) => void;
     onNext: () => void;
-    currentPageIndex: number;
-    currentTourIndex: number;
-    tours: Tour[];
-    setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
     onExitAttempt: () => void;
 };
 
 export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
-
-
-    const currentTour = props.tours[props.currentTourIndex];
     const selectedAnswer = props.page.selectedAnswer;
     const correctAnswer = props.page.correctAnswer;
 
     const hasSelectedAnswer = Boolean(selectedAnswer);
 
     const handleAnswer = (answer: string) => {
-        const copy = [...props.tours];
-        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
-        if (currentPage.type === 'SingleAnswerQuestionAndImageQuestionPage') {
-            currentPage.selectedAnswer = answer;
-        }
-        props.setTours(copy);
+        const copy = { ...props.page };
+        copy.selectedAnswer = answer;
+        props.onFinishAnswer(copy);
     };
 
     const getButtonColor = (option: string) => {
@@ -46,14 +37,19 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
         <>
             <div className={style.containerHeader}>
                 <div className={styles.questionContainer}>
-                    <h2 className={styles.questionNumber}>{props.page.subTitle}</h2>
+                    <h2 className={styles.questionNumber}>
+                        {props.page.subTitle}
+                    </h2>
                     <p className={styles.questionText}>{props.page.question}</p>
                 </div>
-                <div className={style.CompassImageContainer}><
-                    img src={props.page.questionImage} alt="Компасс" className={style.CompassImage} />
+                <div className={style.CompassImageContainer}>
+                    <img
+                        src={props.page.questionImage}
+                        alt="Компас"
+                        className={style.CompassImage}
+                    />
                 </div>
             </div>
-
 
             <div className={styles.controlsContainer}>
                 <div className={style.options}>
@@ -76,14 +72,11 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
                         color={'primary'}
                     ></Button>
                     <Button
-                        text={
-                            props.currentPageIndex <
-                            currentTour.pages.length - 1
-                                ? 'ДАЛЕЕ'
-                                : 'ПРОДОЛЖИТЬ КВИЗ'
-                        }
+                        text={'ДАЛЕЕ'}
                         onClick={props.onNext}
-                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswer}
                     ></Button>
                 </div>

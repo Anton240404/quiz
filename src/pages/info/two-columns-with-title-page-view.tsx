@@ -1,14 +1,13 @@
 import style from './two-columns-with-title-page-view.module.css';
 import styles from '../css/quiz.module.css';
-import { Button } from '../../components/ui-compnents/button.tsx';
+import { Button } from '../../components/ui/button/button.tsx';
 import { useNavigate } from 'react-router-dom';
 import { TwoColumnsWithTitlePage } from '../../types/types.ts';
 
-
 type Props = {
-    page: TwoColumnsWithTitlePage
+    page: TwoColumnsWithTitlePage;
     onNext: () => void;
-}
+};
 
 export function TwoColumnsWithTitlePageView(props: Props) {
     const navigate = useNavigate();
@@ -21,12 +20,15 @@ export function TwoColumnsWithTitlePageView(props: Props) {
                 {props.page.items.map((item) => (
                     <div className={style.container}>
                         <div className={style.imageAndText}>
-                            <img src={item.image} alt={'info'} className={style.image} />
+                            <img
+                                src={item.image}
+                                alt={'info'}
+                                className={style.image}
+                            />
                             <p className={style.text}>{item.text}</p>
                         </div>
                     </div>
-                        )
-                )}
+                ))}
             </div>
 
             <div className={styles.buttonContainer}>

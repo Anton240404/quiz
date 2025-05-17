@@ -12,34 +12,35 @@ export type Page =
     | SingleAnswerQuestionAndImageQuestionPage
     | ResultPage
     | InfoPage
-    | TwoColumnsWithTitlePage
-
-
+    | TwoColumnsWithTitlePage;
 
 export type InputQuestionPage = {
     type: 'InputQuestionPage';
     question: string;
     correctAnswer: string;
+    finished?: boolean;
     selectedAnswer?: string;
-    popupInfo: PopupInfo
-}
-export type PopupInfo ={
+    popupInfo: PopupInfo;
+};
+
+export type PopupInfo = {
     title: string;
     text: string;
-}
+};
 
 export type DescriptionInfoPage = {
     type: 'DescriptionInfoPage';
 };
+
 export type MultiSelectAnswerQuestionPage = {
     type: 'MultiSelectAnswerQuestionPage';
     subTitle: string;
     question: string;
     options: string[];
     correctAnswers: string[];
+    finished?: boolean;
     selectedAnswers?: string[];
 };
-
 
 export type SingleAnswerQuestionAndImageQuestionPage = {
     type: 'SingleAnswerQuestionAndImageQuestionPage';
@@ -49,25 +50,25 @@ export type SingleAnswerQuestionAndImageQuestionPage = {
     options: string[];
     correctAnswer: string;
     selectedAnswer?: string;
-}
+};
 
 export type InfoPage = {
     type: 'InfoPage';
     image: string;
     title: string;
     text: string;
-
 };
+
 export type TwoColumnsWithTitlePage = {
     type: 'TwoColumnsWithTitlePage';
     title: string;
-    items: TwoColumnsWithTitlePageItem[]
+    items: TwoColumnsWithTitlePageItem[];
 };
 
 export type TwoColumnsWithTitlePageItem = {
-    image: string,
-    text: string
-}
+    image: string;
+    text: string;
+};
 
 export type SingleAnswerAndImageQuestionPage = {
     type: 'SingleAnswerAndImageQuestionPage';
@@ -76,6 +77,7 @@ export type SingleAnswerAndImageQuestionPage = {
     correctAnswer: string;
     selectedAnswer?: string;
 };
+
 export type SingleAnswerQuestionPage = {
     type: 'SingleAnswerQuestionPage';
     question: string;
@@ -83,7 +85,6 @@ export type SingleAnswerQuestionPage = {
     correctAnswer: string;
     selectedAnswer?: string;
 };
-
 
 export type ResultPage = {
     type: 'ResultPage';
@@ -110,4 +111,3 @@ export type ExcellentResultPage = {
     image: 'iconExcellent.png';
     range: [number, number];
 };
-

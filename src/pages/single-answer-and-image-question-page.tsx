@@ -1,8 +1,7 @@
 import { SingleAnswerAndImageQuestionPage, Tour } from '../types/types.ts';
 import styles from './css/quiz.module.css';
-import { Button } from '../components/ui-compnents/button.tsx';
-import { ImageButton } from '../components/ui-compnents/image-button.tsx';
-
+import { Button } from '../components/ui/button/button.tsx';
+import { ImageButton } from '../components/ui/image-button/image-button.tsx';
 
 type Props = {
     page: SingleAnswerAndImageQuestionPage;
@@ -15,7 +14,6 @@ type Props = {
 };
 
 export function SingleAnswerAndImageQuestionPageView(props: Props) {
-
     const currentTour = props.tours[props.currentTourIndex];
     const selectedAnswer = props.page.selectedAnswer;
     const correctAnswer = props.page.correctAnswer;
@@ -24,7 +22,8 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
 
     const handleAnswer = (answer: string) => {
         const copy = [...props.tours];
-        const currentPage = copy[props.currentTourIndex].pages[props.currentPageIndex];
+        const currentPage =
+            copy[props.currentTourIndex].pages[props.currentPageIndex];
         if (currentPage.type === 'SingleAnswerAndImageQuestionPage') {
             currentPage.selectedAnswer = answer;
         }
@@ -33,10 +32,8 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
 
     const getButtonColor = (img: string) => {
         if (!hasSelectedAnswer) return 'default';
-        if (img === correctAnswer && img === selectedAnswer)
-            return 'correct';
-        if (img !== correctAnswer && img === selectedAnswer)
-            return 'incorrect';
+        if (img === correctAnswer && img === selectedAnswer) return 'correct';
+        if (img !== correctAnswer && img === selectedAnswer) return 'incorrect';
         if (img === correctAnswer && selectedAnswer !== correctAnswer)
             return 'correct';
         return 'default';
@@ -53,11 +50,12 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
                         <ImageButton
                             key={index}
                             onClick={() => handleAnswer(img)}
-                            disabled={hasSelectedAnswer && img !== selectedAnswer}
+                            disabled={
+                                hasSelectedAnswer && img !== selectedAnswer
+                            }
                             variant={getButtonColor(img)}
                             url={img}
                         />
-
                     ))}
                 </div>
 
@@ -75,7 +73,9 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
                                 : 'ПРОДОЛЖИТЬ КВИЗ'
                         }
                         onClick={props.onNext}
-                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswer}
                     ></Button>
                 </div>

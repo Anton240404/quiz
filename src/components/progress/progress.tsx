@@ -7,10 +7,11 @@ type Props = {
     onConfirm: () => void;
     onCancel: () => void;
     isOpen: boolean;
-}
+};
 
 export function Progress(props: Props) {
     if (!props.isOpen) return null;
+
     return (
         <div className={styles.container}>
             <div className={styles.popup}>
@@ -18,8 +19,18 @@ export function Progress(props: Props) {
                 <h2 className={styles.title}>{props.title}</h2>
                 <p className={styles.subTitle}>{props.subTitle}</p>
                 <div className={styles.containerButtons}>
-                    <button className={styles.buttonYes} onClick={props.onConfirm}>ДА</button>
-                    <button className={styles.buttonNo} onClick={props.onCancel}>НЕТ</button>
+                    <button
+                        className={styles.buttonYes}
+                        onClick={props.onConfirm}
+                    >
+                        ДА
+                    </button>
+                    <button
+                        className={styles.buttonNo}
+                        onClick={props.onCancel}
+                    >
+                        НЕТ
+                    </button>
                 </div>
             </div>
         </div>

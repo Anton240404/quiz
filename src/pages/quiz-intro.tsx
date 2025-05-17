@@ -37,6 +37,7 @@ export function QuizIntro() {
                 </div>
             </div>
             <div className={styles.buttons}>
+                {/* Todo */}
                 <button className={styles.button} onClick={() => navigate('/')}>
                     На главную
                 </button>
