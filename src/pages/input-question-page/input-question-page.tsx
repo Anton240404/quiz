@@ -106,15 +106,9 @@ export function InputQuestionPageView(props: Props) {
                     color={'primary'}
                 />
                 <Button
-                    text={
-                        props.currentPageIndex < currentTour.pages.length - 1
-                            ? 'ДАЛЕЕ'
-                            : 'ПРОДОЛЖИТЬ КВИЗ'
-                    }
+                    text={'ДАЛЕЕ'}
                     onClick={handleNext}
-                    color={
-                        userInput.trim() === '' ? 'disabledButtons' : 'primary'
-                    }
+                    color={userInput.trim() === '' ? 'disabledButtons' : 'primary'}
                     disabled={userInput.trim() === ''}
                 />
             </div>
