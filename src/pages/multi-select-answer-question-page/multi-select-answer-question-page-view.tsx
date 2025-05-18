@@ -60,9 +60,7 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
     return (
         <>
             <div className={styles.questionContainer}>
-                {props.page.subTitle && (
-                    <h3 className={style.subTitle}>{props.page.subTitle}</h3>
-                )}
+                <h3 className={style.subTitle}>{props.page.subTitle}</h3>
                 <p className={style.questionText}>{props.page.question}</p>
             </div>
 

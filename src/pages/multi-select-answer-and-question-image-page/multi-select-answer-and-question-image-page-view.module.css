@@ -22,3 +22,55 @@
     margin-bottom: 3px;
     gap: 3px;
 }
+.questionTextContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+    border-radius: 20px;
+    width: 50%;
+    background-color: #eaf1f7;
+}
+.questionContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    gap: 3px;
+}
+.image{
+    width: 100%;
+
+}
+.imageContainer{
+    display: flex;
+    flex:1;
+    border-radius: 20px;
+}
+.options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    height: 120px;
+    margin-bottom: 3px;
+    gap: 3px;
+}
+.tour{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(13, 0, 59, 1);
+    background: rgba(255, 255, 255, 1);
+    font-weight: 600;
+    font-size: 24px;
+    position: absolute;
+    width: 130px;
+    height: 54px;
+    top: 30px;
+    left: 30px;
+    border-radius: 100px;
+}
+

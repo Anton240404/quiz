@@ -2,7 +2,9 @@ import styles from '../quiz/base-page.module.css';
 import style from './multi-select-answer-and-question-image-page-view.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { useEffect, useState } from 'react';
-import { MultiSelectAnswerAndQuestionImagePage } from '../../types/multi-select-answer-and-question-image-page/multi-select-answer-question-page.ts';
+import {
+    MultiSelectAnswerAndQuestionImagePage,
+} from '../../types/multi-select-answer-and-question-image-page/multi-select-answer-question-page.ts';
 
 type Props = {
     page: MultiSelectAnswerAndQuestionImagePage;
@@ -59,12 +61,15 @@ export function MultiSelectAnswerAndQuestionImagePageView(props: Props) {
 
     return (
         <>
-            <div className={styles.questionContainer}>
-                <div>
-                    {props.page.subTitle && (<h3 className={style.subTitle}>{props.page.subTitle}</h3>)}
+            <div className={style.questionContainer}>
+                <div className={style.questionTextContainer}>
+                    <h3 className={style.subTitle}>{props.page.subTitle}</h3>
                     <p className={style.questionText}>{props.page.question}</p>
+                    <p className={style.tour}>{`Тур ${props.tourNumber + 1}`}</p>
                 </div>
-                <img src={props.page.questionImage} alt={'capitan'} className={style.image}/>
+                <div className={style.imageContainer}>
+                    <img src={props.page.questionImage} alt={'capitan'} className={style.image} />
+                </div>
             </div>
 
             <div className={styles.controlsContainer}>

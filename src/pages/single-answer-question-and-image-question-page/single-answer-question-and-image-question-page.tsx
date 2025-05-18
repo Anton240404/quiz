@@ -37,9 +37,7 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
         <>
             <div className={style.containerHeader}>
                 <div className={styles.questionContainer}>
-                    <h2 className={styles.questionNumber}>
-                        {props.page.subTitle}
-                    </h2>
+                    <h2 className={styles.questionNumber}>{props.page.subTitle}</h2>
                     <p className={styles.questionText}>{props.page.question}</p>
                 </div>
                 <div className={style.CompassImageContainer}>

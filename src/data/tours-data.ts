@@ -465,7 +465,7 @@ export const toursData: Tour[] = [
                 type: 'MultiSelectAnswerAndQuestionImagePage',
                 subTitle: 'Снаряди капитана Чирикова',
                 question: 'Выберите атрибуты костюма морского офицера первой половины 18 века для капитана Чирикова?',
-                questionImage: './assets/captain.png',
+                questionImage: '/assets/capitan.png',
                 options: ['Парик', 'Штаны', 'Панталоны', 'Шляпа', 'Ботфорты', 'Кафтан', 'Сюртук', 'Шаровары', 'Жабо', 'Зонтик'],
                 correctAnswers: ['Парик', 'Штаны', 'Шляпа', 'Кафтан']
 
@@ -474,7 +474,7 @@ export const toursData: Tour[] = [
                 type: 'MultiSelectAnswerAndQuestionImagePage',
                 subTitle: 'Снаряди капитана Чирикова',
                 question: 'Выберите атрибуты костюма морского офицера первой половины 18 века для капитана Чирикова?',
-                questionImage: './assets/captain.png',
+                questionImage: '/assets/capitan.png',
                 options: ['Шпага', 'Поясная портупея', 'Шейный платок', 'Камзол', 'Штиблеты', 'Колготы', 'Блузка', 'Брюки', 'Портянки', 'Бутсы'],
                 correctAnswers: ['Шпага', 'Поясная портупея', 'Шейный платок', 'Камзол', 'Штиблеты']
 
