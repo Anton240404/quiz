@@ -1,0 +1,69 @@
+// Пропсы компонента Dropdown
+type Props = {
+    items: Item[],
+    onSelect: (item: Item) => void;
+    placeholder: string
+}
+
+export function Dropdown(props: Props) {
+    // Состояние для отслеживания, открыт ли выпадающий список
+    const [isOpen, setIsOpen] = useState(false);
+    // Состояние для хранения выбранного элемента
+    const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+
+    // Обработчик клика по элементу списка
+    const handleItemClick = (item: Item) => {
+        setSelectedItem(item);        // Сохраняем выбранный элемент
+        props.onSelect(item);         // Вызываем колбэк родительского компонента
+        setIsOpen(false);             // Закрываем выпадающий список
+    };
+
+    return (
+        <>
+            <div className={css.container}>
+                <div className={css.wrapper}>
+                    {/* Область заголовка выпадающего списка */}
+                    <div
+                        className={css.placeholder}
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {/* Показываем выбранный элемент или плейсхолдер */}
+                        {selectedItem ? selectedItem.text : props.placeholder}
+                        {/* Кнопка-стрелка для открытия/закрытия списка */}
+                        <button
+                            className={`${css.arrow} ${isOpen ? css.up : css.down}`}
+                            onClick={(e) => {
+                                e.stopPropagation(); // Предотвращаем всплытие события
+                                setIsOpen(!isOpen);  // Переключаем состояние открытия
+                            }}
+                        >
+                            {isOpen ? '▲' : '▼'}
+                        </button>
+                    </div>
+
+                    {/* Отображаем выпадающий список только если isOpen = true */}
+                    {isOpen && (
+                        <div className={css.dropdown}>
+                            {/* Отображаем каждый элемент из массива items */}
+                            {props.items.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className={`${css.item} ${css[item.color]}`}
+                                    onClick={() => handleItemClick(item)}
+                                >
+                                    {item.text}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </>
+    );
+}
+
+// (
+//     <Dropdown items={[{id: '1', text: 'Часть 1', color: 'default'}, {id: '2', text: 'Часть 2', color: 'default'}]} />
+// )
+
+//

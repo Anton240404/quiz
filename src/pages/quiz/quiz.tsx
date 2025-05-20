@@ -12,7 +12,7 @@ import { SingleAnswerQuestionAndImageQuestionPageView } from '../single-answer-q
 import { TwoColumnsWithTitlePageView } from '../two-columns-with-title-page/two-columns-with-title-page-view.tsx';
 import { InputQuestionPageView } from '../input-question-page/input-question-page.tsx';
 import { Progress } from '../../components/progress/progress.tsx';
-import { calculateResult } from '../lib.ts';
+import { calculateTourResult } from '../lib.ts';
 import { MultiSelectAnswerQuestionPageView } from '../multi-select-answer-question-page/multi-select-answer-question-page-view.tsx';
 import { MultiSelectAnswerAndQuestionImagePageView } from '../multi-select-answer-and-question-image-page/multi-select-answer-and-question-image-page-view.tsx';
 
@@ -76,7 +76,7 @@ export function Quiz() {
     function renderResultPage() {
         if (currentPage.type !== 'ResultPage') return;
 
-        const { correctQuestionsCount, questionsCount } = calculateResult(
+        const { correctQuestionsCount, questionsCount } = calculateTourResult(
             currentTour.pages
         );
 

@@ -8,7 +8,8 @@ export function QuizIntro() {
 
     const currentTourIndex = tourIndex ? parseInt(tourIndex, 10) : 0;
 
-    const isValidIndex = currentTourIndex >= 0 && currentTourIndex < toursData.length;
+    const isValidIndex =
+        currentTourIndex >= 0 && currentTourIndex < toursData.length;
 
     if (!isValidIndex) {
         navigate('/');

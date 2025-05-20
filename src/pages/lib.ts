@@ -10,7 +10,7 @@ export function getQuestionsPages(pages: Page[]) {
     );
 }
 
-export function calculateResult(pages: Page[]) {
+export function calculateTourResult(pages: Page[]) {
     const correctAnswers = pages.filter((page) => {
         if (page.type === 'SingleAnswerQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
