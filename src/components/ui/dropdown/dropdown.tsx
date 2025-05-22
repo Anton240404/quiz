@@ -1,16 +1,17 @@
 import { useState } from 'react';
+import css from './dropdown.module.css';
 
 type Item = {
-    id: string,
-    text: string
-    color: 'success' | 'danger' | 'default'
-}
+    id: string;
+    text: string;
+    color: 'success' | 'danger' | 'default';
+};
 
 type Props = {
-    items: Item[],
+    items: Item[];
     onSelect: (item: Item) => void;
-    placeholder: string
-}
+    placeholder: string;
+};
 
 export function Dropdown(props: Props) {
     const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +33,9 @@ export function Dropdown(props: Props) {
                     >
                         {selectedItem ? selectedItem.text : props.placeholder}
                         <button
-                            className={`${css.arrow} ${isOpen ? css.up : css.down}`}
+                            className={`${css.arrow} ${
+                                isOpen ? css.up : css.down
+                            }`}
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             {isOpen ? '▲' : '▼'}
@@ -44,7 +47,6 @@ export function Dropdown(props: Props) {
                             {props.items.map((item) => (
                                 <div
                                     key={item.id}
-                                    /*className={`${css.item} ${css[item.color]}`}*/
                                     onClick={() => handleItemClick(item)}
                                 >
                                     {item.text}
@@ -57,4 +59,3 @@ export function Dropdown(props: Props) {
         </>
     );
 }
-

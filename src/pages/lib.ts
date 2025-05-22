@@ -17,11 +17,17 @@ export function calculateTourResult(pages: Page[]) {
         } else if (page.type === 'SingleAnswerAndImageQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
         } else if (page.type === 'MultiSelectAnswerQuestionPage') {
+            // !
             return page.selectedAnswers === page.correctAnswers;
         } else if (page.type === 'InputQuestionPage') {
             return page.selectedAnswer === page.correctAnswer;
-        }else if (page.type === 'MultiSelectAnswerAndQuestionImagePage') {
+        } else if (page.type === 'MultiSelectAnswerAndQuestionImagePage') {
+            // !
             return page.selectedAnswers === page.correctAnswers;
+        } else if (page.type === 'SingleAnswerQuestionAndImageQuestionPage') {
+            //
+        } else if (page.type === 'OrderPage') {
+            //
         }
     });
     return {

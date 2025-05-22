@@ -1,13 +1,14 @@
 export type OrderPage = {
-    type: 'OrderPage',
-    items: OrderPageItem[]
-}
+    type: 'OrderPage';
+    title: string;
+    items: OrderPageItem[];
+};
 
 type OrderPageItem = {
-    text: string,
-    correctPosition: number,
-    selectedPosition?: number
-}
+    text: string;
+    correctPosition: number;
+    selectedPosition?: number;
+};
 
 // const p: OrderPage ={
 //     type: 'OrderPage',
@@ -18,4 +19,3 @@ type OrderPageItem = {
 //         { text:'b', correctPosition: 2, selectedPosition: undefined },
 //     ]
 // }
-

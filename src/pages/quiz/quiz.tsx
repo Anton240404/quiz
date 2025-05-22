@@ -12,14 +12,17 @@ import { SingleAnswerQuestionAndImageQuestionPageView } from '../single-answer-q
 import { TwoColumnsWithTitlePageView } from '../two-columns-with-title-page/two-columns-with-title-page-view.tsx';
 import { InputQuestionPageView } from '../input-question-page/input-question-page.tsx';
 import { Progress } from '../../components/progress/progress.tsx';
-import { calculateTourResult } from '../lib.ts';
+
 import { MultiSelectAnswerQuestionPageView } from '../multi-select-answer-question-page/multi-select-answer-question-page-view.tsx';
 import { MultiSelectAnswerAndQuestionImagePageView } from '../multi-select-answer-and-question-image-page/multi-select-answer-and-question-image-page-view.tsx';
+import { calculateTourResult } from '../lib.ts';
+import { OrderPageView } from '../order-page/order-page-view.tsx';
 
 export function Quiz() {
     const navigate = useNavigate();
     const { tourIndex } = useParams();
-    const [currentTourIndex, setCurrentTourIndex] = useState(Number(tourIndex) || 0
+    const [currentTourIndex, setCurrentTourIndex] = useState(
+        Number(tourIndex) || 0
     );
     const [currentPageIndex, setCurrentPageIndex] = useState(0);
     const [tours, setTours] = useState(toursData);
@@ -30,10 +33,8 @@ export function Quiz() {
 
     const handleNext = () => {
         if (currentPageIndex < currentTour.pages.length - 1) {
-
             setCurrentPageIndex((prev) => prev + 1);
         } else if (currentTourIndex < tours.length - 1) {
-
             const nextTourIndex = currentTourIndex + 1;
             navigate(`/quiz-intro/${nextTourIndex}`);
         } else {
@@ -186,7 +187,8 @@ export function Quiz() {
                         }}
                     />
                 )}
-                {currentPage.type === 'SingleAnswerQuestionAndImageQuestionPage' && (
+                {currentPage.type ===
+                    'SingleAnswerQuestionAndImageQuestionPage' && (
                     <SingleAnswerQuestionAndImageQuestionPageView
                         page={currentPage}
                         onFinishAnswer={(newPage) => {
@@ -241,7 +243,8 @@ export function Quiz() {
                         onExitAttempt={handleExitAttempt}
                     />
                 )}
-                {currentPage.type === 'MultiSelectAnswerAndQuestionImagePage' && (
+                {currentPage.type ===
+                    'MultiSelectAnswerAndQuestionImagePage' && (
                     <MultiSelectAnswerAndQuestionImagePageView
                         page={currentPage}
                         onNext={(newPage, goToNextQuestion) => {
@@ -256,7 +259,20 @@ export function Quiz() {
                         pageNumber={currentPageIndex + 1}
                         tourNumber={currentTourIndex}
                         onExitAttempt={handleExitAttempt}
-                        />
+                    />
+                )}
+                {currentPage.type === 'OrderPage' && (
+                    <OrderPageView
+                        page={currentPage}
+                        onChange={(newPage) => {
+                            const copy = [...tours];
+                            const currentTour = copy[currentTourIndex];
+                            currentTour.pages[currentPageIndex] = newPage;
+                            setTours(copy);
+                        }}
+                        tourNumber={currentTourIndex}
+                        onExitAttempt={handleExitAttempt}
+                    />
                 )}
                 <Progress
                     isOpen={showExitPopup}
