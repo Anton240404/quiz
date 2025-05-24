@@ -2,6 +2,7 @@ import { useState } from 'react';
 import css from './dropdown.module.css';
 
 type Item = {
+    title: string;
     id: string;
     text: string;
     color: 'success' | 'danger' | 'default';
@@ -24,38 +25,40 @@ export function Dropdown(props: Props) {
     };
 
     return (
-        <>
-            <div className={css.container}>
-                <div className={css.wrapper}>
-                    <div
-                        className={css.placeholder}
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {selectedItem ? selectedItem.text : props.placeholder}
-                        <button
-                            className={`${css.arrow} ${
-                                isOpen ? css.up : css.down
-                            }`}
-                            onClick={() => setIsOpen(!isOpen)}
-                        >
-                            {isOpen ? '▲' : '▼'}
-                        </button>
-                    </div>
-
-                    {isOpen && (
-                        <div className={css.dropdown}>
-                            {props.items.map((item) => (
-                                <div
-                                    key={item.id}
-                                    onClick={() => handleItemClick(item)}
-                                >
-                                    {item.text}
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
+        <div className={css.container}>
+            <div
+                className={css.placeholder}
+                onClick={() => setIsOpen(!isOpen)}
+            >
+                {selectedItem ? selectedItem.title : props.placeholder}
+                <button
+                    className={`${css.arrow} ${isOpen ? css.up : css.down}`}
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    {isOpen ? '▲' : '▼'}
+                </button>
             </div>
-        </>
+
+            {isOpen && (
+                <div className={css.dropdown}>
+                    {props.items.map((item) => {
+                        const isSelected = selectedItem?.id === item.id;
+                        const itemClass = `${css.item} ${isSelected ? css[item.color] : ''}`;
+                        const circleClass = `${css.circle} ${isSelected ? css[item.color] : css.default}`;
+
+                        return (
+                            <div
+                                key={item.id}
+                                className={itemClass}
+                                onClick={() => handleItemClick(item)}
+                            >
+                                <span className={circleClass} />
+                                <span className={css.text}>{item.title}</span>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
     );
 }
