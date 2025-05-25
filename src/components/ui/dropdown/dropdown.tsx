@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import css from './dropdown.module.css';
+import arrowIcon from './arrow-icon.svg';
 
 type Item = {
     title: string;
@@ -9,33 +10,38 @@ type Item = {
 };
 
 type Props = {
+    selectedId: string | undefined;
     items: Item[];
     onSelect: (item: Item) => void;
     placeholder: string;
+    closeOnSelect?: boolean;
 };
 
 export function Dropdown(props: Props) {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+
+    const closeOnSelect = props.closeOnSelect ?? true;
+    // const closeOnSelect = props.closeOnSelect || true
 
     const handleItemClick = (item: Item) => {
-        setSelectedItem(item);
         props.onSelect(item);
-        setIsOpen(false);
+
+        if (closeOnSelect) {
+            setIsOpen(false);
+        }
     };
+
+    const selectedItem = props.items.find((x) => x.id === props.selectedId);
 
     return (
         <div className={css.container}>
-            <div
-                className={css.placeholder}
-                onClick={() => setIsOpen(!isOpen)}
-            >
+            <div className={css.placeholder} onClick={() => setIsOpen(!isOpen)}>
                 {selectedItem ? selectedItem.title : props.placeholder}
                 <button
                     className={`${css.arrow} ${isOpen ? css.up : css.down}`}
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    {isOpen ? '▲' : '▼'}
+                    <img src={arrowIcon} />
                 </button>
             </div>
 
@@ -43,8 +49,12 @@ export function Dropdown(props: Props) {
                 <div className={css.dropdown}>
                     {props.items.map((item) => {
                         const isSelected = selectedItem?.id === item.id;
-                        const itemClass = `${css.item} ${isSelected ? css[item.color] : ''}`;
-                        const circleClass = `${css.circle} ${isSelected ? css[item.color] : css.default}`;
+
+                        const itemClass = `${css.item} ${css[item.color]}`; // !
+
+                        const circleClass = `${css.circle} ${
+                            isSelected ? css[item.color] : css.default
+                        }`;
 
                         return (
                             <div

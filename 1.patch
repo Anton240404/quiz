@@ -1,0 +1,293 @@
+From 865499ed08b555687342dc086d2208813ee42eff Mon Sep 17 00:00:00 2001
+From: artur <email@example.com>
+Date: Sat, 24 May 2025 15:13:34 +0500
+Subject: [PATCH] 1
+
+---
+ src/components/ui/dropdown/arrow-icon.svg     |  3 +
+ .../ui/dropdown/dropdown.module.css           | 19 ++--
+ src/components/ui/dropdown/dropdown.tsx       | 30 ++++--
+ src/pages/order-page/order-page-view.tsx      | 99 +++++++++++++------
+ 4 files changed, 105 insertions(+), 46 deletions(-)
+ create mode 100644 src/components/ui/dropdown/arrow-icon.svg
+
+diff --git a/src/components/ui/dropdown/arrow-icon.svg b/src/components/ui/dropdown/arrow-icon.svg
+new file mode 100644
+index 0000000..de80655
+--- /dev/null
++++ b/src/components/ui/dropdown/arrow-icon.svg
+@@ -0,0 +1,3 @@
++<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
++<path fill-rule="evenodd" clip-rule="evenodd" d="M4.43057 8.51192C4.70014 8.19743 5.17361 8.161 5.48811 8.43057L12 14.0122L18.5119 8.43057C18.8264 8.16101 19.2999 8.19743 19.5695 8.51192C19.839 8.82642 19.8026 9.29989 19.4881 9.56946L12.4881 15.5695C12.2072 15.8102 11.7928 15.8102 11.5119 15.5695L4.51192 9.56946C4.19743 9.29989 4.161 8.82641 4.43057 8.51192Z" fill="#0D003B"/>
++</svg>
+diff --git a/src/components/ui/dropdown/dropdown.module.css b/src/components/ui/dropdown/dropdown.module.css
+index c544612..b907948 100644
+--- a/src/components/ui/dropdown/dropdown.module.css
++++ b/src/components/ui/dropdown/dropdown.module.css
+@@ -1,12 +1,13 @@
+ .container {
+     width: 100%;
+-    padding: 8px;
++    min-width: 200px;
+     border-radius: 20px;
+-
+ }
+ 
+ .placeholder {
+     display: flex;
++    justify-content: space-between;
++    gap: 8px;
+     align-items: center;
+     width: 100%;
+     background-color: rgba(236, 247, 255, 1);
+@@ -24,7 +25,6 @@
+     border: none;
+     cursor: pointer;
+     font-size: 16px;
+-    margin-left: 8px;
+     color: #0b0146;
+ }
+ 
+@@ -33,19 +33,24 @@
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+-
++    background-color: rgba(236, 247, 255, 1);
++    border-radius: 20px;
++    overflow: hidden;
+ }
+ 
+ .item {
+     display: flex;
+     align-items: center;
+     padding: 12px 16px;
+-    background-color: rgba(236, 247, 255, 1);
+     font-size: 18px;
+     font-weight: 500;
+     color: #0b0146;
+     cursor: pointer;
+-    transition: border 0.2s ease-in-out;
++    transition: all 0.1s ease-in-out;
++}
++
++.item:hover {
++    background-color: rgb(155, 216, 247);
+ }
+ 
+ .circle {
+@@ -88,4 +93,4 @@
+ .circle.default {
+     background-color: white;
+     border: 2px solid #cfd1d6;
+-}
+\ No newline at end of file
++}
+diff --git a/src/components/ui/dropdown/dropdown.tsx b/src/components/ui/dropdown/dropdown.tsx
+index fd5941e..8dcd70d 100644
+--- a/src/components/ui/dropdown/dropdown.tsx
++++ b/src/components/ui/dropdown/dropdown.tsx
+@@ -1,5 +1,6 @@
+ import { useState } from 'react';
+ import css from './dropdown.module.css';
++import arrowIcon from './arrow-icon.svg';
+ 
+ type Item = {
+     title: string;
+@@ -9,33 +10,38 @@ type Item = {
+ };
+ 
+ type Props = {
++    selectedId: string | undefined;
+     items: Item[];
+     onSelect: (item: Item) => void;
+     placeholder: string;
++    closeOnSelect?: boolean;
+ };
+ 
+ export function Dropdown(props: Props) {
+     const [isOpen, setIsOpen] = useState(false);
+-    const [selectedItem, setSelectedItem] = useState<Item | null>(null);
++
++    const closeOnSelect = props.closeOnSelect ?? true;
++    // const closeOnSelect = props.closeOnSelect || true
+ 
+     const handleItemClick = (item: Item) => {
+-        setSelectedItem(item);
+         props.onSelect(item);
+-        setIsOpen(false);
++
++        if (closeOnSelect) {
++            setIsOpen(false);
++        }
+     };
+ 
++    const selectedItem = props.items.find((x) => x.id === props.selectedId);
++
+     return (
+         <div className={css.container}>
+-            <div
+-                className={css.placeholder}
+-                onClick={() => setIsOpen(!isOpen)}
+-            >
++            <div className={css.placeholder} onClick={() => setIsOpen(!isOpen)}>
+                 {selectedItem ? selectedItem.title : props.placeholder}
+                 <button
+                     className={`${css.arrow} ${isOpen ? css.up : css.down}`}
+                     onClick={() => setIsOpen(!isOpen)}
+                 >
+-                    {isOpen ? '▲' : '▼'}
++                    <img src={arrowIcon} />
+                 </button>
+             </div>
+ 
+@@ -43,8 +49,12 @@ export function Dropdown(props: Props) {
+                 <div className={css.dropdown}>
+                     {props.items.map((item) => {
+                         const isSelected = selectedItem?.id === item.id;
+-                        const itemClass = `${css.item} ${isSelected ? css[item.color] : ''}`;
+-                        const circleClass = `${css.circle} ${isSelected ? css[item.color] : css.default}`;
++
++                        const itemClass = `${css.item} ${css[item.color]}`; // !
++
++                        const circleClass = `${css.circle} ${
++                            isSelected ? css[item.color] : css.default
++                        }`;
+ 
+                         return (
+                             <div
+diff --git a/src/pages/order-page/order-page-view.tsx b/src/pages/order-page/order-page-view.tsx
+index a2c75fb..0807f55 100644
+--- a/src/pages/order-page/order-page-view.tsx
++++ b/src/pages/order-page/order-page-view.tsx
+@@ -2,7 +2,7 @@ import { useState } from 'react';
+ import { Button } from '../../components/ui/button/button';
+ import { Dropdown } from '../../components/ui/dropdown/dropdown';
+ import { OrderPage } from '../../types/order-page';
+-import css from './order-page.module.css'
++import css from './order-page.module.css';
+ import styles from '../quiz/base-page.module.css';
+ 
+ type Props = {
+@@ -25,49 +25,90 @@ export function OrderPageView(props: Props) {
+                 <div className={css.title}>{props.page.title}</div>
+             </div>
+             <div className={css.wrapper}>
+-                <div style={{ background: '#fff', flex: 1, display: 'flex', gap: 16, }}>
+-                    <Dropdown
+-                        onSelect={(val) => {
+-                            currentText.selectedPosition = Number(val.id);
+-                        }}
+-                        placeholder="Выбрать позицию"
+-                        items={props.page.items.map((item) => {
+-                            const getColor = (): | 'default' | 'danger' | 'success' => {
+-                                if (currentText.selectedPosition === undefined)
+-                                    return 'default';
++                <div
++                    style={{
++                        background: '#fff',
++                        flex: 1,
++                        display: 'flex',
++                        gap: 16,
++                        padding: 30,
++                        borderRadius: 20,
++                    }}
++                >
++                    <div style={{}}>
++                        <Dropdown
++                            selectedId={
++                                currentText.selectedPosition === undefined
++                                    ? undefined
++                                    : currentText.selectedPosition.toString()
++                            }
++                            closeOnSelect={false}
++                            onSelect={(val) => {
++                                const newPage = { ...props.page };
++                                newPage.items[selectedIndex].selectedPosition =
++                                    Number(val.id);
++                                props.onChange(newPage);
++                            }}
++                            placeholder="Выбрать позицию"
++                            items={props.page.items.map((item, i) => {
++                                const getColor = ():
++                                    | 'default'
++                                    | 'danger'
++                                    | 'success' => {
++                                    if (
++                                        currentText.selectedPosition ===
++                                        undefined
++                                    )
++                                        return 'default';
++
++                                    if (
++                                        currentText.selectedPosition ===
++                                            currentText.correctPosition &&
++                                        currentText.selectedPosition === i
++                                    )
++                                        return 'success';
+ 
+-                                return 'default';
++                                    if (
++                                        currentText.selectedPosition !==
++                                            currentText.correctPosition &&
++                                        currentText.selectedPosition === i
++                                    )
++                                        return 'danger';
+ 
+-                                // if (
+-                                //     currentText.selectedPosition ===
+-                                //     currentText.correctPosition
+-                                // )
+-                                //     return 'success';
+-                            };
++                                    // ...
++
++                                    return 'default';
++                                };
+ 
+-                            return {
+-                                id: item.correctPosition.toString(),
+-                                color: getColor(),
+-                                text: item.text,
+-                                title: item.title,
+-                            };
+-                        })}
+-                    />
+-                    <div>{currentText.text}</div>
++                                return {
++                                    id: item.correctPosition.toString(),
++                                    color: getColor(),
++                                    text: item.text,
++                                    title: item.title,
++                                };
++                            })}
++                        />
++                    </div>
++                    <div style={{ flex: 1 }}>{currentText.text}</div>
+                 </div>
+                 <div
+                     style={{
+                         display: 'flex',
+                         flexDirection: 'column',
+                         gap: 10,
++                        width: 200,
+                     }}
+                 >
+                     {props.page.items.map((x, i) => {
+                         return (
+                             <Button
+                                 text={`ОТРЫВОК ${i + 1}`}
+-                                color={selectedIndex === i ? 'success' : 'primary'}
+-                                onClick={() => setSelectedIndex(i)}
++                                color={
++                                    selectedIndex === i ? 'success' : 'primary'
++                                }
++                                onClick={() => {
++                                    setSelectedIndex(i);
++                                }}
+                             />
+                         );
+                     })}
+-- 
+2.47.1.windows.2
+
