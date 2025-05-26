@@ -10,4 +10,3 @@ type OrderPageItem = {
     correctPosition: number;
     selectedPosition?: number;
 };
-

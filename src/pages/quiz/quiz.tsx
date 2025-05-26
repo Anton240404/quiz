@@ -6,29 +6,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { BadResultPageView } from '../pages-result/bad-result-page/bad-result-page-view.tsx';
 import { GoodResultPageView } from '../pages-result/good-result-page/good-result-page-view.tsx';
 import { ExcellentResultPageView } from '../pages-result/excellent-result-page/excellent-result-page-view.tsx';
-import {
-    SingleAnswerAndImageQuestionPageView,
-} from '../single-answer-and-image-question-page/single-answer-and-image-question-page.tsx';
+import { SingleAnswerAndImageQuestionPageView } from '../single-answer-and-image-question-page/single-answer-and-image-question-page.tsx';
 import { InfoPageView } from '../info/info-page-view.tsx';
-import {
-    SingleAnswerQuestionAndImageQuestionPageView,
-} from '../single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.tsx';
+import { SingleAnswerQuestionAndImageQuestionPageView } from '../single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.tsx';
 import { TwoColumnsWithTitlePageView } from '../two-columns-with-title-page/two-columns-with-title-page-view.tsx';
 import { InputQuestionPageView } from '../input-question-page/input-question-page.tsx';
 import { ExitPopup } from '../../components/progress/exit-popup.tsx';
 
-import {
-    MultiSelectAnswerQuestionPageView,
-} from '../multi-select-answer-question-page/multi-select-answer-question-page-view.tsx';
-import {
-    MultiSelectAnswerAndQuestionImagePageView,
-} from '../multi-select-answer-and-question-image-page/multi-select-answer-and-question-image-page-view.tsx';
+import { MultiSelectAnswerQuestionPageView } from '../multi-select-answer-question-page/multi-select-answer-question-page-view.tsx';
+import { MultiSelectAnswerAndQuestionImagePageView } from '../multi-select-answer-and-question-image-page/multi-select-answer-and-question-image-page-view.tsx';
 import { calculateTourResult } from '../lib.ts';
 import { OrderPageView } from '../order-page/order-page-view.tsx';
 
 type Params = {
-    tourIndex: string
-}
+    tourIndex: string;
+};
 
 export function Quiz() {
     const navigate = useNavigate();
@@ -46,7 +38,7 @@ export function Quiz() {
     const currentPage = currentTour.pages[currentPageIndex];
 
     useEffect(() => {
-        setCurrentPageIndex(0)
+        setCurrentPageIndex(0);
     }, [tourIndex]);
 
     const handleNext = () => {
@@ -57,7 +49,7 @@ export function Quiz() {
             navigate(`/quiz-intro/${nextTourIndex}`);
         } else {
             const resultPageIndex = currentTour.pages.findIndex(
-                (page) => page.type === 'ResultPage',
+                (page) => page.type === 'ResultPage'
             );
             if (resultPageIndex !== -1) {
                 setCurrentPageIndex(resultPageIndex);
@@ -95,7 +87,7 @@ export function Quiz() {
         if (currentPage.type !== 'ResultPage') return;
 
         const { correctQuestionsCount, questionsCount } = calculateTourResult(
-            currentTour.pages,
+            currentTour.pages
         );
 
         const view = currentPage.pages.find((x) => {
@@ -104,8 +96,6 @@ export function Quiz() {
         });
 
         if (!view) return;
-
-
 
         return (
             <>
@@ -200,19 +190,19 @@ export function Quiz() {
                 )}
                 {currentPage.type ===
                     'SingleAnswerQuestionAndImageQuestionPage' && (
-                        <SingleAnswerQuestionAndImageQuestionPageView
-                            page={currentPage}
-                            tourNumber={tourIndex}
-                            onFinishAnswer={(newPage) => {
-                                const copy = [...tours];
-                                const currentTour = copy[tourIndex];
-                                currentTour.pages[currentPageIndex] = newPage;
-                                setTours(copy);
-                            }}
-                            onNext={handleNext}
-                            onExitAttempt={handleExitAttempt}
-                        />
-                    )}
+                    <SingleAnswerQuestionAndImageQuestionPageView
+                        page={currentPage}
+                        tourNumber={tourIndex}
+                        onFinishAnswer={(newPage) => {
+                            const copy = [...tours];
+                            const currentTour = copy[tourIndex];
+                            currentTour.pages[currentPageIndex] = newPage;
+                            setTours(copy);
+                        }}
+                        onNext={handleNext}
+                        onExitAttempt={handleExitAttempt}
+                    />
+                )}
                 {currentPage.type === 'MultiSelectAnswerQuestionPage' && (
                     <MultiSelectAnswerQuestionPageView
                         page={currentPage}
@@ -255,22 +245,22 @@ export function Quiz() {
                 )}
                 {currentPage.type ===
                     'MultiSelectAnswerAndQuestionImagePage' && (
-                        <MultiSelectAnswerAndQuestionImagePageView
-                            page={currentPage}
-                            onNext={(newPage, goToNextQuestion) => {
-                                const copy = [...tours];
-                                const currentTour = copy[tourIndex];
-                                currentTour.pages[currentPageIndex] = newPage;
-                                setTours(copy);
-                                if (goToNextQuestion) {
-                                    handleNext();
-                                }
-                            }}
-                            pageNumber={currentPageIndex + 1}
-                            tourNumber={tourIndex}
-                            onExitAttempt={handleExitAttempt}
-                        />
-                    )}
+                    <MultiSelectAnswerAndQuestionImagePageView
+                        page={currentPage}
+                        onNext={(newPage, goToNextQuestion) => {
+                            const copy = [...tours];
+                            const currentTour = copy[tourIndex];
+                            currentTour.pages[currentPageIndex] = newPage;
+                            setTours(copy);
+                            if (goToNextQuestion) {
+                                handleNext();
+                            }
+                        }}
+                        pageNumber={currentPageIndex + 1}
+                        tourNumber={tourIndex}
+                        onExitAttempt={handleExitAttempt}
+                    />
+                )}
                 {currentPage.type === 'OrderPage' && (
                     <OrderPageView
                         page={currentPage}

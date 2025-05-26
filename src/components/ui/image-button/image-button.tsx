@@ -24,19 +24,19 @@ export function ImageButton(props: Props) {
 
     return (
         <>
-            <button disabled={props.disabled}
-                    onClick={() => {
-                        props.onClick?.();
-                    }}
-                    style={{
-                        backgroundImage: `url(${props.url})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        height: '300px',
-                    }}
-                    className={classnames.join(' ')}
-            >
-            </button>
+            <button
+                disabled={props.disabled}
+                onClick={() => {
+                    props.onClick?.();
+                }}
+                style={{
+                    backgroundImage: `url(${props.url})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    height: '300px',
+                }}
+                className={classnames.join(' ')}
+            ></button>
         </>
     );
 }

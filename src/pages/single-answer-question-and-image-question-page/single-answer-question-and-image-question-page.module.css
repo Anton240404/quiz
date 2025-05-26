@@ -1,16 +1,16 @@
-.containerHeader{
+.containerHeader {
     display: flex;
     flex-direction: row;
     width: 100%;
-    flex:1;
+    flex: 1;
     gap: 3px;
 }
-.CompassImageContainer{
+.CompassImageContainer {
     width: 50%;
     border-radius: 20px;
     height: 100%;
-    }
-.CompassImage{
+}
+.CompassImage {
     height: 100%;
     width: 100%;
     border-radius: 20px;

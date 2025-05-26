@@ -7,7 +7,10 @@ import css from '../single-answer-question-page/single-answer-question-page.modu
 
 type Props = {
     page: MultiSelectAnswerQuestionPage;
-    onNext: (newPage: MultiSelectAnswerQuestionPage, goToNextQuestion?: boolean) => void;
+    onNext: (
+        newPage: MultiSelectAnswerQuestionPage,
+        goToNextQuestion?: boolean
+    ) => void;
     pageNumber: number;
     tourNumber: number;
     onExitAttempt: () => void;
@@ -38,7 +41,11 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
 
     const handleNext = () => {
         if (!props.page.finished) {
-            const updatedPage = { ...props.page, selectedAnswers: [...selectedAnswers], finished: true};
+            const updatedPage = {
+                ...props.page,
+                selectedAnswers: [...selectedAnswers],
+                finished: true,
+            };
             props.onNext(updatedPage, false);
         } else {
             props.onNext(props.page, true);
@@ -47,7 +54,9 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
 
     const getButtonColor = (option: string) => {
         if (!props.page.finished) {
-            return selectedAnswers.includes(option) ? 'disabledButton' : 'default';
+            return selectedAnswers.includes(option)
+                ? 'disabledButton'
+                : 'default';
         } else {
             if (correctAnswers.includes(option)) {
                 return 'success';
@@ -73,7 +82,8 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
                             key={index}
                             onClick={() => handleAnswer(option)}
                             disabled={
-                                props.page.finished && !selectedAnswers.includes(option)
+                                props.page.finished &&
+                                !selectedAnswers.includes(option)
                             }
                             color={getButtonColor(option)}
                             text={option}
@@ -91,7 +101,9 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
                     <Button
                         text={'ДАЛЕЕ'}
                         onClick={handleNext}
-                        color={!hasSelectedAnswers ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswers ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswers}
                     />
                 </div>

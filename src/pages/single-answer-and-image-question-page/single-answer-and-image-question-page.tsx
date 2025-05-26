@@ -1,9 +1,7 @@
 import styles from '../quiz/base-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { ImageButton } from '../../components/ui/image-button/image-button.tsx';
-import {
-    SingleAnswerAndImageQuestionPage,
-} from '../../types/single-answer-and-image-question-page/single-answer-and-image-question-page.ts';
+import { SingleAnswerAndImageQuestionPage } from '../../types/single-answer-and-image-question-page/single-answer-and-image-question-page.ts';
 
 type Props = {
     page: SingleAnswerAndImageQuestionPage;
@@ -41,9 +39,8 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
             <div className={styles.controlsContainer}>
                 <div className={styles.options}>
                     {props.page.imageOptions.map((img, index) => (
-                        <div key={index} style={{width: '25%'}}>
+                        <div key={index} style={{ width: '25%' }}>
                             <ImageButton
-
                                 onClick={() => handleAnswer(img)}
                                 disabled={
                                     hasSelectedAnswer && img !== selectedAnswer
@@ -64,7 +61,9 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
                     <Button
                         text={'ДАЛЕЕ'}
                         onClick={props.onNext}
-                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswer}
                     />
                 </div>

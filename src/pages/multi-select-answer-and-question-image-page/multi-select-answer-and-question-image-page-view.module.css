@@ -7,7 +7,7 @@
     max-width: 1500px;
     margin-bottom: 40px;
 }
-.subTitle{
+.subTitle {
     color: rgba(92, 89, 253, 1);
     font-size: 24px;
     font-weight: 600;
@@ -22,7 +22,7 @@
     margin-bottom: 3px;
     gap: 3px;
 }
-.questionTextContainer{
+.questionTextContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,11 +41,11 @@
     align-items: center;
     gap: 3px;
 }
-.image{
+.image {
     width: 100%;
     border-radius: 20px;
 }
-.imageContainer{
+.imageContainer {
     width: 50%;
 }
 .options {
@@ -55,7 +55,7 @@
     margin-bottom: 3px;
     gap: 3px;
 }
-.tour{
+.tour {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,4 +70,3 @@
     left: 30px;
     border-radius: 100px;
 }
-

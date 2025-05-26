@@ -20,18 +20,23 @@ export function OrderPageView(props: Props) {
     const currentText = props.page.items[selectedIndex];
     useEffect(() => {
         const allItemsHaveSelection = props.page.items.every(
-            item => item.selectedPosition !== undefined
+            (item) => item.selectedPosition !== undefined
         );
         setIsNextButtonActive(allItemsHaveSelection);
     }, [props.page.items]);
 
-    const getColor = (dropdownOptionItem: typeof props.page.items[number], dropdownOptionIndex: number): 'default' | 'danger' | 'success' => {
-
+    const getColor = (
+        dropdownOptionItem: (typeof props.page.items)[number],
+        dropdownOptionIndex: number
+    ): 'default' | 'danger' | 'success' => {
         if (currentText.selectedPosition === undefined) {
             return 'default';
         }
         if (dropdownOptionIndex === currentText.selectedPosition) {
-            if (currentText.correctPosition === dropdownOptionItem.correctPosition) {
+            if (
+                currentText.correctPosition ===
+                dropdownOptionItem.correctPosition
+            ) {
                 return 'success';
             } else {
                 return 'danger';
@@ -51,7 +56,11 @@ export function OrderPageView(props: Props) {
                 <div className={css.textContainer}>
                     <div>
                         <Dropdown
-                            selectedId={currentText.selectedPosition !== undefined ? currentText.selectedPosition.toString() : undefined}
+                            selectedId={
+                                currentText.selectedPosition !== undefined
+                                    ? currentText.selectedPosition.toString()
+                                    : undefined
+                            }
                             closeOnSelect={false}
                             onSelect={(val) => {
                                 const updatedItems = [...props.page.items];
@@ -59,7 +68,10 @@ export function OrderPageView(props: Props) {
                                     ...updatedItems[selectedIndex],
                                     selectedPosition: Number(val.id),
                                 };
-                                props.onChange({ ...props.page, items: updatedItems });
+                                props.onChange({
+                                    ...props.page,
+                                    items: updatedItems,
+                                });
                             }}
                             placeholder="Выбрать позицию"
                             items={props.page.items.map((item, i) => ({
@@ -73,13 +85,16 @@ export function OrderPageView(props: Props) {
                     <div className={css.text}>{currentText.text}</div>
                 </div>
                 <div className={css.list}>
-                    {props.page.items.map((_,i) => {
+                    {props.page.items.map((_, i) => {
                         return (
                             <Button
                                 size={'sm'}
                                 text={`ОТРЫВОК ${i + 1}`}
-                                color={selectedIndex === i ? 'success' : 'primary'}
-                                onClick={() => {setSelectedIndex(i);
+                                color={
+                                    selectedIndex === i ? 'success' : 'primary'
+                                }
+                                onClick={() => {
+                                    setSelectedIndex(i);
                                 }}
                             />
                         );
@@ -95,7 +110,7 @@ export function OrderPageView(props: Props) {
                 <Button
                     text="ДАЛЕЕ"
                     onClick={props.onNext}
-                    color={isNextButtonActive ?  'primary' : 'disabledButtons' } 
+                    color={isNextButtonActive ? 'primary' : 'disabledButtons'}
                     disabled={!isNextButtonActive}
                 />
             </div>

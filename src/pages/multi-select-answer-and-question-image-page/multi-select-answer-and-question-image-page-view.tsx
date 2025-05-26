@@ -2,13 +2,15 @@ import styles from '../quiz/base-page.module.css';
 import style from './multi-select-answer-and-question-image-page-view.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { useEffect, useState } from 'react';
-import { MultiSelectAnswerAndQuestionImagePage, } from '../../types/multi-select-answer-and-question-image-page/multi-select-answer-question-page.ts';
+import { MultiSelectAnswerAndQuestionImagePage } from '../../types/multi-select-answer-and-question-image-page/multi-select-answer-question-page.ts';
 import css from '../single-answer-question-page/single-answer-question-page.module.css';
-
 
 type Props = {
     page: MultiSelectAnswerAndQuestionImagePage;
-    onNext: (newPage: MultiSelectAnswerAndQuestionImagePage, goToNextQuestion?: boolean) => void;
+    onNext: (
+        newPage: MultiSelectAnswerAndQuestionImagePage,
+        goToNextQuestion?: boolean
+    ) => void;
     pageNumber: number;
     tourNumber: number;
     onExitAttempt: () => void;
@@ -39,7 +41,11 @@ export function MultiSelectAnswerAndQuestionImagePageView(props: Props) {
 
     const handleNext = () => {
         if (!props.page.finished) {
-            const updatedPage = { ...props.page, selectedAnswers: [...selectedAnswers], finished: true };
+            const updatedPage = {
+                ...props.page,
+                selectedAnswers: [...selectedAnswers],
+                finished: true,
+            };
             props.onNext(updatedPage, false);
         } else {
             props.onNext(props.page, true);
@@ -48,7 +54,9 @@ export function MultiSelectAnswerAndQuestionImagePageView(props: Props) {
 
     const getButtonColor = (option: string) => {
         if (!props.page.finished) {
-            return selectedAnswers.includes(option) ? 'disabledButton' : 'default';
+            return selectedAnswers.includes(option)
+                ? 'disabledButton'
+                : 'default';
         } else {
             if (correctAnswers.includes(option)) {
                 return 'success';
@@ -68,7 +76,11 @@ export function MultiSelectAnswerAndQuestionImagePageView(props: Props) {
                     <div className={css.tour}>{props.tourNumber + 1} тур</div>
                 </div>
                 <div className={style.imageContainer}>
-                    <img src={props.page.questionImage} alt={'capitan'} className={style.image} />
+                    <img
+                        src={props.page.questionImage}
+                        alt={'capitan'}
+                        className={style.image}
+                    />
                 </div>
             </div>
 
@@ -79,7 +91,8 @@ export function MultiSelectAnswerAndQuestionImagePageView(props: Props) {
                             key={index}
                             onClick={() => handleAnswer(option)}
                             disabled={
-                                props.page.finished && !selectedAnswers.includes(option)
+                                props.page.finished &&
+                                !selectedAnswers.includes(option)
                             }
                             color={getButtonColor(option)}
                             text={option}
@@ -97,7 +110,9 @@ export function MultiSelectAnswerAndQuestionImagePageView(props: Props) {
                     <Button
                         text={'ДАЛЕЕ'}
                         onClick={handleNext}
-                        color={!hasSelectedAnswers ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswers ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswers}
                     />
                 </div>

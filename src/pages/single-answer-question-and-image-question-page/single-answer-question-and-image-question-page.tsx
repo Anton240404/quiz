@@ -1,9 +1,7 @@
 import styles from '../quiz/base-page.module.css';
 import style from './single-answer-question-and-image-question-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
-import {
-    SingleAnswerQuestionAndImageQuestionPage,
-} from '../../types/single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.ts';
+import { SingleAnswerQuestionAndImageQuestionPage } from '../../types/single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.ts';
 import css from '../single-answer-question-page/single-answer-question-page.module.css';
 
 type Props = {
@@ -42,12 +40,17 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
             <div className={style.containerHeader}>
                 <div className={css.tour}>{props.tourNumber + 1} тур</div>
                 <div className={styles.questionContainer}>
-                    <h2 className={styles.questionNumber}>{props.page.subTitle}</h2>
+                    <h2 className={styles.questionNumber}>
+                        {props.page.subTitle}
+                    </h2>
                     <p className={styles.questionText}>{props.page.question}</p>
                 </div>
-                <div className={style.CompassImageContainer}
-                     style={{ background: `url(${props.page.questionImage}) center / 100% 100% no-repeat` }}>
-                </div>
+                <div
+                    className={style.CompassImageContainer}
+                    style={{
+                        background: `url(${props.page.questionImage}) center / 100% 100% no-repeat`,
+                    }}
+                ></div>
             </div>
 
             <div className={styles.controlsContainer}>
@@ -73,7 +76,9 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
                     <Button
                         text={'ДАЛЕЕ'}
                         onClick={props.onNext}
-                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswer}
                     />
                 </div>

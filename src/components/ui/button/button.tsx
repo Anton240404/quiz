@@ -13,7 +13,7 @@ type Props = {
     disabled?: boolean;
     type?: 'submit' | 'button' | 'reset';
     index?: number;
-    size?: 'lg' | 'md' | 'sm'
+    size?: 'lg' | 'md' | 'sm';
 };
 
 export function Button(props: Props) {
@@ -57,7 +57,13 @@ export function Button(props: Props) {
                 className={classnames.join(' ')}
             >
                 {props.index !== undefined && (
-                    <span className={styles.optionNumber} style={{color: props.color === 'success' ? '#fff' : '#b1acc4'}}>
+                    <span
+                        className={styles.optionNumber}
+                        style={{
+                            color:
+                                props.color === 'success' ? '#fff' : '#b1acc4',
+                        }}
+                    >
                         {props.index + 1}
                     </span>
                 )}

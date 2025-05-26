@@ -65,7 +65,6 @@
     box-sizing: border-box;
 }
 
-
 .text {
     font-size: 18px;
     font-weight: 500;
@@ -77,7 +76,7 @@
 }
 .circle.success {
     background-color: rgba(68, 190, 114, 1);
-    border-color: rgba(68, 190, 114, 1) ;
+    border-color: rgba(68, 190, 114, 1);
 }
 
 .danger {

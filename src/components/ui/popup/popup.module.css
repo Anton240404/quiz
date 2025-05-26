@@ -46,7 +46,7 @@
     height: 80px;
     width: calc(100% - 60px);
     background-color: rgba(92, 89, 253, 1);
-    color:rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 1);
     margin: 0 30px 30px;
     border-radius: 9px;
     transition: background-color 0.3s;

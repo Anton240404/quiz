@@ -1,9 +1,9 @@
-import {  Tour } from '../../types/types.ts';
+import { Tour } from '../../types/types.ts';
 import styles from '../quiz/base-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { getQuestionsPages } from '../lib.ts';
 import { SingleAnswerQuestionPage } from '../../types/single-answer-question-page/single-answer-question-page.ts';
-import css from './single-answer-question-page.module.css'
+import css from './single-answer-question-page.module.css';
 
 type Props = {
     page: SingleAnswerQuestionPage;
@@ -73,7 +73,9 @@ export function SingleAnswerQuestionPageView(props: Props) {
                     <Button
                         text={'ДАЛЕЕ'}
                         onClick={props.onNext}
-                        color={!hasSelectedAnswer ? 'disabledButtons' : 'primary'}
+                        color={
+                            !hasSelectedAnswer ? 'disabledButtons' : 'primary'
+                        }
                         disabled={!hasSelectedAnswer}
                     />
                 </div>

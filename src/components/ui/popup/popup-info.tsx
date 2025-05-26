@@ -5,7 +5,7 @@ type Props = {
     text: string;
     onCancel: () => void;
     isOpen: boolean;
-}
+};
 
 export function PopupInfo(props: Props) {
     return (
@@ -15,7 +15,9 @@ export function PopupInfo(props: Props) {
                     <h2 className={styles.title}>{props.title}</h2>
                     <p className={styles.subTitle}>{props.text}</p>
                 </div>
-                <button className={styles.buttonNo} onClick={props.onCancel}>ЗАКРЫТЬ</button>
+                <button className={styles.buttonNo} onClick={props.onCancel}>
+                    ЗАКРЫТЬ
+                </button>
             </div>
         </div>
     );

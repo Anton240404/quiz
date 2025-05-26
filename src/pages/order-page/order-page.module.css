@@ -1,4 +1,4 @@
-.questionContainer{
+.questionContainer {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -10,7 +10,7 @@
     border-radius: 20px;
 }
 
-.tour{
+.tour {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +25,7 @@
     left: 30px;
     border-radius: 100px;
 }
-.title{
+.title {
     display: flex;
     align-items: flex-end;
     text-align: center;
@@ -46,16 +46,15 @@
     gap: 30px;
     padding: 40px;
 }
-.textContainer{
+.textContainer {
     background-color: #fff;
     display: flex;
     flex: 1;
     gap: 16px;
     padding: 30px;
     border-radius: 20px;
-
 }
-.text{
+.text {
     flex: 1;
     font-weight: 400;
     font-size: 24px;
@@ -64,18 +63,16 @@
 }
 .text::-webkit-scrollbar {
     width: 6px;
-
 }
 .text::-webkit-scrollbar-track {
     background: rgba(236, 247, 255, 1);
 }
 .text::-webkit-scrollbar-thumb {
-    background:rgba(92, 89, 253, 1);
+    background: rgba(92, 89, 253, 1);
     border-radius: 37px;
-
 }
 
-.list{
+.list {
     display: flex;
     flex-direction: column;
     gap: 10px;
