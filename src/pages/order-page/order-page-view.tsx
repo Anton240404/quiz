@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '../../components/ui/button/button';
 import { Dropdown } from '../../components/ui/dropdown/dropdown';
-import { OrderPage } from '../../types/order-page';
+import { OrderPage } from '../../types/order-page/order-page.tsx';
 import css from './order-page.module.css';
 import styles from '../quiz/base-page.module.css';
 
@@ -17,6 +17,24 @@ export function OrderPageView(props: Props) {
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     const currentText = props.page.items[selectedIndex];
+    const hasSelectedAnswers = currentText.selectedPosition !== undefined;
+
+    const getColor = (
+        dropdownOptionItem: typeof props.page.items[number], dropdownOptionIndex: number): 'default' | 'danger' | 'success' => {
+
+        if (currentText.selectedPosition === undefined) {
+            return 'default';
+        }
+        if (dropdownOptionIndex === currentText.selectedPosition) {
+            if (currentText.correctPosition === dropdownOptionItem.correctPosition) {
+                return 'success';
+            } else {
+                return 'danger';
+            }
+        }
+
+        return 'default';
+    };
 
     return (
         <>
@@ -25,89 +43,38 @@ export function OrderPageView(props: Props) {
                 <div className={css.title}>{props.page.title}</div>
             </div>
             <div className={css.wrapper}>
-                <div
-                    style={{
-                        background: '#fff',
-                        flex: 1,
-                        display: 'flex',
-                        gap: 16,
-                        padding: 30,
-                        borderRadius: 20,
-                    }}
-                >
-                    <div style={{}}>
+                <div className={css.textContainer}>
+                    <div>
                         <Dropdown
-                            selectedId={
-                                currentText.selectedPosition === undefined
-                                    ? undefined
-                                    : currentText.selectedPosition.toString()
-                            }
+                            selectedId={currentText.selectedPosition !== undefined ? currentText.selectedPosition.toString() : undefined}
                             closeOnSelect={false}
                             onSelect={(val) => {
-                                const newPage = { ...props.page };
-                                newPage.items[selectedIndex].selectedPosition =
-                                    Number(val.id);
-                                props.onChange(newPage);
+                                const updatedItems = [...props.page.items];
+                                updatedItems[selectedIndex] = {
+                                    ...updatedItems[selectedIndex],
+                                    selectedPosition: Number(val.id),
+                                };
+                                props.onChange({ ...props.page, items: updatedItems });
                             }}
                             placeholder="Выбрать позицию"
-                            items={props.page.items.map((item, i) => {
-                                const getColor = ():
-                                    | 'default'
-                                    | 'danger'
-                                    | 'success' => {
-                                    if (
-                                        currentText.selectedPosition ===
-                                        undefined
-                                    )
-                                        return 'default';
-
-                                    if (
-                                        currentText.selectedPosition ===
-                                            currentText.correctPosition &&
-                                        currentText.selectedPosition === i
-                                    )
-                                        return 'success';
-
-                                    if (
-                                        currentText.selectedPosition !==
-                                            currentText.correctPosition &&
-                                        currentText.selectedPosition === i
-                                    )
-                                        return 'danger';
-
-                                    // ...
-
-                                    return 'default';
-                                };
-
-                                return {
-                                    id: item.correctPosition.toString(),
-                                    color: getColor(),
-                                    text: item.text,
-                                    title: item.title,
-                                };
-                            })}
+                            items={props.page.items.map((item, i) => ({
+                                id: i.toString(),
+                                color: getColor(item, i),
+                                text: item.text,
+                                title: item.title,
+                            }))}
                         />
                     </div>
-                    <div style={{ flex: 1 }}>{currentText.text}</div>
+                    <div className={css.text}>{currentText.text}</div>
                 </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 10,
-                        width: 200,
-                    }}
-                >
-                    {props.page.items.map((x, i) => {
+                <div className={css.list}>
+                    {props.page.items.map((_,i) => {
                         return (
                             <Button
+                                size={'sm'}
                                 text={`ОТРЫВОК ${i + 1}`}
-                                color={
-                                    selectedIndex === i ? 'success' : 'primary'
-                                }
-                                onClick={() => {
-                                    setSelectedIndex(i);
+                                color={selectedIndex === i ? 'success' : 'primary'}
+                                onClick={() => {setSelectedIndex(i);
                                 }}
                             />
                         );
@@ -120,7 +87,7 @@ export function OrderPageView(props: Props) {
                     onClick={props.onExitAttempt}
                     color={'primary'}
                 />
-                <Button text="Далее" color="primary" />
+                <Button text="ДАЛЕЕ" color={!hasSelectedAnswers ? 'disabledButtons' : 'primary'} disabled={!hasSelectedAnswers} />
             </div>
         </>
     );

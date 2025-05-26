@@ -63,28 +63,29 @@
     box-sizing: border-box;
 }
 
-/* Цвет текста */
+
 .text {
     font-size: 18px;
     font-weight: 500;
     color: #0b0146;
 }
 
-/* Модификаторы цвета */
 .success {
-    border: 2px solid #28a745 !important; /* зелёная рамка вокруг item */
+    border: 2px solid #28a745;
+    border-radius: 20px
 }
 .circle.success {
-    background-color: #28a745 !important;
-    border-color: #28a745 !important;
+    background-color: #28a745;
+    border-color: #28a745 ;
 }
 
 .danger {
-    border: 2px solid #dc3545 !important; /* красная рамка вокруг item */
+    border: 2px solid #dc3545;
+    border-radius: 20px
 }
 .circle.danger {
-    background-color: #dc3545 !important;
-    border-color: #dc3545 !important;
+    background-color: #dc3545;
+    border-color: #dc3545;
 }
 
 .default {

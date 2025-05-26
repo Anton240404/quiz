@@ -28,13 +28,13 @@ export function QuizIntro() {
             </div>
             <div className={styles.buttons}>
                 <button className={styles.button} onClick={() => navigate('/')}>
-                    На главную
+                    НА ГЛАВНУЮ
                 </button>
                 <button
                     className={styles.button}
                     onClick={() => navigate(`/quiz/${currentTourIndex}`)}
                 >
-                    Начать
+                    НАЧАТЬ
                 </button>
             </div>
         </div>

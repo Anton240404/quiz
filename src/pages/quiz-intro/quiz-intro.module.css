@@ -10,7 +10,7 @@
 }
 .intro {
     display: flex;
-    flex: 5;
+    flex: 9;
     flex-direction: column;
     align-items: center;
     justify-content: center;

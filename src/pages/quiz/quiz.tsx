@@ -52,7 +52,6 @@ export function Quiz() {
     const handleExitAttempt = () => setShowExitPopup(true);
 
     const handleConfirmExit = () => {
-        // Сбрасываем прогресс (опционально)
         const resetTours = toursData.map((tour) => ({
             ...tour,
             pages: tour.pages.map((page) => {
@@ -94,12 +93,12 @@ export function Quiz() {
                     <BadResultPageView
                         onNext={() => {
                             if (currentTourIndex < tours.length - 1) {
-                                // Переход к следующему туру
+
                                 setCurrentTourIndex((prev) => prev + 1);
-                                setCurrentPageIndex(0); // Сброс индекса страницы
+                                setCurrentPageIndex(0);
+
                                 navigate(`/quiz-intro/${currentTourIndex + 1}`);
                             } else {
-                                // Если это последний тур, перенаправляем на главную
                                 navigate('/');
                             }
                         }}

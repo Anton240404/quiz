@@ -21,7 +21,6 @@ export function Dropdown(props: Props) {
     const [isOpen, setIsOpen] = useState(false);
 
     const closeOnSelect = props.closeOnSelect ?? true;
-    // const closeOnSelect = props.closeOnSelect || true
 
     const handleItemClick = (item: Item) => {
         props.onSelect(item);
@@ -41,7 +40,7 @@ export function Dropdown(props: Props) {
                     className={`${css.arrow} ${isOpen ? css.up : css.down}`}
                     onClick={() => setIsOpen(!isOpen)}
                 >
-                    <img src={arrowIcon} />
+                    <img src={arrowIcon} alt="arrow" />
                 </button>
             </div>
 
@@ -50,7 +49,7 @@ export function Dropdown(props: Props) {
                     {props.items.map((item) => {
                         const isSelected = selectedItem?.id === item.id;
 
-                        const itemClass = `${css.item} ${css[item.color]}`; // !
+                        const itemClass = `${css.item} ${css[item.color]}`;
 
                         const circleClass = `${css.circle} ${
                             isSelected ? css[item.color] : css.default

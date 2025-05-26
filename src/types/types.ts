@@ -7,7 +7,7 @@ import { SingleAnswerAndImageQuestionPage } from './single-answer-and-image-ques
 import { SingleAnswerQuestionPage } from './single-answer-question-page/single-answer-question-page.ts';
 import { ResultPage } from './result-page/result-page.ts';
 import { MultiSelectAnswerAndQuestionImagePage } from './multi-select-answer-and-question-image-page/multi-select-answer-question-page.ts';
-import { OrderPage } from './order-page.tsx';
+import { OrderPage } from './order-page/order-page.tsx';
 
 export type Tour = {
     title: string;

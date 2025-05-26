@@ -13,7 +13,7 @@ type Props = {
     disabled?: boolean;
     type?: 'submit' | 'button' | 'reset';
     index?: number;
-    // size: 'lg' | 'md' | 'sm'
+    size?: 'lg' | 'md' | 'sm'
 };
 
 export function Button(props: Props) {
@@ -31,6 +31,16 @@ export function Button(props: Props) {
         classnames.push(styles.disabledButtons);
     } else if (props.color === 'disabledButton') {
         classnames.push(styles.disabledButton);
+    }
+    if (props.size === 'sm') {
+        classnames.push(styles.sm);
+    }
+    if (props.size === 'md') {
+        classnames.push(styles.md);
+    }
+
+    if (props.size === 'lg') {
+        classnames.push(styles.lg);
     }
 
     if (props.disabled) {
