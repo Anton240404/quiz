@@ -8,6 +8,7 @@ import css from './single-answer-question-page.module.css'
 type Props = {
     page: SingleAnswerQuestionPage;
     tourNumber: number;
+    pageNumber: number;
     tour: Tour;
     onFinishAnswer: (page: SingleAnswerQuestionPage) => void;
     onNext: () => void;
@@ -44,7 +45,7 @@ export function SingleAnswerQuestionPageView(props: Props) {
             <div className={styles.questionContainer}>
                 <div className={css.tour}>{props.tourNumber + 1} тур</div>
                 <h2 className={styles.questionNumber}>
-                    Вопрос {props.tourNumber} / {questionPages.length}
+                    Вопрос {props.pageNumber} / {questionPages.length}
                 </h2>
                 <p className={styles.questionText}>{props.page.question}</p>
             </div>

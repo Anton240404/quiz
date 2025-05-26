@@ -19,19 +19,13 @@ export function InfoPageView(props: Props) {
                 <div className={style.flag}>
                     <img
                         src={flagInfo}
-                        alt="Андреевский флаг"
+                        alt={props.page.title}
                         className={style.flagImage}
                     />
                 </div>
                 <div className={style.infoRight}>
-                    <h1 className={style.title}>АНДРЕЕЙВСКИЙ ФЛАГ</h1>
-                    <h2 className={style.textInfo}>
-                        Андреевский флаг является главным корабельным кормовым
-                        флагом Российского Флота. Он представляет собой белое
-                        полотнище, пересеченное по диагонали двумя синими
-                        полосами, которые образуют наклонный крест, который
-                        называется Андреевским. Этот крест и дал имя флагу.
-                    </h2>
+                    <h1 className={style.title}>{props.page.title}</h1>
+                    <h2 className={style.textInfo}>{props.page.text}</h2>
                 </div>
             </div>
             <div className={styles.buttonContainer}>

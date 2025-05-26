@@ -16,7 +16,6 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    margin-bottom: 3px;
 }
 .questionContainer {
     display: flex;

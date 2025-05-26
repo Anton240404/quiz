@@ -1,7 +1,9 @@
 import styles from '../quiz/base-page.module.css';
 import style from './single-answer-question-and-image-question-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
-import { SingleAnswerQuestionAndImageQuestionPage } from '../../types/single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.ts';
+import {
+    SingleAnswerQuestionAndImageQuestionPage,
+} from '../../types/single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.ts';
 import css from '../single-answer-question-page/single-answer-question-page.module.css';
 
 type Props = {
@@ -43,12 +45,8 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
                     <h2 className={styles.questionNumber}>{props.page.subTitle}</h2>
                     <p className={styles.questionText}>{props.page.question}</p>
                 </div>
-                <div className={style.CompassImageContainer}>
-                    <img
-                        src={props.page.questionImage}
-                        alt="Компас"
-                        className={style.CompassImage}
-                    />
+                <div className={style.CompassImageContainer}
+                     style={{ background: `url(${props.page.questionImage}) center / 100% 100% no-repeat` }}>
                 </div>
             </div>
 

@@ -8,6 +8,7 @@
 .CompassImageContainer{
     width: 50%;
     border-radius: 20px;
+    height: 100%;
     }
 .CompassImage{
     height: 100%;

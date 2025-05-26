@@ -1,4 +1,4 @@
-import styles from './progress.module.css';
+import styles from './exit-popup.module.css';
 import arrow from '../../../public/assets/growth-arrow.png';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
     isOpen: boolean;
 };
 
-export function Progress(props: Props) {
+export function ExitPopup(props: Props) {
     if (!props.isOpen) return null;
 
     return (

@@ -1,7 +1,9 @@
 import styles from '../quiz/base-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { ImageButton } from '../../components/ui/image-button/image-button.tsx';
-import { SingleAnswerAndImageQuestionPage } from '../../types/single-answer-and-image-question-page/single-answer-and-image-question-page.ts';
+import {
+    SingleAnswerAndImageQuestionPage,
+} from '../../types/single-answer-and-image-question-page/single-answer-and-image-question-page.ts';
 
 type Props = {
     page: SingleAnswerAndImageQuestionPage;
@@ -39,15 +41,17 @@ export function SingleAnswerAndImageQuestionPageView(props: Props) {
             <div className={styles.controlsContainer}>
                 <div className={styles.options}>
                     {props.page.imageOptions.map((img, index) => (
-                        <ImageButton
-                            key={index}
-                            onClick={() => handleAnswer(img)}
-                            disabled={
-                                hasSelectedAnswer && img !== selectedAnswer
-                            }
-                            variant={getButtonColor(img)}
-                            url={img}
-                        />
+                        <div key={index} style={{width: '25%'}}>
+                            <ImageButton
+
+                                onClick={() => handleAnswer(img)}
+                                disabled={
+                                    hasSelectedAnswer && img !== selectedAnswer
+                                }
+                                variant={getButtonColor(img)}
+                                url={img}
+                            />
+                        </div>
                     ))}
                 </div>
 

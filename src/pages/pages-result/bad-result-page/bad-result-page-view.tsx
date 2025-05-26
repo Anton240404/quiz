@@ -1,17 +1,15 @@
 import styles from './bad-result-page.module.css';
 import iconBad from '../../../../public/assets/iconBad.png';
 import { Button } from '../../../components/ui/button/button.tsx';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
     correctAnswers: number;
     allAnswers: number;
     onNext: () => void;
+    onExitAttempt: () => void;
 };
 
 export function BadResultPageView(props: Props) {
-    const navigate = useNavigate();
-
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -31,7 +29,7 @@ export function BadResultPageView(props: Props) {
                 <div className={styles.buttonContainer}>
                     <Button
                         text={'НА ГЛАВНУЮ'}
-                        onClick={() => navigate('/')}
+                        onClick={() => props.onExitAttempt()}
                         color={'primary'}
                     />
                     <Button
