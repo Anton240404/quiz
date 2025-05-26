@@ -8,19 +8,20 @@ import { useState } from 'react';
 import { PopupInfo } from '../../components/ui/popup/popup-info.tsx';
 import { InputQuestionPage } from '../../types/input-question-page/input-question-page.ts';
 import { Tour } from '../../types/types.ts';
+import css from '../single-answer-question-page/single-answer-question-page.module.css';
 
 type Props = {
     page: InputQuestionPage;
     onNext: () => void;
     currentPageIndex: number;
-    currentTourIndex: number;
+    tourNumber: number;
     tours: Tour[];
     setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
     onExitAttempt: () => void;
 };
 
 export function InputQuestionPageView(props: Props) {
-    const currentTour = props.tours[props.currentTourIndex];
+    const currentTour = props.tours[props.tourNumber];
     const selectedAnswer = props.page.selectedAnswer || '';
     const correctAnswer = props.page.correctAnswer;
 
@@ -35,7 +36,7 @@ export function InputQuestionPageView(props: Props) {
     const handleAnswer = (answer: string) => {
         const copy = [...props.tours];
         const currentPage =
-            copy[props.currentTourIndex].pages[props.currentPageIndex];
+            copy[props.tourNumber].pages[props.currentPageIndex];
         if (currentPage.type === 'InputQuestionPage') {
             currentPage.selectedAnswer = answer;
         }
@@ -68,6 +69,7 @@ export function InputQuestionPageView(props: Props) {
     return (
         <>
             <div className={styles.questionContainer}>
+                <div className={css.tour}>{props.tourNumber + 1} тур</div>
                 <h2 className={styles.questionNumber}>
                     Вопрос {props.currentPageIndex + 1} / {questionPages.length}
                 </h2>

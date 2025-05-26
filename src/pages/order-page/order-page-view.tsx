@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../components/ui/button/button';
 import { Dropdown } from '../../components/ui/dropdown/dropdown';
 import { OrderPage } from '../../types/order-page/order-page.tsx';
@@ -8,19 +8,24 @@ import styles from '../quiz/base-page.module.css';
 type Props = {
     page: OrderPage;
     onChange: (page: OrderPage) => void;
-
+    onNext: () => void;
     tourNumber: number;
     onExitAttempt: () => void;
 };
 
 export function OrderPageView(props: Props) {
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [isNextButtonActive, setIsNextButtonActive] = useState(false);
 
     const currentText = props.page.items[selectedIndex];
-    const hasSelectedAnswers = currentText.selectedPosition !== undefined;
+    useEffect(() => {
+        const allItemsHaveSelection = props.page.items.every(
+            item => item.selectedPosition !== undefined
+        );
+        setIsNextButtonActive(allItemsHaveSelection);
+    }, [props.page.items]);
 
-    const getColor = (
-        dropdownOptionItem: typeof props.page.items[number], dropdownOptionIndex: number): 'default' | 'danger' | 'success' => {
+    const getColor = (dropdownOptionItem: typeof props.page.items[number], dropdownOptionIndex: number): 'default' | 'danger' | 'success' => {
 
         if (currentText.selectedPosition === undefined) {
             return 'default';
@@ -87,7 +92,12 @@ export function OrderPageView(props: Props) {
                     onClick={props.onExitAttempt}
                     color={'primary'}
                 />
-                <Button text="ДАЛЕЕ" color={!hasSelectedAnswers ? 'disabledButtons' : 'primary'} disabled={!hasSelectedAnswers} />
+                <Button
+                    text="ДАЛЕЕ"
+                    onClick={props.onNext}
+                    color={isNextButtonActive ?  'primary' : 'disabledButtons' } 
+                    disabled={!isNextButtonActive}
+                />
             </div>
         </>
     );

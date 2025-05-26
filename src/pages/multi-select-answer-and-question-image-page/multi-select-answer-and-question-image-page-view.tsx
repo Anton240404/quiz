@@ -3,6 +3,7 @@ import style from './multi-select-answer-and-question-image-page-view.module.css
 import { Button } from '../../components/ui/button/button.tsx';
 import { useEffect, useState } from 'react';
 import { MultiSelectAnswerAndQuestionImagePage, } from '../../types/multi-select-answer-and-question-image-page/multi-select-answer-question-page.ts';
+import css from '../single-answer-question-page/single-answer-question-page.module.css';
 
 
 type Props = {
@@ -64,7 +65,7 @@ export function MultiSelectAnswerAndQuestionImagePageView(props: Props) {
                 <div className={style.questionTextContainer}>
                     <h3 className={style.subTitle}>{props.page.subTitle}</h3>
                     <p className={style.questionText}>{props.page.question}</p>
-                    <p className={style.tour}>{`Тур ${props.tourNumber + 1}`}</p>
+                    <div className={css.tour}>{props.tourNumber + 1} тур</div>
                 </div>
                 <div className={style.imageContainer}>
                     <img src={props.page.questionImage} alt={'capitan'} className={style.image} />

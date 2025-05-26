@@ -2,12 +2,14 @@ import styles from '../quiz/base-page.module.css';
 import style from './single-answer-question-and-image-question-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { SingleAnswerQuestionAndImageQuestionPage } from '../../types/single-answer-question-and-image-question-page/single-answer-question-and-image-question-page.ts';
+import css from '../single-answer-question-page/single-answer-question-page.module.css';
 
 type Props = {
     page: SingleAnswerQuestionAndImageQuestionPage;
     onFinishAnswer: (page: SingleAnswerQuestionAndImageQuestionPage) => void;
     onNext: () => void;
     onExitAttempt: () => void;
+    tourNumber: number;
 };
 
 export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
@@ -36,6 +38,7 @@ export function SingleAnswerQuestionAndImageQuestionPageView(props: Props) {
     return (
         <>
             <div className={style.containerHeader}>
+                <div className={css.tour}>{props.tourNumber + 1} тур</div>
                 <div className={styles.questionContainer}>
                     <h2 className={styles.questionNumber}>{props.page.subTitle}</h2>
                     <p className={styles.questionText}>{props.page.question}</p>

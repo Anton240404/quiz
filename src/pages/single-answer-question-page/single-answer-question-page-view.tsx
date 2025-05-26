@@ -3,10 +3,11 @@ import styles from '../quiz/base-page.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { getQuestionsPages } from '../lib.ts';
 import { SingleAnswerQuestionPage } from '../../types/single-answer-question-page/single-answer-question-page.ts';
+import css from './single-answer-question-page.module.css'
 
 type Props = {
     page: SingleAnswerQuestionPage;
-    pageNumber: number;
+    tourNumber: number;
     tour: Tour;
     onFinishAnswer: (page: SingleAnswerQuestionPage) => void;
     onNext: () => void;
@@ -41,8 +42,9 @@ export function SingleAnswerQuestionPageView(props: Props) {
     return (
         <>
             <div className={styles.questionContainer}>
+                <div className={css.tour}>{props.tourNumber + 1} тур</div>
                 <h2 className={styles.questionNumber}>
-                    Вопрос {props.pageNumber} / {questionPages.length}
+                    Вопрос {props.tourNumber} / {questionPages.length}
                 </h2>
                 <p className={styles.questionText}>{props.page.question}</p>
             </div>

@@ -146,13 +146,13 @@ export function Quiz() {
                 {currentPage.type === 'SingleAnswerQuestionPage' && (
                     <SingleAnswerQuestionPageView
                         page={currentPage}
+                        tourNumber={currentTourIndex}
                         onFinishAnswer={(newPage) => {
                             const copy = [...tours];
                             const currentTour = copy[currentTourIndex];
                             currentTour.pages[currentPageIndex] = newPage;
                             setTours(copy);
                         }}
-                        pageNumber={currentPageIndex + 1}
                         tour={currentTour}
                         onNext={handleNext}
                         onExitAttempt={handleExitAttempt}
@@ -190,6 +190,7 @@ export function Quiz() {
                     'SingleAnswerQuestionAndImageQuestionPage' && (
                     <SingleAnswerQuestionAndImageQuestionPageView
                         page={currentPage}
+                        tourNumber={currentTourIndex}
                         onFinishAnswer={(newPage) => {
                             const copy = [...tours];
                             const currentTour = copy[currentTourIndex];
@@ -236,7 +237,7 @@ export function Quiz() {
                         page={currentPage}
                         onNext={handleNext}
                         currentPageIndex={currentPageIndex}
-                        currentTourIndex={currentTourIndex}
+                        tourNumber={currentTourIndex}
                         tours={tours}
                         setTours={setTours}
                         onExitAttempt={handleExitAttempt}
@@ -271,6 +272,7 @@ export function Quiz() {
                         }}
                         tourNumber={currentTourIndex}
                         onExitAttempt={handleExitAttempt}
+                        onNext={handleNext}
                     />
                 )}
                 <Progress

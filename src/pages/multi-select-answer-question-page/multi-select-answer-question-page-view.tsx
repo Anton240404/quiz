@@ -3,6 +3,7 @@ import style from './multi-select-answer-question-page-view.module.css';
 import { Button } from '../../components/ui/button/button.tsx';
 import { useEffect, useState } from 'react';
 import { MultiSelectAnswerQuestionPage } from '../../types/multi-select-answer-question-page/multi-select-answer-question-page.ts';
+import css from '../single-answer-question-page/single-answer-question-page.module.css';
 
 type Props = {
     page: MultiSelectAnswerQuestionPage;
@@ -60,6 +61,7 @@ export function MultiSelectAnswerQuestionPageView(props: Props) {
     return (
         <>
             <div className={styles.questionContainer}>
+                <div className={css.tour}>{props.tourNumber + 1} тур</div>
                 <h3 className={style.subTitle}>{props.page.subTitle}</h3>
                 <p className={style.questionText}>{props.page.question}</p>
             </div>
